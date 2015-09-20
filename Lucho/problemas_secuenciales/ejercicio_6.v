@@ -24,18 +24,23 @@ module ejercicio_6(
 	input wire clock
     );
 	 
-	 reg [4:0]cont_clk;
+	 reg [4:0]cont_clk = 0;
 	 
 	 
 	 always@(posedge clock)
 	 begin
 		cont_clk <= cont_clk + 1;
 		
-		if(cont_clk)
-	 
-	 
-	 
-	 
-
+		if(cont_clk == 4 || cont_clk == 20 || cont_clk == 24)
+		begin
+			o_ctrl <= 1;
+		end
+		
+		else
+		begin
+			o_ctrl <= 0;
+		end
+		
+	 end
 
 endmodule
