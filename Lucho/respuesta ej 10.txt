@@ -1,0 +1,15 @@
+a.
+
+con un tiempo de setup de 150 ps, y un delay clock to output de 400ns, y siendo el maximo delay de propagacion 1,3 ns:
+
+150+400+1300 = 1850 ps
+
+frec max = 1/1850 ps = 540 MHz
+
+b.
+
+con el path de 1.3 ns optimizado a 800 ps, el camino mas largo ahora es de 900 ps. por lo que
+
+maximo delay de propagacion = 150+400+900 = 1450 ps
+
+frec max = 689 MHz
