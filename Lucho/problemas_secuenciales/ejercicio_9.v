@@ -32,7 +32,10 @@ module ejercicio_9(
     );
 	 
 	 wire [2:0]deco_in = 0;
-	 wire [2:0]ndeco_in = 0; 
+	 wire [2:0]ndeco_in = 0;
+	 
+	 wire [7:0]salida_deco;
+	 wire [7:0]salida_ndeco;
 	
 	ejercicio_5 #(1) ff_0 (.i_in(ndeco_in[0]),
 								  .o_out(deco_in[0]),
@@ -52,7 +55,7 @@ module ejercicio_9(
 								  .clock(ndeco_in[0])
 								  );
 								  
-	ejercicio_5 #(1) ff_2 (.i_in(ndeco_in[0]),
+	ejercicio_5 #(1) ff_2 (.i_in(ndeco_in[2]),
 								  .o_out(deco_in[2]),
 								  .o_nout(ndeco_in[2]),
 								  .i_en(cont_enable),
@@ -61,32 +64,21 @@ module ejercicio_9(
 								  .clock(ndeco_in[1])
 								  );
 								  
+	decoder deco1 (.entrada(deco_in),
+						.salida(salida_deco)
+						);
+															  
+	decoder deco2 (.entrada(ndeco_in),
+						.salida(salida_ndeco)
+						);
+						
 	always@(posedge clock)
 	begin
-		
-		case(deco_in)
-			0: cont_out <= 0;
-			1: cont_out <= 1;
-			2: cont_out <= 2;
-			3: cont_out <= 3;
-			4: cont_out <= 4;
-			5: cont_out <= 5;
-			6: cont_out <= 6;
-			7: cont_out <= 7;
-		endcase
-			
-		case(ndeco_in)
-			0: cont_nout <= 0;
-			1: cont_nout <= 1;
-			2: cont_nout <= 2;
-			3: cont_nout <= 3;
-			4: cont_nout <= 4;
-			5: cont_nout <= 5;
-			6: cont_nout <= 6;
-			7: cont_nout <= 7;
-		endcase
+	
+	cont_out <= salida_deco;
+	cont_nout <= salida_ndeco;
+	
 	end
-								  
 		
 
 
