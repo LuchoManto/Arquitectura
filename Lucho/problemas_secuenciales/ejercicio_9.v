@@ -19,64 +19,67 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_9(
-
-	input wire cont_enable,
-	input wire cont_reset,
-	input wire cont_set,
 	
 	output reg [7:0]cont_out,
 	output reg [7:0]cont_nout,
+	
+	input wire cont_enable,
+	input wire cont_reset,
+	input wire cable0,
+	input wire cable1,
+	input wire cable2,
 	
 	input wire clock
 
     );
 	 
-	 wire [2:0]deco_in = 0;
-	 wire [2:0]ndeco_in = 0;
+	 wire [2:0]deco_in;
+//	 wire [2:0]ndeco_in;
 	 
 	 wire [7:0]salida_deco;
-	 wire [7:0]salida_ndeco;
+//	 wire [7:0]salida_ndeco;
 	
-	ejercicio_5 #(1) ff_0 (.i_in(ndeco_in[0]),
-								  .o_out(deco_in[0]),
-								  .o_nout(ndeco_in[0]),
-								  .i_en(cont_enable),
-								  .i_rs(cont_reset),
-								  .i_se(cont_set),
+	 assign cable0 = 0;
+	 assign cable1 = 0;
+	 assign cable2 = 0;
+	
+	ejercicio_3 #(1) ff_0 (.D(cable0),
+								  .Q(deco_in[0]),
+								  .notQ(cable0),
+								  .enable(cont_enable),
+								  .reset(cont_reset),
 								  .clock(clock)
 								  );
 								  
-	ejercicio_5 #(1) ff_1 (.i_in(ndeco_in[1]),
-								  .o_out(deco_in[1]),
-								  .o_nout(ndeco_in[1]),
-								  .i_en(cont_enable),
-								  .i_rs(cont_reset),
-								  .i_se(cont_set),
-								  .clock(ndeco_in[0])
+	ejercicio_3 #(1) ff_1 (.D(cable1),
+								  .Q(deco_in[1]),
+								  .notQ(cable1),
+								  .enable(cont_enable),
+								  .reset(cont_reset),
+								  .clock(cable0)
 								  );
 								  
-	ejercicio_5 #(1) ff_2 (.i_in(ndeco_in[2]),
-								  .o_out(deco_in[2]),
-								  .o_nout(ndeco_in[2]),
-								  .i_en(cont_enable),
-								  .i_rs(cont_reset),
-								  .i_se(cont_set),
-								  .clock(ndeco_in[1])
+	ejercicio_3 #(1) ff_2 (.D(cable2),
+								  .Q(deco_in[2]),
+								  .notQ(cable2),
+								  .enable(cont_enable),
+								  .reset(cont_reset),
+								  .clock(cable1)
 								  );
 								  
 	decoder deco1 (.entrada(deco_in),
 						.salida(salida_deco)
 						);
 															  
-	decoder deco2 (.entrada(ndeco_in),
-						.salida(salida_ndeco)
-						);
+//	decoder deco2 (.entrada(ndeco_in),
+//						.salida(salida_ndeco)
+//						);
 						
 	always@(posedge clock)
 	begin
 	
 	cont_out <= salida_deco;
-	cont_nout <= salida_ndeco;
+//	cont_nout <= salida_ndeco;
 	
 	end
 		

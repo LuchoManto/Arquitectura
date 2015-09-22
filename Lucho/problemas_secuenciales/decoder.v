@@ -19,23 +19,21 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module decoder (
-		input wire [2:0]entrada,
-		output reg [7:0]salida
-    );
-	 
-	 always@(*)
-	 begin
-	 
-		 case(entrada)
-				0:  salida = 8'b00000001;
-				1:  salida = 8'b00000010;
-				2:  salida = 8'b00000100;
-				3:  salida = 8'b00001000;
-				4:  salida = 8'b00010000;
-				5:  salida = 8'b00100000;
-				6:  salida = 8'b01000000;
-				7:  salida = 8'b10000000;
-		 endcase
-	 end
+			input wire [2:0]entrada,
+			output reg [7:0]salida
+		);
+
+   always @(*)
+         case (entrada)
+            3'b000  : salida <= 8'b00000001;
+            3'b001  : salida <= 8'b00000010;
+            3'b010  : salida <= 8'b00000100;
+            3'b011  : salida <= 8'b00001000;
+            3'b100  : salida <= 8'b00010000;
+            3'b101  : salida <= 8'b00100000;
+            3'b110  : salida <= 8'b01000000;
+            3'b111  : salida <= 8'b10000000;
+            default : salida <= 8'b00000000;
+         endcase
 
 endmodule

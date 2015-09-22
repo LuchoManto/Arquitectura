@@ -29,32 +29,31 @@ module ejercicio_5#(parameter N=32)(
 	input wire clock
     );
 	 
-	 always@(posedge clock or posedge i_rs or posedge i_se)
+ always@(posedge clock)
+	 
 	 begin
-	 if(i_en)
-	 begin
-	 	o_out <= 0;
-		o_nout <= 0;
+		 if(i_en == 0)
+		 begin
+			 
+			 if(i_rs == 1)
+			 begin
+				 o_out <= 0;
+				 o_nout <= 1;
+			 end
+			 else if(i_se == 1)
+			 begin
+				 o_nout <= 0;
+				 o_out <= 1;
+			 end
+			 else
+			 begin
+				 o_out <= i_in;
+				 o_nout <= ~i_in;
+		 end	 
+	 
 	 end
-	 else
-	 begin
-		o_out <= i_in;
-		o_nout <= ~i_in;
-	 end
-		
-	 if(i_rs)
-		begin
-		o_out <= 0;
-		o_nout <= 'hFFFFFFFF;
-		end
-		
-	 if(i_se)
-		begin
-		o_out <= 'hFFFFFFFF;
-		o_nout <= 0;
-		end
-		
-	 end
+	 
+ end
 	 
 	 
 endmodule

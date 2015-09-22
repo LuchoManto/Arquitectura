@@ -19,22 +19,25 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_3#(parameter N=32)(
-	input wire [N-1:0]i_in,
-	output reg [N-1:0]o_out,
-	input wire i_en,
-	input wire i_rs,
+	input wire [N-1:0]D,
+	output reg [N-1:0]Q,
+	output reg [N-1:0]notQ,
+	input wire enable,
+	input wire reset,
 	input wire clock
     );
 	 
-	 always@(posedge clock)
+	 always@(posedge clock or posedge reset)
 	 begin
-	 if(i_en)
+		if(reset)
 		begin
-		o_out <= i_in;
+			Q <= 0;
+			notQ <= 1;
 		end
-	 if(i_rs)
+		else if(enable)
 		begin
-		o_out <= 0;
+			Q <= D;
+			notQ <= ~D;
 		end
 	 end
 	 

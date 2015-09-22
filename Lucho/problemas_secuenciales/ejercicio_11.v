@@ -19,25 +19,33 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_11(
-	input wire i_signal;
-	output reg o_periodo;
+	input wire i_signal,
+	output reg [7:0]o_periodo,
 	
-	input wire clk;
+	input wire clock
     );
 	 
-	 reg cuenta;
+	 reg [7:0]cont_clock;
+	 reg [1:0]estado = 2'b01;
 	 
+	always@(posedge clock)
+	begin
 	 
-	 always@(posedge clock)
-	 begin
+	case(estado)
+	0: begin 
+			o_periodo = cont_clock;
+			cont_clock = 0;
+		end
+	1: cont_clock = cont_clock + 1;
+	endcase
 	 
-	 if(posedge i_signal)
-	 begin
-	 
-	 
-	 end
-	 
-	 end
+	if(i_signal == 1)
+		estado <= 1;
+	else if (i_signal == 0)
+		estado <= 0;
+
+
+	end
 
 
 endmodule
