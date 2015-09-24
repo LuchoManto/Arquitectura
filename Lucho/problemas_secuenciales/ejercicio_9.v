@@ -25,9 +25,9 @@ module ejercicio_9(
 	
 	input wire cont_enable,
 	input wire cont_reset,
-	input wire cable0,
-	input wire cable1,
-	input wire cable2,
+	input wire D_in0,
+	input wire D_in1,
+	input wire D_in2,
 	
 	input wire clock
 
@@ -39,9 +39,13 @@ module ejercicio_9(
 	 wire [7:0]salida_deco;
 //	 wire [7:0]salida_ndeco;
 	
-	 assign cable0 = 0;
-	 assign cable1 = 0;
-	 assign cable2 = 0;
+	 wire cable0;
+	 wire cable1;
+	 wire cable2;
+	 
+	 assign cable0 = D_in0;
+	 assign cable1 = D_in1;
+	 assign cable2 = D_in2;
 	
 	ejercicio_3 #(1) ff_0 (.D(cable0),
 								  .Q(deco_in[0]),
@@ -68,20 +72,12 @@ module ejercicio_9(
 								  );
 								  
 	decoder deco1 (.entrada(deco_in),
-						.salida(salida_deco)
+						.salida(cont_out)
 						);
 															  
 //	decoder deco2 (.entrada(ndeco_in),
 //						.salida(salida_ndeco)
 //						);
-						
-	always@(posedge clock)
-	begin
-	
-	cont_out <= salida_deco;
-//	cont_nout <= salida_ndeco;
-	
-	end
 		
 
 

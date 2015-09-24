@@ -25,26 +25,20 @@ module ejercicio_11(
 	input wire clock
     );
 	 
-	 reg [7:0]cont_clock;
-	 reg [1:0]estado = 2'b01;
+	reg [7:0]contador;
+	 
 	 
 	always@(posedge clock)
 	begin
-	 
-	case(estado)
-	0: begin 
-			o_periodo = cont_clock;
-			cont_clock = 0;
+	
+		if(i_signal)
+			contador <= contador + 1;
+		else
+		begin
+			contador <= 0;
+			o_periodo <= contador;
 		end
-	1: cont_clock = cont_clock + 1;
-	endcase
-	 
-	if(i_signal == 1)
-		estado <= 1;
-	else if (i_signal == 0)
-		estado <= 0;
-
-
+	
 	end
 
 
