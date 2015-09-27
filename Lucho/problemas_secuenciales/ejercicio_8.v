@@ -16,6 +16,11 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
+
+//8.	Describa en Verilog un circuito para un contador de módulo 12. Se deberá permitir cargar un valor umbral, con una
+// resolución <= a 12 bits utilizando los switches dispuestos en la placa de desarrollo BASYS 2. Cuando el contador alcance
+// (o supere) dicho umbral deberá encender un led (de los disponibles en el kit de desarrollo) que indique dicho evento.
+// Al alcanzar su valor de cuenta máxima se deberá apagar dicho LED.
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_8(

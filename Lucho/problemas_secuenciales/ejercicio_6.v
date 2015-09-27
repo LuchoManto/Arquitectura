@@ -16,6 +16,9 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
+
+//6.	Describa en Verilog un contador del tipo “free-running” que cuente 32 ciclos de reloj y produzca una señal de control
+// que valdrá ‘1’ cada 4, 20 y 24 ciclos.
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_6(

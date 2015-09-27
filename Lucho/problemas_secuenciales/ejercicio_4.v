@@ -16,6 +16,12 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
+
+//4.	Desarrolle un modelo Verilog de un detector de picos que encuentre el valor máximo dentro de una secuencia de enteros
+// sin signo de 10 bit. Un nuevo número arriba a la entrada con un flanco ascendente del reloj. El valor del máximo número
+// ingresado deberá ser mostrado en los 8 de los leds de usuario presentes en el kit de desarrollo BASYS 2. Se deberá
+// implementar una señal de “RESET” utilizando uno de los pulsadores dispuestos en el kit para el usuario. El valor máximo
+// mostrado en los leds será borrado (todos los leds apagados) cuando llegue un reset. 
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_4(

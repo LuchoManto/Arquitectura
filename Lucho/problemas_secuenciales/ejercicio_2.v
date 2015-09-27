@@ -16,6 +16,13 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
+
+//2.	Desarrolle un modelo Verilog de un circuito con “pipeline” que compute el valor máximo de 3 flujos de entrada, a, b y c.
+// El pipeline debe tener 2 etapas:
+//•	La primera etapa determina cual es el mayor entre ‘a’ y ‘b’ y guarda el valor de ‘c’.
+//•	La segunda etapa busca el mayor entre ‘c’ y el resultado de la comparación de ‘a’ y ‘b’.
+//Las entradas y salidas son de 14 bits con signo, en complemento a 2.
+
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_2(

@@ -17,6 +17,9 @@
 // Revision 0.01 - File Created
 // Additional Comments: 
 //
+//7.	Describa en Verilog un circuito que utilice contadores para dividir un master clock de 20.48 MHz y genere un señal
+// con un “duty cycle” del 50% y una frecuencia de 5 KHz.
+//
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_7(
 	output reg o_signal = 0,

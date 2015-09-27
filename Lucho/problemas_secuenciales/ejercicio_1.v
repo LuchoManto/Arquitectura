@@ -17,6 +17,9 @@
 // Revision 0.01 - File Created
 // Additional Comments: 
 //
+
+//1.	Escriba un modelo Verilog para un registro parametrizable. En caso de no indicar ningún valor para el parámetro
+// el registro debe ser de 32 bits.
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_1#(parameter N=32)(
 	input wire [N-1:0]i_e,

@@ -16,6 +16,12 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
+
+//5.	Escriba un modelo Verilog de un flip-flop con:
+//a.	Una señal de “Clock-enable” síncrona con lógica negativa
+//b.	2 entradas, una de reset y otra de preset asincrónicas y con lógica positiva.
+//c.	Y ambas salidas Q y ~Q (not Q).
+
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_5#(parameter N=32)(

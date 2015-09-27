@@ -16,6 +16,9 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
+
+//3.	Desarrolle un modelo en Verilog de un registro similar al del punto 1 pero agregando “clock-enable” y reset síncrono.
+// El registro debe poder almacenar enteros en complemento a 2.
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_3#(parameter N=32)(

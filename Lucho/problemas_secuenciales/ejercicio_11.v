@@ -16,6 +16,19 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
+
+//11.	Diseñe un circuito en Verilog que sea capaz de contar el periodo de una señal externa periódica y de onda cuadrada,
+// con una resolución de 8 bits y mostrarlo en los 8 Leds de usuarios disponibles en la placa BASYS 2. 
+//NOTA: Para realizar este ejercicio deberá utilizar un generador de señales.
+//
+//12.	Agregue la capacidad de almacenar el máximo y mínimo periodo medido de la señal externa hasta el momento.
+// Para mostrar dichos valores deberá utilizar uno y solo un pulsador de los disponibles en los kits de desarrollo BASYS 2.
+// El pulsador funcionara de la siguiente manera:
+//a.	Por default muestra el periodo instantáneo de la señal externa.
+//b.	Al pulsarlo 1 vez muestra el máximo periodo medido.
+//c.	Al pulsarlo por segunda vez muestra el mínimo periodo medido hasta el momento.
+//d.	Al pulsarlo por tercera vez vuelve a mostrar el periodo instantáneo de la señal externa y el ciclo de pulsaciones comienza nuevamente.
+
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_11_12(

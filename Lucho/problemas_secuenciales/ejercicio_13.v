@@ -16,6 +16,9 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
+//13.	Describa en Verilog e implemente en el kit BASYS 2 un PWM con resolución de 4 bits. Deberá modular el ancho de pulso
+// de una onda cuadrada externa, la cual se introducirá a la placa a través de alguno de los pines disponibles para señales
+// externas. Se Deberá determinar la máxima frecuencia de señal de entrada que su circuito puede modular.
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_13(
@@ -25,13 +28,14 @@ module ejercicio_13(
 	
 	output reg o_pwm,
 	
-	input wire clock;
+	input wire clock
     );
 	
 	reg [31:0]cont_clk;
 	reg [31:0]cont_pwm;
 	reg [31:0]periodo;
 	reg [31:0]resolucion; //dependera del periodo y sirve para calcular el ciclo de trabajo. es periodo/16
+	reg ciclo_dt;
 	
 	always@(posedge clock)
 	begin
@@ -48,6 +52,8 @@ module ejercicio_13(
 	begin
 		cont_pwm <= cont_pwm + 1;   // incremento el contador del pwm
 		
+		resolucion <= periodo / 16; // se calcula el valor minimo para el pwm
+		
 		if(cont_pwm == periodo)  // si el contador del pwm es igual al periodo, se llego al periodo de la señal
 		begin
 			cont_pwm <= 0; // se vuelve a 0 el contador para que el periodo de la señal de salida sea el mismo que el de la entrada
@@ -56,7 +62,7 @@ module ejercicio_13(
 		
 		if(cont_pwm == ciclo_dt) // cuando llega al ciclo de trabajo calculado, se baja la señal
 		begin
-		o_pwm <= 0
+			o_pwm <= 0;
 		end
 		
 	end
@@ -65,8 +71,8 @@ module ejercicio_13(
 	always@(posedge clock)
 	begin
 		if(i_boton == 1)
-		ciclo_dt = periodo / valor_pwm; // se carga el valor del ciclo de trabajo segun el valor de 16 bits ingresado en los botones
-		// el valor actual del periodo dividido 16 da 
-	
+			ciclo_dt = resolucion * valor_pwm; // se carga el valor del ciclo de trabajo segun el valor de 16 bits ingresado en los botones
+		// la resolucion es el ciclo minimo de trabajo. si valor_pwm vale 1, el ciclo de trabajo es maximo, si vale 16, es minimo
+	end
 	
 endmodule

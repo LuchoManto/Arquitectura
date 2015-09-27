@@ -16,6 +16,13 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
+
+//9.	El esquemático de la figura 1 muestra un contador de ripple conectado a un decodificador. En el diagrama de tiempos de
+// la figura 2 se muestran los valores a la salida del decodificador, incluyendo cualquier pulso espurio que se puede generar
+// cuando el contador se incrementa.  
+//a.	Se pide implementar el circuito mostrado en la figura 1 para generar las salidas (Y0…Y7) mostradas en el diagrama de la
+// figura 2.
+
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ejercicio_9(
