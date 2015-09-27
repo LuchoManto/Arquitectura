@@ -32,10 +32,10 @@ module ejercicio_13(
     );
 	
 	reg [31:0]cont_clk;
-	reg [31:0]cont_pwm;
+//	reg [31:0]cont_pwm;
 	reg [31:0]periodo;
 	reg [31:0]resolucion; //dependera del periodo y sirve para calcular el ciclo de trabajo. es periodo/16
-	reg ciclo_dt;
+	reg [31:0]ciclo_dt;
 	
 	always@(posedge clock)
 	begin
@@ -50,17 +50,16 @@ module ejercicio_13(
 	
 	always@(posedge clock)
 	begin
-		cont_pwm <= cont_pwm + 1;   // incremento el contador del pwm
+//		cont_pwm <= cont_pwm + 1;   // incremento el contador del pwm
 		
 		resolucion <= periodo / 16; // se calcula el valor minimo para el pwm
 		
-		if(cont_pwm == periodo)  // si el contador del pwm es igual al periodo, se llego al periodo de la señal
+		if(cont_clk == 0)  // si el contador del clock es 0, se llego al periodo de la señal
 		begin
-			cont_pwm <= 0; // se vuelve a 0 el contador para que el periodo de la señal de salida sea el mismo que el de la entrada
 			o_pwm <= 1; // se comienza el ciclo de trabajo
 		end
 		
-		if(cont_pwm == ciclo_dt) // cuando llega al ciclo de trabajo calculado, se baja la señal
+		if(cont_clk == ciclo_dt) // cuando llega al ciclo de trabajo calculado, se baja la señal
 		begin
 			o_pwm <= 0;
 		end
