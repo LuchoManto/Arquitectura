@@ -21,7 +21,7 @@
 module ejercicio_11_12(
 	input wire i_signal,
 	output reg [7:0]o_salida,
-	input wire i_boton;
+	input wire i_boton,
 	
 	input wire clock
     );
@@ -55,7 +55,7 @@ module ejercicio_11_12(
 	always@(posedge i_signal)
 	begin
 		contador <= 0;
-		o_periodo_actual <= contador;
+		periodo_actual <= contador;
 		
 		if(periodo_actual > periodo_max)
 			periodo_max <= periodo_actual;
