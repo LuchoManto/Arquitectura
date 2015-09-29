@@ -20,46 +20,37 @@
 //////////////////////////////////////////////////////////////////////////////////
 module Ejercicio_5
 	( input wire i_a,
-	  //input wire i_b,
 	  input wire reset,
 	  input wire clk,
 	  input wire preset,
-	  output reg o_a,
-	  output reg o_b
+	  output reg o_a, //Q
+	  output reg o_b  //notQ
     );
 
  // always @(negedge clk, reset, preset)
-always @(negedge clk)
-begin 
-	if (i_a == 0)
-	begin
-		o_a <= ~i_a;
-		o_b <=  i_a;
-	end
+always @(negedge clk or posedge preset or posedge reset)
+begin
+	if(reset == 1)
+	begin	
+		o_a<= 0;
+		o_b<= 0;
+	end 
 	else 
 	begin
-		o_a <= ~i_a;
-		o_b <=  i_a;
+		o_a<= i_a;
+		o_b<= ~i_a;
 	end
 	
-	if (reset == 1)
-	begin 
-		o_a <= 0;
-		o_b <= 1;
-	end
-	else 
-	begin 
-		o_a <= ~i_a;
-		o_b <=  i_a;
-	end
-	if (preset == 1)
+	if(preset == 1)
 	begin
-		o_a <= 1;
-		o_b <= 0;
+		o_a<= 1;
+		o_b<= 1;
 	end
 	else 
-		o_a <= ~i_a;
-		o_b <=  i_a;
+	begin
+		o_a<= i_a;
+		o_b<= ~i_a;
+	end
 end
 		
 endmodule
