@@ -4,6 +4,8 @@
 # But not these files...
 !*.v
 !*.txt
+!*.pdf
+!*.docx
 # etc...
 
 # ...even if they are in subdirectories
