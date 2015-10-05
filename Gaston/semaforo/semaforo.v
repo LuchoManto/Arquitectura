@@ -45,14 +45,14 @@ reg[2:0] current_state, next_state;
 						
 //Registro de estado (Memoria)
 always @(negedge clk, negedge reset)
-	
+begin
 	//Si se resetea se pone verde.
 	if(~reset)
 		current_state <= VERDE;
 	//Cada vez que viene un clock se actualiza el estado al proximo.
 	else
 		current_state <= next_state;
-		
+end
 
 //Logica de salida
 //Maquina de estado de moore solo depende del estado en el que me encuentro.
@@ -96,13 +96,13 @@ always @*
 		//Puedo poner el estado por default al principio para evitar toda lea logica del estado default
 		//Si ingresa a un case correcto se sobreescribe y no hay problema. Evitando la necesidad
 		//de tener definido el default.
-		next_state = ON_ALL; //En caso de un estado invalido, el semaforo pasa a la secuencia de alternar luces
+		next_state = ONALL; //En caso de un estado invalido, el semaforo pasa a la secuencia de alternar luces
 		case(current_state)
 			VERDE:
 				begin
 					//Como son combinacionales puedo poner aca lo del always anterior
 					//para optimizar mas.
-					sel_luz = 3b'100;
+					sel_luz = 3'b100;
 					if(~on_off)
 						next_state = OFF_A;
 					else
@@ -138,7 +138,7 @@ always @*
 				end
 			default:
 					begin
-						next_state = ON_ALL; //En caso de un estado invalido, el semaforo pasa a la secuencia de alternar luces
+						next_state = ONALL; //En caso de un estado invalido, el semaforo pasa a la secuencia de alternar luces
 					end
 		endcase
 	end //always de logica cambio de estado
