@@ -39,15 +39,14 @@ module test_ejercicio_6;
 	always #20
 		clk = ~clk;
 		
-		
 	initial begin
 		// Initialize Inputs
-		//contro = 00000;
+		//control <= 0;
 		clk = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
-        
+         
 		// Add stimulus here
 
 	end

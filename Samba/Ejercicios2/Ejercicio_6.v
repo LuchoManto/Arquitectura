@@ -35,21 +35,30 @@ module Ejercicio_6
 	always @(posedge clk)
 	begin 
 		cont = cont + 1;
-		if (cont == 5'b00100)
-			control <= 1;
+		if (cont == 5'b00100 | cont == 5'b10100 | cont == 5'b11000)
+		begin
+			//cont4 <= cont4 + 1;
+			control <= 1 ;
+		end
 		else 
 			control <= 0;
 		
-		if (cont == 5'b10100)
-			control <= 1;
+		/*if (cont == 5'b10100)
+		begin
+			cont20 <= cont20 + 1;
+			control <= control + 1 ;
+		end
 		else 
 			control <= 0;
 		
 		if (cont == 5'b11000)
-			control <= 1;
+		begin
+			cont24 <= cont24 + 1;
+			control <= control + 1 ;
+		end
 		else 
 			control <= 0;
-		
+		*/
 		if (cont == 5'b11111)
 			cont <= 0;
 	end
