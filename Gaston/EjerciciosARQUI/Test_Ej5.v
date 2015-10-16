@@ -45,49 +45,56 @@ module Test_Ej5;
 	);
 
 	//Clock cada 10 us.
-	always #10
-	clk = ~clk;
+	always #5		
+		clk = ~clk;
 
 	initial begin
+		$display("Comienza la simulacion");
+		$monitor("-set:",set," -reset:",reset," -clock_en:",clock_en," -result:",result," -not_result:",not_result,);
+		
 		set = 1;
 		reset = 0;
 		clk = 0;
 		clock_en = 0;
 
-		#30;
+		#10;
 		
 		set = 0;
 		reset = 1;
 		
-		#30;
+		#10;
 		
 		set = 0;
 		reset = 0;
       
-		#30;
+		#10;
 		
 		set = 1;
 		reset = 0;
 		
-		#30;
+		#10;
 		
       set = 1;
 		reset = 1;
 		
-		#30;
+		#10;
 		
 		clock_en = 1;
 		
-		#30;
+		#10;
 		
       set = 0;
 		reset = 1;  
 		
-		#30;
+		#10;
 		
       set = 1;
 		reset = 0;  
 		
+		#10;
+		
+		$display("Comienza la simulacion");
+		$finish;
 	end
       
 endmodule

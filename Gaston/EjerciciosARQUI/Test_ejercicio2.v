@@ -22,19 +22,21 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
+`define N 4
+
 module Test_ejercicio2;
 
 	// Inputs
-	reg [13:0] a;
-	reg [13:0] b;
-	reg [13:0] c;
+	reg signed [`N-1:0] a;
+	reg signed [`N-1:0] b;
+	reg signed [`N-1:0] c;
 	reg clock;
 
 	// Outputs
-	wire [13:0] result;
+	wire signed [`N-1:0] result;
 
 	// Instantiate the Unit Under Test (UUT)
-	Ejercicio2 uut (
+	Ejercicio2#( .N(`N) ) uut (
 		.a(a), 
 		.b(b), 
 		.c(c), 
@@ -42,27 +44,84 @@ module Test_ejercicio2;
 		.clock(clock)
 	);
 	
-	always #10
-	clock = ~clock;
+	always #5
+		clock = ~clock;
+	
+	reg signed [`N-1:0] aux;
+
+	function check_result(input [`N-1:0] val_deseado);
+	begin
+		if(a > b)
+			aux = a;
+		else
+			aux = b;
+		
+		if(aux  > c)
+			val_deseado = aux;
+		else
+			val_deseado = c;
+			
+		if(result != val_deseado)
+		begin
+			$display("Error resultado, valor deseado es:",val_deseado,".Valor result es:",result);
+			$finish;
+		end
+	end
+	endfunction
+	
+	reg finish1=0;
+	reg finish2=0;
+	reg finish3=0;
 
 	initial begin
-		a = 3;
-		b = 4;
-		c = 7;
+		$display("Comienza la simulacion");
+		$monitor("-a:",a," -b:",b," -c:",c," -result:",result);
+		
 		clock = 0;
+		a=0;
+		b=0;
+		c=0;
+		
+		while(finish1==0)
+		begin
+			while(finish2==0)
+			begin	
+				while(finish3==0)
+				begin
+					#20;
+					check_result(0);
+					
+					c=c+1;
 
-		#20;
+					if(c==0)
+					begin
+						finish3=1;
+						c=0;
+					end
+				end
+				
+				b=b+1;
+				finish3=0;
+				
+				if(b==0)
+				begin
+					finish2=1;
+					b=0;
+				end
+			end
+			
+			a=a+1;	
+			finish2=0;
+
+			if(a==0)
+			begin
+				finish1=1;
+				a=0;
+			end
+		end
 		
-		a = 8;
-		b = 12;
-		c = 2;
-		
-      #20; 
-		
-		a = 32;
-		b = 1;
-		c = 7;
-		
+		$display("Termino la simulación");
+		$finish;
 	end
       
 endmodule

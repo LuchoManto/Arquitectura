@@ -21,20 +21,21 @@
 // Additional Comments:
 // 
 ////////////////////////////////////////////////////////////////////////////////
-
+`define N 4
 module Test_ejercicio3;
 
 	// Inputs
-	reg [31:0] input_signal;
+	reg [`N-1:0] input_signal;
 	reg clock_enable;
 	reg reset;
 	reg clock;
 
 	// Outputs
-	wire [31:0] output_register;
+	wire [`N-1:0] output_register;
 
 	// Instantiate the Unit Under Test (UUT)
-	Ejercicio3 uut (
+	Ejercicio3 #( .N(`N) ) uut 
+	(
 		.input_signal(input_signal), 
 		.output_register(output_register), 
 		.clock_enable(clock_enable), 
@@ -42,26 +43,63 @@ module Test_ejercicio3;
 		.clock(clock)
 	); 
 	
-	always #10
-	clock = ~clock;
 
+	reg [`N-1:0] output_deseada;
+	
+	function	check_out(input [`N-1:0] val_deseado);
+	begin
+		if(val_deseado != output_register)
+		begin
+			$display("Error output, valor deseado:",val_deseado,".Valor obtenido:",output_register);
+			$finish;
+		end
+	end
+	endfunction
+	
+	
+	always #5
+		clock = ~clock;
+		
+	always #50
+		reset = ~reset;
+		
+	always #100
+		clock_enable = ~clock_enable;
+		
+	reg finish = 0;
+	
 	initial begin
-		input_signal = 10'b1111111111;
-		clock_enable = 0;
+		$display("Comienza la simulacion");
+		$monitor("-input:",input_signal," -output:",output_register," -reset:",reset, " -clock_en:",clock_enable);
+		input_signal = 0;
+		clock_enable = 1;
 		reset = 0;
 		clock = 0;
+		output_deseada = input_signal;
 
-		#40;
-        
-		input_signal = 10'b1111111111;
-		clock_enable = 1;
-		reset = 0;
+		while(finish == 0)
+		begin
+			#10;
+			check_out(output_deseada);
+			if(clock_enable)
+			begin
+				if(reset)
+				begin
+					output_deseada=0;
+				end
+				else
+				begin
+					input_signal = input_signal+1;
+					output_deseada = input_signal;
+					
+					if(input_signal == 0)
+						finish = 1;
+				end
+			end
+		end
 		
-		#40;
-		
-		input_signal = 10'b1111111111;
-		clock_enable = 1;
-		reset = 1;
+		$display("Termino la simulación");
+		$finish;
 	end
       
 endmodule

@@ -24,8 +24,8 @@ parametrizable con "clock-enable" y reset síncrono.
 */
 module Ejercicio3#(parameter N=32)
 (
-input wire [N-1:0] input_signal,
-output reg [N-1:0] output_register,
+input wire signed [N-1:0] input_signal,
+output reg signed [N-1:0] output_register,
 input wire clock_enable,
 input wire reset,
 input clock
@@ -34,10 +34,12 @@ input clock
 always@(posedge clock)
 begin
 	if(clock_enable)
+	begin
 		if(reset)
 			output_register <= 0;
 		else
 			output_register <= input_signal;
+	end
 end
 
 

@@ -26,16 +26,17 @@ Las entradas y salidas son de 14 bits con signo, en complemento a 2.
 //////////////////////////////////////////////////////////////////////////////////
 */
 module Ejercicio2
+#(parameter N=14)
 (
-	input wire signed [13:0]a,
-	input wire signed [13:0]b,
-	input wire signed [13:0]c,
-	output reg signed [13:0]result,
+	input wire signed [N-1:0]a,
+	input wire signed [N-1:0]b,
+	input wire signed [N-1:0]c,
+	output reg signed [N-1:0]result,
 	input wire clock
 );
 	 
-	 reg signed [13:0]primera_etapa;
-	 reg signed [13:0]auxiliar_c;
+	 reg signed [N-1:0]primera_etapa;
+	 reg signed [N-1:0]auxiliar_c;
 	 
 	 always@(posedge clock)
 	 begin

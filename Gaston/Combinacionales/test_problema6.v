@@ -26,14 +26,16 @@ module test_problema6;
 
 	// Inputs
 	reg [3:0] val;
-
+	reg clk;
+	
 	// Outputs
 	wire [6:0] seg;
 
 	// Instantiate the Unit Under Test (UUT)
 	problema6 uut (
 		.val(val), 
-		.seg(seg)
+		.seg(seg),
+		.clk(clk)
 	);
 	
 	function check_seg(input [6:0] val_deseado);
@@ -58,75 +60,28 @@ module test_problema6;
 		end
 	end
 	endfunction
+	
+	always #5
+		clk = ~clk;
 
+	reg finish=0;
 
 	initial begin
 		$display("Comienza la simulacion");
 		$monitor("val:",val," -seg:%b",seg," -Tiempo:",$time);
 		
+		clk = 0;
 		val = 0;
-		#10;
-		check_seg(0);
 		
-		val = 1;
-		#10;
-		check_seg(0);
-		
-		val = 2;
-		#10;
-		check_seg(0);
-		
-		val = 3;
-		#10;
-		check_seg(0);
+		while(finish == 0)
+		begin
+			#15;
+			check_seg(0);
+			val = val + 1;
+			if(val == 0)
+					finish = 1;
+		end
 	
-		val = 4;
-		#10;
-		check_seg(0);
-	
-		val = 5;
-		#10;
-		check_seg(0);
-		
-		val = 6;
-		#10;
-		check_seg(0);
-		
-		val = 7;
-		#10;
-		check_seg(0);
-		
-		val = 8;
-		#10;
-		check_seg(0);
-		
-		val = 9;
-		#10;
-		check_seg(0);
-		
-		val = 10;
-		#10;
-		check_seg(0);
-		
-		val = 11;
-		#10;
-		check_seg(0);
-		
-		val = 12;
-		#10;
-		check_seg(0);
-		
-		val = 13;
-		#10;
-		check_seg(0);
-		
-		val = 14;
-		#10;
-		check_seg(0);
-		
-		val = 15;
-		#10;
-		check_seg(0);
 		$display("Termina la simulacion. -Tiempo:",$time);
 		$finish;
 	end

@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+/*
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
@@ -10,7 +11,9 @@
 // Target Devices: 
 // Tool versions: 
 // Description: 
-//
+	1.	Escriba un modelo Verilog para un registro parametrizable. 
+	En caso de no indicar ningún valor para el parámetro el registro debe ser de 32 bits.
+	
 // Dependencies: 
 //
 // Revision: 
@@ -18,6 +21,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
+*/
 module Ejercicio1 
 
 #(parameter N=32)
