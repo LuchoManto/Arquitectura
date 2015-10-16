@@ -78,9 +78,48 @@ always @*
 		endcase
 	end//always de logica de salida
 
-
-
-
-			
-endmodule
+//Logica de cambio de estado
+always @*
+	begin
+		case(current_state)
+			INICIAL:
+				begin
+					if(ready)
+						next_state = LISTO;
+				end
+			LISTO:
+				begin
+					if(~read_write)
+						next_state = ESCRITURA;
+					else
+						next_state = LECTURA ;
+				end
+			ROJO:
+				begin
+					if(~on_off)
+						next_state = OFF_A;
+					else
+						next_state = VERDE;
+				end
+			OFF_A:
+				begin
+					if(~on_off)
+						next_state = ONALL;
+					else
+						next_state = VERDE;
+				end
+			ONALL:
+				begin
+					if(~on_off)
+						next_state = OFF_A;
+					else
+						next_state = VERDE;
+				end
+			default:
+					begin
+						next_state = ON_ALL; //En caso de un estado invalido, el semaforo pasa a la secuencia de alternar luces
+					end
+		endcase
+	end //always de logica cambio de estado
+endmodule //fin del modulo
 							
