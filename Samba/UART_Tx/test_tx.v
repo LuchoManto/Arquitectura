@@ -42,7 +42,7 @@ module test_tx;
 		.tx(tx)
 	);
 
-	always #10
+	always #20
 	clk = ~clk;
 	
 	initial begin
@@ -50,23 +50,23 @@ module test_tx;
 		clk = 0;
 		d_in = 11110000;
 		tx_start = 1;
-
+		/*
 		// Wait 100 ns for global reset to finish
-		#200;
+		#300;
         
 		// Add stimulus here
 		d_in = 01010101;
 		tx_start = 1;
 
-		#200;
+		#300;
         
 		// Add stimulus here
 		d_in = 10101010;
 		tx_start = 1;
 
 		// Wait 100 ns for global reset to finish
-		#200;
-      
+		#300;
+      */
 
 	end
       

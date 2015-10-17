@@ -41,6 +41,7 @@ reg [3:0] next_state;
 reg [7:0] bus_interno_tx;
 reg [4:0]n;
 reg [4:0]s; 
+//reg [4:0]s1;
 
 
 //Registro de estado, cambio segun el clock (aca va a ir conectado
@@ -51,7 +52,7 @@ begin
 end
 
 //declaro ahora la logica de salida de cada estado
-always @*
+always @ (posedge clk)
 begin
 	case(current_state)
 		UNO:
