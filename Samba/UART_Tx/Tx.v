@@ -36,10 +36,12 @@ localparam [2:0] 	UNO 	 = 3'b000,
 						SIETE	 = 3'b110;
 
 //Declaro las variables necesarias internas.
-reg [3:0] current_state, next_state;
+reg [3:0] current_state = 3'b000;
+reg [3:0] next_state;
 reg [7:0] bus_interno_tx;
-reg n;
-reg s; 
+reg [4:0]n;
+reg [4:0]s; 
+
 
 //Registro de estado, cambio segun el clock (aca va a ir conectado
 // el s_tick).
