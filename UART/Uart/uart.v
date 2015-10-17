@@ -1,0 +1,65 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    17:31:39 10/17/2015 
+// Design Name: 
+// Module Name:    uart 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module uart(
+	input wire rx,
+	output reg tx,
+	
+	input wire clock
+    );
+	 
+	 baudrate_gen baudr (.clock(clock),
+								.baud(baud)
+								);
+	 
+	 receiver r (.rx(rx),
+					 .clk(baud),
+					 .d_out(d_out),
+					 .rx_done(rx_done)
+					 );
+					 
+	 transmitter t (	.clk(baud),
+							.d_in(d_in),
+							.tx_start(tx_start),
+							.tx_done(tx_done),
+							.tx(tx)
+						);
+						
+	 fifo_receiver fifor (	.clk(clock),
+									.d_out(d_out),
+									.rx_done(rx_done),
+									.r_data(r_data),
+									.rx_empty(rx_empty),
+									.rd(rd)
+								);
+
+	 fifo_transmitter fifot (	.clk(clock),
+										.d_in(d_in),
+										.tx_done(tx_done),
+										.tx_start(tx_start),
+										.w_data(w_data),
+										.tx_full(tx_full),
+										.wr(wr)
+								);
+								
+	 
+
+
+endmodule
