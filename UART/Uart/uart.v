@@ -42,21 +42,21 @@ module uart(
 							.tx(tx)
 						);
 						
-	 fifo_receiver fifor (	.clk(clock),
-									.d_out(d_out),
-									.rx_done(rx_done),
-									.r_data(r_data),
-									.rx_empty(rx_empty),
-									.rd(rd)
+	 fifo_receiver #(8) fifor (	.d_out(d_out),
+											.rx_done(rx_done),
+											.rd(rd),
+											.r_data(r_data),
+											.rx_empty(rx_empty),
+											.clk(clock)
 								);
 
-	 fifo_transmitter fifot (	.clk(clock),
-										.d_in(d_in),
-										.tx_done(tx_done),
-										.tx_start(tx_start),
-										.w_data(w_data),
-										.tx_full(tx_full),
-										.wr(wr)
+	 fifo_transmitter #(8) fifot (	.w_data(w_data),
+												.tx_done(tx_done),
+												.wr(wr),
+												.d_in(d_in),
+												.tx_full(tx_full),
+												.tx_start(tx_start),
+												.clk(clock)
 								);
 								
 	 
