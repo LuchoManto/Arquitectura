@@ -29,7 +29,7 @@ module tes_receiver;
 	reg clk;
 
 	// Outputs
-	wire [8:0] d_out;
+	wire [7:0] d_out;
 	wire rx_done;
 
 	// Instantiate the Unit Under Test (UUT)
@@ -41,34 +41,34 @@ module tes_receiver;
 	);
 
 	initial begin
+		$monitor("---------------------------------\n-current_state: ",uut.current_state,"\n -d_out(salida): ",d_out,"\n -buffer: ",uut.buffer,"\n -s: ",uut.s,"\n -n: ",uut.n,"\n -rx: ",rx,"\n -rx_done: ",rx_done,"\n---------------------------------\n");
 		// Initialize Inputs
 		rx = 1;
-		clk = 0;
-
-		// Wait 100 ns for global reset to finish
+		clk = 1;
 		#20;
+		rx = 0; // start bit
+		// Wait 100 ns for global reset to finish
+		#30;
 		
-		// byte: 01100110
-		rx = 0;
-		#2;
-		rx = 0;
-		#2;
+		// byte: 11011100
 		rx = 1;
-		#2;
-		rx = 1;
-		#2;
+		#30;
 		rx = 0;
-		#2;
+		#30;
+		rx = 1;
+		#30;
 		rx = 0;
-		#2;
+		#30;
 		rx = 1;
-		#2;
-		rx = 1;
-		#2;
+		#30;
 		rx = 0;
-		#2;
+		#30;
 		rx = 1;
-		#2;
+		#30;
+		rx = 0;
+		#30;
+		rx = 1; // stop bit
+		#30;
 		
         
 		// Add stimulus here
@@ -76,7 +76,7 @@ module tes_receiver;
 	end
 	
 	
-	always #20
+	always #1
 	clk = ~clk;
       
 endmodule

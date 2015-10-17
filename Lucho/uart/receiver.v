@@ -21,7 +21,7 @@
 module receiver(
 		input wire rx,
 		input wire clk,
-		output reg [8:0]d_out,
+		output reg [7:0]d_out,
 		output reg rx_done
     );
 		
@@ -35,13 +35,16 @@ module receiver(
 						  E7 = 3'b111;
 	
 reg [2:0]current_state, next_state;
-reg n,s;
-reg [8:0]buffer;
+reg [4:0]n;
+reg [4:0]s;
+reg [7:0]buffer;
 
-always @(negedge clk)
+always @(posedge clk)
 		current_state <= next_state;
 		
-always @* // always de logica de salida
+begin
+		
+always @(posedge clk) // always de logica de salida
 	begin
 		case(current_state)
 			E0: // estado inicial. Idle
@@ -66,6 +69,7 @@ always @* // always de logica de salida
 					begin
 						buffer[n] = rx;
 						n = n + 1;
+						s = 1;
 					end
 			E5: // se envia el buffer
 					begin
@@ -114,17 +118,17 @@ always @*
 				end
 			E3:
 				begin
-					if(s == 15)
+					if(s == 14)
 						next_state = E4;
 					else
 						next_state = E3;
 				end
 			E4:
 				begin
-					if(n == 8)
+					if(n == 7)
 						next_state = E5;
 					else
-						next_state = E2;
+						next_state = E3;
 				end
 			E5:
 				begin
@@ -132,17 +136,19 @@ always @*
 				end
 			E6:
 				begin
-					if(s == 15)
+					if(s == 14)
 						next_state = E1;
 					else
 						next_state = E6;
 				end
 			default:
 					begin
-						next_state = E1; //En caso de un estado invalido, el semaforo pasa a la secuencia de alternar luces
+						next_state = E0; //En caso de un estado invalido, el semaforo pasa a la secuencia de alternar luces
 					end
 		endcase
 	end //always de logica cambio de estado
+	
+	end
 
 
 endmodule
