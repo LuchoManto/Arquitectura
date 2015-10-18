@@ -99,7 +99,14 @@ always @*
 		case(current_state)
 			ENVIO_A_TX:
 				begin
-					next_state=ESPERO_A_TX;
+					if(tx_done==1)
+					begin
+						next_state=ESPERO_A_TX;
+					end
+					else
+					begin
+						next_state=IDLE;
+					end
 				end
 			ESPERO_A_TX:
 				begin
@@ -114,7 +121,14 @@ always @*
 				end
 			RECIBO_DE_CPU:
 				begin
-					next_state=ESPERO_A_CPU;
+					if(wr==1)
+					begin
+						next_state=ESPERO_A_CPU;
+					end
+					else
+					begin
+						next_state=IDLE;
+					end
 				end
 			ESPERO_A_CPU:
 				begin

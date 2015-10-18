@@ -37,15 +37,15 @@ module UARTFIFORX
 );
 
 //Declaro estados
-localparam [3:0] ENVIO_A_CPU = 3'b000,
+localparam [3:0] IDLE = 3'b000,
 					  ESPERO_A_CPU = 3'b001,
 					  RECIBO_DE_RX = 3'b010,
 					  ESPERO_A_RX = 3'b011,
-					  IDLE = 3'b100;
+					  ENVIO_A_CPU = 3'b100;
 					  
 //Declaracion de senales (las utilizare para el elemento de memoria por lo tanto son tipo REGISTRO)
-reg[3:0] current_state=3'b100;
-reg[3:0] next_state=3'b100;					  
+reg[3:0] current_state=3'b000;
+reg[3:0] next_state=3'b000;					  
 
 				  				
 //Stack FIFO.
@@ -98,7 +98,14 @@ always @*
 		case(current_state)
 			ENVIO_A_CPU:
 				begin
-					next_state=ESPERO_A_CPU;
+					if(rd==1)
+					begin
+						next_state=ESPERO_A_CPU;
+					end
+					else
+					begin
+						next_state=IDLE;
+					end
 				end
 			ESPERO_A_CPU:
 				begin
@@ -113,7 +120,14 @@ always @*
 				end
 			RECIBO_DE_RX:
 				begin
-					next_state=ESPERO_A_RX;
+					if(rx_done==1)
+					begin
+						next_state=ESPERO_A_RX;
+					end
+					else
+					begin
+						next_state=IDLE;
+					end
 				end
 			ESPERO_A_RX:
 				begin

@@ -47,16 +47,48 @@ module TEST_FIFO_TX;
 	);
 
 
-	/*
-		Funciones y variables para test
-	*/
-	reg[10*8:0] string;
 	
+	//Funciones y variables para test
+	reg[10*8:0] current_state_name;
+	
+	
+	//Declaro estados
+	localparam [3:0] IDLE = 3'b000,
+						  ENVIO_A_TX = 3'b001,
+						  ESPERO_A_TX = 3'b010,
+						  RECIBO_DE_CPU = 3'b011,
+						  ESPERO_A_CPU = 3'b100;
+						  
+	
+
 	function check_state(input [3:0] state);
 	begin
-		$display("---------------------------------\n-current_state: %s",string,"\n -w_data(entrada): ",w_data,
-		"\n -stack: ",uut.stack,"\n -d_in(salida): ",d_in,"\n -tx_done: ",tx_done,
-		"\n -wr: ",wr,"\n -tx_full: ",tx_full,"\n -tx_start: ",tx_start,"\n---------------------------------\n");
+		case(state)
+			IDLE:
+				begin
+					current_state_name="IDLE";
+				end
+			ENVIO_A_TX:
+				begin
+					current_state_name="ENVIO_A_TX";
+				end
+			ESPERO_A_TX:
+				begin
+					current_state_name="ESPERO_A_TX";
+				end
+			RECIBO_DE_CPU :
+				begin
+					current_state_name="RECIBO_DE_CPU";
+				end
+			ESPERO_A_CPU:
+				begin
+					current_state_name="ESPERO_A_CPU";
+				end
+		endcase
+		
+		$display("---------------------------------\n-current_state: %s",current_state_name,"\n -w_data(entrada): ",w_data,
+		"\n -stack: ",uut.stack,"\n -d_in(salida): ",d_in,"\n -tx_done: ",tx_done,"\n -wr: ",wr,
+		"\n -tx_full: ",tx_full,"\n -tx_start: ",tx_start,"\n -time: ",$time,"\n---------------------------------\n");
 		if(state != uut.current_state)
 		begin
 			$display("Error curret_state, state esperado es:",state,".Valor uut.current_state es:",uut.current_state,". Tiempo: ", $time);
@@ -65,38 +97,38 @@ module TEST_FIFO_TX;
 	end
 	endfunction
 
+	/*
 	function get_state_name(input [3:0] state);
 	begin
 		case(state)
-			3'b000:
+			IDLE:
 				begin
-					string="IDLE";
+					current_state_name="IDLE";
 				end
-			3'b001:
+			ENVIO_A_TX:
 				begin
-					string="ENVIO_A_TX";
+					current_state_name="ENVIO_A_TX";
 				end
-			3'b010:
+			ESPERO_A_TX:
 				begin
-					string="ESPERO_A_TX";
+					current_state_name="ESPERO_A_TX";
 				end
-			3'b011:
+			RECIBO_DE_CPU :
 				begin
-					string="RECIBO_DE_CPU";
+					current_state_name="RECIBO_DE_CPU";
 				end
-			3'b100:
+			ESPERO_A_CPU:
 				begin
-					string="ESPERO_A_CPU";
+					current_state_name="ESPERO_A_CPU";
 				end
 		endcase
 	end
 	endfunction
-
+	*/
 
 	always #5
 	begin
 		clk = ~clk;
-		get_state_name(uut.current_state);
 	end
 
 
@@ -114,22 +146,30 @@ module TEST_FIFO_TX;
 		
 		#20;
 		
+		tx_done = 1;
+		#10;
+		check_state(IDLE);
+		
 		wr = 1;
-		#50;
-		check_state(3'b100);
+		#10;
+		check_state(RECIBO_DE_CPU);
+		
+		#10;
+		check_state(ESPERO_A_CPU);
 		
 		wr = 0;
-		#50;
-		check_state(3'b000);
+		#10;
+		check_state(IDLE);
 		
-		tx_done=1;
-		#50;
-		check_state(3'b010);
+		#10;
+		check_state(ENVIO_A_TX);
+		
+		#10;
+		check_state(ESPERO_A_TX);
 		
 		tx_done=0;
 		#50;
-		check_state(3'b000);
-
+		check_state(IDLE);
 
 		$display("Termina la simulacion");
 		$finish;
