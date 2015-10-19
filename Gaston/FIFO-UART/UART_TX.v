@@ -28,8 +28,8 @@ module UART_TX(
 
 initial
 begin
-	tx_done = 0;
-	tx = 0;
+	tx_done = 1;
+	tx = 1;
 end
 
 //Declaro los estados que voy a tener.
@@ -63,6 +63,7 @@ begin
 		IDLE:
 			begin
 				tx_done = 1;
+				tx = 1;
 			end
 		START:
 			begin 
