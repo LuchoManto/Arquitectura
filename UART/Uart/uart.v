@@ -19,14 +19,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module uart(
-	input wire [7:0]r_data,
-	output reg rd,
-	input wire rx_empty,
-	
-	output reg [7:0]w_data,
-	output reg wr,
-	input wire tx_full,
-	
+
 	output reg tx,
 	input wire rx,
 	
@@ -69,6 +62,15 @@ module uart(
 												.tx_start(tx_start),
 												.clk(clock)
 								);
+								
+	 test testm (		.r_data(r_data),
+							.rd(rd),
+							.rx_empty(rx_empty),
+							.w_data(w_data),
+							.wr(wr),
+							.tx_full(tx_full),
+							.clock(clock)
+					);
 								
 	 
 
