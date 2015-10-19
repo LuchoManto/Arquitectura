@@ -63,7 +63,7 @@ module uart(
 												.clk(clock)
 								);
 								
-	 test testm (		.r_data(r_data),
+	 replicador rep (	.r_data(r_data),
 							.rd(rd),
 							.rx_empty(rx_empty),
 							.w_data(w_data),
