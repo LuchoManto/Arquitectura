@@ -19,11 +19,22 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module uart(
-	input wire rx,
+	input wire [7:0]r_data,
+	output reg rd,
+	input wire rx_empty,
+	
+	output reg [7:0]w_data,
+	output reg wr,
+	input wire tx_full,
+	
 	output reg tx,
+	input wire rx,
+	
 	
 	input wire clock
     );
+	 
+	 
 	 
 	 baudrate_gen baudr (.clock(clock),
 								.baud(baud)

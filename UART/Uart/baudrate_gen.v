@@ -23,7 +23,7 @@ module baudrate_gen(  // generador de ticks para un baudrate de 19200
 		output reg baud
     );
 	 
-	 reg count[7:0];
+	 reg [7:0]count;
 	 
 	 always@(posedge clock)
 	 begin
