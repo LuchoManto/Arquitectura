@@ -27,19 +27,23 @@ module test(
 	output reg wr,
 	input wire tx_full,
 	
+	input wire [7:0]dato_a_enviar,
+	output reg success,
+	
 	input wire clk
     );
 	 
 //Estados
-localparam [1:0] ESPERA = 2'b00,
-					  PIDE_DATO = 2'b01,
-					  PIDE_ENVIO = 2'b10,
-					  ENVIAR = 2'b11;
+localparam [2:0] ESPERA_ENVIAR = 3'b000,
+					  ENVIAR = 3'b001,
+					  ESPERA_RECIBIR = 3'b010,
+					  RECIBIR = 3'b011,
+					  FIN = 3'b100;
 					  
 //Variables internas
 reg [2:0] current_state = 3'b000;
 reg [2:0] next_state = 3'b000;
-reg [7:0] buffer = 0;
+reg [7:0] dato_a_recibir = 0;
 
 
 always @(posedge clk)
@@ -51,52 +55,63 @@ end
 always @(posedge clk) // always de logica de salida
 begin
 	case(current_state)
-		ESPERA: // estado inicial. Idle
+		ESPERA_ENVIAR: // coloca en 1 la bandera de envio y espera que este disponible el buffer
 				begin
-					rd = 1;
+				wr = 1;
 				end
-		PIDE_DATO: // se recibe el bit de start
+		ENVIAR: // el dato del buffer de entrada se envia
 				begin
-					buffer = r_data;
+					w_data = dato_a_enviar;
+					wr = 0;
+				end
+		ESPERA_RECIBIR: // se coloca en 1 la bandera de recepcion y se espera a que el buffer este disponible
+				begin
+				rd = 1;
+				end
+		RECIBIR: // el dato recibido se guarda
+				begin
+					dato_a_recibir = r_data;
 					rd = 0;
 				end
-		PIDE_ENVIO: // se espera incrementando s
+		FIN: // se comparan los datos
 				begin
-					wr = 1;
-				end
-		ENVIAR: // se guarda el dato en el buffer
-				begin
-					w_data = buffer;
-					wr = 0;
+				if(dato_a_enviar == dato_a_recibir)
+				success = 1;
+				else
+				success = 0;
 				end
 	endcase
 end//always de logica de salida
 	
 always @* // logica de cambio de estado
 begin
-	next_state = ESPERA;
+	next_state = ESPERA_ENVIAR;
 	case(current_state)
-		ESPERA:
+		ESPERA_ENVIAR:
 			begin
-				if(rx_empty == 0)
-					next_state = PIDE_DATO;
+				if(tx_full == 0)
+					next_state = ENVIAR;
 				else
-					next_state = ESPERA;
+					next_state = ESPERA_ENVIAR;
 			end
-		PIDE_DATO:
-			begin
-					next_state = PIDE_ENVIO;
-			end
-		PIDE_ENVIO:
-			begin
-			if (tx_full == 0)
-				next_state = ENVIAR;
-			else
-				next_state = PIDE_ENVIO;
-		end
 		ENVIAR:
 			begin
-				next_state = ESPERA;
+					next_state = ESPERA_RECIBIR;
+			end
+		ESPERA_RECIBIR:
+			begin
+			if (rx_empty == 0)
+				next_state = RECIBIR;
+			else
+				next_state = ESPERA_RECIBIR;
+		end
+		RECIBIR:
+			begin
+				next_state = FIN;
+			end
+		FIN:
+			begin
+				next_state = FIN;
 			end
 	endcase
 end //always de logica cambio de estado
