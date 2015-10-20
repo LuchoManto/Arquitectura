@@ -46,9 +46,9 @@ reg[3:0] next_state=3'b000;
 //Init los reg output para evitar que esten en x.
 initial 
 begin
-d_in = 0;
-tx_full = 0;
-tx_start = 0;
+	d_in = 0;
+	tx_full = 0;
+	tx_start = 0;
 end
 		
 		
@@ -73,6 +73,10 @@ end
 always @*
 	begin
 		case(current_state)
+		   IDLE:
+				begin
+					tx_start = 0;
+				end
 			ENVIO_A_TX:
 				begin
 					d_in=stack;

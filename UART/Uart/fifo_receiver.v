@@ -54,24 +54,17 @@ reg [DB-1:0] stack=0;
 //Init los reg output para evitar que esten en x.
 initial 
 begin
-r_data = 0;
-rx_empty = 1;
+	r_data = 0;
+	rx_empty = 1;
 end
 
 
-//Registro de estado (Memoria)
 always @(posedge clk)
 begin
-	//Cada vez que viene un clock se actualiza el estado al proximo.
 		current_state <= next_state;
 end
 
 
-//Logica de salida
-//Maquina de estado de moore solo depende del estado en el que me encuentro.
-//si fuera de mealy tendria en cuenta las entradas.
-//El  always * entra cada vez que cambian las senales que tengo adentro del bloque always, en este caso
-//solo entra cuando cambia current_state
 always @*
 	begin
 		case(current_state)
@@ -88,12 +81,10 @@ always @*
 		 endcase
 	end//always de logica de salida
 
+
 //Logica de cambio de estado
 always @*
 	begin
-		//Puedo poner el estado por default al principio para evitar toda lea logica del estado default
-		//Si ingresa a un case correcto se sobreescribe y no hay problema. Evitando la necesidad
-		//de tener definido el default.
 		next_state = IDLE; //En caso de un estado invalido
 		case(current_state)
 			ENVIO_A_CPU:

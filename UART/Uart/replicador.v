@@ -37,10 +37,16 @@ localparam [1:0] ESPERA = 2'b00,
 					  ENVIAR = 2'b11;
 					  
 //Variables internas
-reg [2:0] current_state = 3'b000;
-reg [2:0] next_state = 3'b000;
+reg [1:0] current_state = 2'b00;
+reg [1:0] next_state = 2'b00;
 reg [7:0] buffer = 0;
+reg [7:0] counter = 0;
 
+initial
+begin
+	rd=0;
+	wr=0;
+end
 
 always @(posedge clk)
 begin
@@ -53,21 +59,22 @@ begin
 	case(current_state)
 		ESPERA: // estado inicial. Idle
 				begin
+					wr = 0;
 					rd = 1;
 				end
-		PIDE_DATO: // se recibe el bit de start
+		//PIDE_DATO: 
+			//	begin
+				//end
+		PIDE_ENVIO: 
 				begin
 					buffer = r_data;
 					rd = 0;
-				end
-		PIDE_ENVIO: // se espera incrementando s
-				begin
+					
 					wr = 1;
 				end
-		ENVIAR: // se guarda el dato en el buffer
+		ENVIAR: 
 				begin
 					w_data = buffer;
-					wr = 0;
 				end
 	endcase
 end//always de logica de salida
@@ -84,19 +91,31 @@ begin
 					next_state = ESPERA;
 			end
 		PIDE_DATO:
-			begin
-					next_state = PIDE_ENVIO;
+			begin	
+					//No funcionaria con mas de un stack
+					if(rx_empty == 0)
+					begin
+						next_state = PIDE_DATO;	
+					end
+					else
+					begin
+						next_state = PIDE_ENVIO;
+					end
 			end
 		PIDE_ENVIO:
 			begin
-			if (tx_full == 0)
-				next_state = ENVIAR;
-			else
-				next_state = PIDE_ENVIO;
-		end
+				if (tx_full == 0)
+					next_state = ENVIAR;
+				else
+					next_state = PIDE_ENVIO;
+			end
 		ENVIAR:
 			begin
-				next_state = ESPERA;
+				//No  funciona con mas de un stack.
+				if(tx_full == 0)
+					next_state = ENVIAR;
+				else
+					next_state = ESPERA;
 			end
 	endcase
 end //always de logica cambio de estado

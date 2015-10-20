@@ -117,8 +117,8 @@ begin
 					next_state = ENVIO;
 				if(n==8)
 					next_state = STOP;
-				if(n==9)
-					next_state = IDLE;
+				//if(n==9)
+					//next_state = IDLE;
 			end
 			else
 			begin
@@ -131,7 +131,8 @@ begin
 		end
 		STOP:
 		begin
-			next_state = ESPERO;
+			//next_state = ESPERO;
+			next_state = IDLE;
 		end
 	endcase
 end

@@ -116,8 +116,8 @@ begin
 					next_state = RECIBO;
 				if(n==9)
 					next_state = FIN;
-				if(n==10)
-					next_state = IDLE;
+				//if(n==10)
+					//next_state = IDLE;
 			end
 			else
 			begin
@@ -130,7 +130,8 @@ begin
 			end
 		FIN:
 			begin
-				next_state = ESPERO;
+				//next_state = ESPERO;
+				next_state = IDLE;
 			end
 	endcase
 end //always de logica cambio de estado

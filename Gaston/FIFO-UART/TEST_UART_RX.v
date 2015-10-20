@@ -119,7 +119,7 @@ module TEST_UART_RX;
 
 	initial begin
 		$display("Comienza la simulacion");
-	$monitor("---------------------------------\n-current_state: ",uut.current_state,
+		$monitor("---------------------------------\n-current_state: ",uut.current_state,
 		"\n -buffer: ",uut.buffer,"\n -rx(entrada): ",rx,
 		"\n -rx_done: ",rx_done,"\n -n: ",uut.n,"\n -s: ",uut.s,
 		"\n -d_out(salida): ",d_out,"\n -TIME: ",$time,"\n---------------------------------\n");

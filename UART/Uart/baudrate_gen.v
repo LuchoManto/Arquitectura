@@ -21,20 +21,24 @@
 module baudrate_gen(  // generador de ticks para un baudrate de 19200
 		input wire clock,
 		output reg baud
-    );
-	 
-	 reg [7:0]count;
-	 
-	 always@(posedge clock)
-	 begin
+ );
+ 
+reg [7:0]count=0;
+
+
+always@(posedge clock)
+begin
 	 count <= count + 1;
 	 
 	 if(count == 163)
-	 baud <= 1;
+	 //if(count == 1)
+	 begin
+		baud <= 1;
+		count <= 0;
+	 end 
 	 else
-	 baud <= 0;
-	 
-	 end
+		baud <= 0;
 
+end
 
 endmodule
