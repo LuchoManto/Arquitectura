@@ -140,9 +140,9 @@ module test_de_uart;
 		*/
 
 
-		send_value(8'b00001111);
+		//send_value(8'b00001111);
 		
-		#1000
+		#10000;
 		
 		$finish;
 

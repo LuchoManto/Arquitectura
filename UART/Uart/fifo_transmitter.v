@@ -43,14 +43,6 @@ localparam [3:0] IDLE = 3'b000,
 reg[3:0] current_state=3'b000;
 reg[3:0] next_state=3'b000;					  
 
-//Init los reg output para evitar que esten en x.
-initial 
-begin
-	d_in = 0;
-	tx_full = 0;
-	tx_start = 0;
-end
-		
 		
 //Stack FIFO.
 reg [DB-1:0] stack=0;
@@ -76,6 +68,7 @@ always @*
 		   IDLE:
 				begin
 					tx_start = 0;
+					tx_full = 0;
 				end
 			ENVIO_A_TX:
 				begin

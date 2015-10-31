@@ -51,13 +51,6 @@ reg[3:0] next_state=3'b000;
 //Stack FIFO.
 reg [DB-1:0] stack=0;
 
-//Init los reg output para evitar que esten en x.
-initial 
-begin
-	r_data = 0;
-	rx_empty = 1;
-end
-
 
 always @(posedge clk)
 begin
@@ -68,6 +61,10 @@ end
 always @*
 	begin
 		case(current_state)
+			IDLE:
+				begin
+					rx_empty = 1;
+				end
 			ENVIO_A_CPU:
 				begin
 					r_data=stack;
@@ -128,7 +125,14 @@ always @*
 					end
 					else
 					begin
-						next_state=IDLE;
+						if(rd==1)
+						begin
+							next_state=ENVIO_A_CPU;
+						end
+						else
+						begin
+							next_state=IDLE;
+						end
 					end
 				end
 			IDLE:

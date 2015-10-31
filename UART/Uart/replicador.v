@@ -42,12 +42,6 @@ reg [1:0] next_state = 2'b00;
 reg [7:0] buffer = 0;
 reg [7:0] counter = 0;
 
-initial
-begin
-	rd=0;
-	wr=0;
-end
-
 always @(posedge clk)
 begin
 		current_state <= next_state;

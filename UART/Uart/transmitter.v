@@ -26,12 +26,6 @@ module transmitter(
 	output reg tx
 );
 
-initial
-begin
-	tx_done = 1;
-	tx = 1;
-end
-
 //Declaro los estados que voy a tener.
 localparam [2:0] 	IDLE 	 = 3'b000,
 						START  = 3'b001,

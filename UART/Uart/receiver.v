@@ -39,12 +39,6 @@ reg [3:0] n = 0;
 reg [3:0] s = 0;
 reg [7:0] buffer = 0;
 
-initial
-begin
-	d_out=0;
-	rx_done=0;
-end
-
 
 always @(posedge clk)
 begin
