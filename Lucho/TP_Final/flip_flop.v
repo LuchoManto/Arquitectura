@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    14:09:01 09/18/2015 
+// Create Date:    16:39:42 10/31/2015 
 // Design Name: 
-// Module Name:    ejercicio_5 
+// Module Name:    flip_flop 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -16,15 +16,9 @@
 // Revision: 
 // Revision 0.01 - File Created
 // Additional Comments: 
-
-//5.	Escriba un modelo Verilog de un flip-flop con:
-//a.	Una señal de “Clock-enable” síncrona con lógica negativa
-//b.	2 entradas, una de reset y otra de preset asincrónicas y con lógica positiva.
-//c.	Y ambas salidas Q y ~Q (not Q).
-
 //
 //////////////////////////////////////////////////////////////////////////////////
-module ejercicio_5#(parameter N=32)(
+module flip_flop#(parameter N=32)(
 	input wire [N-1:0]i_in,
 	output reg [N-1:0]o_out,
 	input wire i_en,
