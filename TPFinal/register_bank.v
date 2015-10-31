@@ -60,7 +60,42 @@ wire out_demux28;
 wire out_demux29;
 wire out_demux30;
 wire out_demux31;
-	 
+	
+wire [31:0] output_r0;
+wire [31:0] output_r1;
+wire [31:0] output_r2;
+wire [31:0] output_r3;
+wire [31:0] output_r4;
+wire [31:0] output_r6;
+wire [31:0] output_r7;
+wire [31:0] output_r8;
+wire [31:0] output_r9;
+wire [31:0] output_r10;
+wire [31:0] output_r11;
+wire [31:0] output_r12;
+wire [31:0] output_r13;
+wire [31:0] output_r14;
+wire [31:0] output_r15;
+wire [31:0] output_r16;
+wire [31:0] output_r17;
+wire [31:0] output_r18;
+wire [31:0] output_r19;
+wire [31:0] output_r20;
+wire [31:0] output_r21;
+wire [31:0] output_r22;
+wire [31:0] output_r23;
+wire [31:0] output_r24;
+wire [31:0] output_r25;
+wire [31:0] output_r26;
+wire [31:0] output_r27;
+wire [31:0] output_r28;
+wire [31:0] output_r29;
+wire [31:0] output_r30;
+wire [31:0] output_r31;
+
+wire [31:0] output_d1;
+wire [31:0] output_d2;
+	
 demultiplexor demultiplexor1(
 .selector(write_register),
 .entrada(regwrite),
@@ -131,6 +166,7 @@ registro r29(.input_data(write_data), .chip_en(out_demux29), .output_data(output
 registro r30(.input_data(write_data), .chip_en(out_demux30), .output_data(output_r30), .clk(clk));
 registro r31(.input_data(write_data), .chip_en(out_demux31), .output_data(output_r31), .clk(clk));
 
+
 multiplexor multiplexor1(
 .selector(i_r1),
 .entrada0(output_r0),
@@ -165,7 +201,7 @@ multiplexor multiplexor1(
 .entrada29(output_r29),
 .entrada30(output_r30),
 .entrada31(output_r31),
-.salida(d1)
+.salida(output_d1)
 );	
 
 multiplexor multiplexor2(
@@ -202,6 +238,14 @@ multiplexor multiplexor2(
 .entrada29(output_r29),
 .entrada30(output_r30),
 .entrada31(output_r31),
-.salida(d2)
+.salida(output_d2)
 );	
+
+
+always@(*)
+begin
+	d1 = output_d1;
+	d2 = output_d2;
+end
+
 endmodule
