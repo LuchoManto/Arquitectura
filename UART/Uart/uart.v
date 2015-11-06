@@ -10,7 +10,7 @@
 // Target Devices: 
 // Tool versions: 
 // Description: 
-//
+//   v10 clock
 // Dependencies: 
 //
 // Revision: 

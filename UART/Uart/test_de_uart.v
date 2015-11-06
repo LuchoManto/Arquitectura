@@ -142,7 +142,7 @@ module test_de_uart;
 
 		//send_value(8'b00001111);
 		
-		#10000;
+		#1000000;
 		
 		$finish;
 
