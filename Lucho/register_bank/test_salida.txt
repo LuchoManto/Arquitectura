@@ -1,0 +1,145 @@
+---------------------------
+-r1: 0
+-r2: 0
+-d1:         x
+-d2:         x
+-bank[3]:         x
+-bank[5]:         x
+-reg_write_flag0
+-write_reg 3
+-write_data:        30
+-time:                   0
+---------------------------
+---------------------------
+-r1: 0
+-r2: 0
+-d1:         x
+-d2:         x
+-bank[3]:         x
+-bank[5]:         x
+-reg_write_flag1
+-write_reg 3
+-write_data:        30
+-time:                  20
+---------------------------
+---------------------------
+-r1: 0
+-r2: 0
+-d1:         x
+-d2:         x
+-bank[3]:        30
+-bank[5]:         x
+-reg_write_flag1
+-write_reg 3
+-write_data:        30
+-time:                  25
+---------------------------
+---------------------------
+-r1: 0
+-r2: 0
+-d1:         x
+-d2:         x
+-bank[3]:        30
+-bank[5]:         x
+-reg_write_flag0
+-write_reg 3
+-write_data:        30
+-time:                  30
+---------------------------
+---------------------------
+-r1: 0
+-r2: 0
+-d1:         x
+-d2:         x
+-bank[3]:        30
+-bank[5]:         x
+-reg_write_flag0
+-write_reg 5
+-write_data:        40
+-time:                  60
+---------------------------
+---------------------------
+-r1: 0
+-r2: 0
+-d1:         x
+-d2:         x
+-bank[3]:        30
+-bank[5]:         x
+-reg_write_flag1
+-write_reg 5
+-write_data:        40
+-time:                  90
+---------------------------
+---------------------------
+-r1: 0
+-r2: 0
+-d1:         x
+-d2:         x
+-bank[3]:        30
+-bank[5]:        40
+-reg_write_flag1
+-write_reg 5
+-write_data:        40
+-time:                  95
+---------------------------
+---------------------------
+-r1: 0
+-r2: 0
+-d1:         x
+-d2:         x
+-bank[3]:        30
+-bank[5]:        40
+-reg_write_flag0
+-write_reg 5
+-write_data:        40
+-time:                 100
+---------------------------
+---------------------------
+-r1: 3
+-r2: 0
+-d1:         x
+-d2:         x
+-bank[3]:        30
+-bank[5]:        40
+-reg_write_flag0
+-write_reg 5
+-write_data:        40
+-time:                 130
+---------------------------
+---------------------------
+-r1: 3
+-r2: 0
+-d1:        30
+-d2:         x
+-bank[3]:        30
+-bank[5]:        40
+-reg_write_flag0
+-write_reg 5
+-write_data:        40
+-time:                 135
+---------------------------
+---------------------------
+-r1: 3
+-r2: 5
+-d1:        30
+-d2:         x
+-bank[3]:        30
+-bank[5]:        40
+-reg_write_flag0
+-write_reg 5
+-write_data:        40
+-time:                 160
+---------------------------
+---------------------------
+-r1: 3
+-r2: 5
+-d1:        30
+-d2:        40
+-bank[3]:        30
+-bank[5]:        40
+-reg_write_flag0
+-write_reg 5
+-write_data:        40
+-time:                 165
+---------------------------
+Termina la simulacion. -Time:                  210
