@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    13:32:56 11/06/2015 
+// Create Date:    19:32:38 11/06/2015 
 // Design Name: 
 // Module Name:    rx 
 // Project Name: 
@@ -18,8 +18,9 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module rx(
-	input wire rx,
+module rx
+(
+	input wire senial,
 	input wire clk,
 	input wire baud,
 	output reg [7:0]d_out,
@@ -41,7 +42,7 @@ reg [3:0] next_state = 3'b000;
 reg [3:0] state_after_wait = 3'b000;
 reg [3:0] n = 0;
 reg [3:0] s = 0;
-reg [7:0] buffer = 0;
+reg [7:0] buffer = 1;
 
 
 always @(posedge clk)
@@ -81,7 +82,7 @@ begin
 						if(s==15)
 						begin
 							s=0;
-							buffer[n-1]=rx;
+							buffer[n-1]=senial;
 							if(n<9)
 							begin
 								n = n+1;
@@ -114,7 +115,7 @@ begin
 	case(current_state)
 		IDLE:
 			begin
-				if(rx == 0)
+				if(senial == 0)
 					next_state = START;
 				else
 					next_state = IDLE;

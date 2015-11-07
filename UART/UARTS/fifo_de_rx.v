@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    16:41:17 11/06/2015 
+// Create Date:    19:33:02 11/06/2015 
 // Design Name: 
 // Module Name:    fifo_de_rx 
 // Project Name: 
@@ -39,7 +39,7 @@ localparam [2:0] START = 2'b00,
 reg [2:0] current_state = 3'b00;
 reg [2:0] next_state = 3'b00;
 
-reg [7:0] buffer = 0;
+reg [7:0] buffer = 1;
 
 reg esperar = 0;
 
@@ -108,25 +108,3 @@ end //always de logica cambio de estado
 	
 
 endmodule
-
-/*
-always@(posedge clk)
-begin
-	rx_empty <= aux_rx_empty;
-	if(rd==1 && rx_empty==0)
-	begin
-		r_data <= buffer;
-		aux_rx_empty <= 1;
-	end
-	else
-	begin
-		if(rx_empty==1 && rx_done==1)
-		begin
-			buffer <= d_out;
-			aux_rx_empty <= 0;
-		end
-	end
-end
-
-endmodule
-*/

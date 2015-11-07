@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    18:26:22 11/06/2015 
+// Create Date:    20:13:38 11/06/2015 
 // Design Name: 
-// Module Name:    baud_gen 
+// Module Name:    probando_entrada 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,39 +18,33 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module baud_gen
-#(
-	parameter BAUD_RATE=9600,
-	parameter CLOCK=50000000
-)
+module probando_entrada
 (
 	input clk,
-	output reg bauds
+	input rx,
+	output reg [7:0] datos
 );
-	 
-localparam CONTADOR_ESPERA=CLOCK/(BAUD_RATE*16*2);//medio ciclo de espera
 
-reg [9:0] contador;
+reg [3:0] n=0;
 reg init = 1;
 
-always @(posedge clk)
+
+always@(posedge clk)
 begin
 	if(init == 1)
 	begin
-		bauds<=1'd0;
-		contador<=10'd0;
 		init <= 0;
+		datos <= 8'b00001111;
 	end
-	else
-	begin	
-		if(contador==CONTADOR_ESPERA)
-		begin
-			bauds<=~bauds;
-			contador<=10'd0;
-		end
-		else
-			contador<=contador+1'b1;
+	datos[n] <= rx;
+	n <= n+1;
+	if(n==8)
+	begin
+		n <= 0;
 	end
 end
+
+
+
 
 endmodule

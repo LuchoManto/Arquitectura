@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    18:26:22 11/06/2015 
+// Create Date:    19:32:11 11/06/2015 
 // Design Name: 
 // Module Name:    baud_gen 
 // Project Name: 
@@ -25,7 +25,7 @@ module baud_gen
 )
 (
 	input clk,
-	output reg bauds
+	output reg baud
 );
 	 
 localparam CONTADOR_ESPERA=CLOCK/(BAUD_RATE*16*2);//medio ciclo de espera
@@ -37,7 +37,7 @@ always @(posedge clk)
 begin
 	if(init == 1)
 	begin
-		bauds<=1'd0;
+		baud<=1'd0;
 		contador<=10'd0;
 		init <= 0;
 	end
@@ -45,7 +45,7 @@ begin
 	begin	
 		if(contador==CONTADOR_ESPERA)
 		begin
-			bauds<=~bauds;
+			baud<=~baud;
 			contador<=10'd0;
 		end
 		else

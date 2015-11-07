@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    13:32:56 11/06/2015 
+// Create Date:    21:00:00 11/06/2015 
 // Design Name: 
 // Module Name:    rx 
 // Project Name: 
@@ -18,8 +18,9 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module rx(
-	input wire rx,
+module rx
+(
+	input wire senial,
 	input wire clk,
 	input wire baud,
 	output reg [7:0]d_out,
@@ -41,23 +42,30 @@ reg [3:0] next_state = 3'b000;
 reg [3:0] state_after_wait = 3'b000;
 reg [3:0] n = 0;
 reg [3:0] s = 0;
-reg [7:0] buffer = 0;
+reg [7:0] buffer = 1;
 
-
+/*
 always @(posedge clk)
 begin
 		current_state <= next_state;
 end
-
+*/
 		
 always @(posedge clk) // always de logica de salida
 begin
+	d_out = buffer;
+	current_state = next_state;
+	//current_state = next_state;
 	case(current_state)
 		IDLE: // estado inicial. Idle
 				begin
 					rx_done = 0;
 					s = 0;
 					n = 0;
+					if(senial == 0)
+						next_state = START;
+					else
+						next_state = IDLE;
 				end
 		START: // se recibe el bit de start
 				begin
@@ -67,13 +75,17 @@ begin
 						begin
 							s=0;
 							n=1;
+							next_state = WAIT;
+							state_after_wait = DATA;
 						end
 						else
 						begin
 							s = s+1;
+							next_state = WAIT;
+							state_after_wait = START;
 						end
 					end
-				end
+				end	
 		DATA: // se espera incrementando s
 				begin
 					if(baud == 0)
@@ -81,15 +93,22 @@ begin
 						if(s==15)
 						begin
 							s=0;
-							buffer[n-1]=rx;
+							buffer[n-1]=senial;
 							if(n<9)
 							begin
 								n = n+1;
+							end
+							else
+							begin
+								next_state = WAIT;
+								state_after_wait = STOP;
 							end
 						end
 						else
 						begin
 							s = s+1;
+							next_state = WAIT;
+							state_after_wait = DATA;
 						end
 					end
 				end
@@ -102,30 +121,45 @@ begin
 						begin
 							d_out = buffer;
 							rx_done=1;
+							next_state = WAIT;
+							state_after_wait = IDLE;
+						end
+						else
+						begin
+							next_state = WAIT;
+							state_after_wait = STOP;
 						end
 					end
 				end
+		WAIT:
+			begin
+				if(baud==0)
+				begin
+					next_state = WAIT;
+				end
+				else
+				begin
+					next_state = state_after_wait;
+				end
+			end
 	endcase
 end//always de logica de salida
 	
-always @*
+	/*
+always @(*)
 begin
-	next_state = IDLE;
+	//next_state = IDLE;
 	case(current_state)
 		IDLE:
 			begin
-				if(rx == 0)
+				if(senial == 0)
 					next_state = START;
 				else
 					next_state = IDLE;
 			end
 		START:
 			begin
-				if(baud==1)
-				begin
-					next_state = START;
-				end
-				else
+				if(baud==0)
 				begin
 					if(n == 1)
 					begin
@@ -141,11 +175,7 @@ begin
 			end
 		DATA:
 			begin
-				if(baud==1)
-				begin
-					next_state = DATA;
-				end
-				else
+				if(baud==0)
 				begin
 					if(n==9)
 					begin
@@ -161,11 +191,7 @@ begin
 			end
 		STOP:
 			begin
-				if(baud==1)
-				begin
-					next_state = STOP;
-				end
-				else
+				if(baud==0)
 				begin
 					if(s==15)
 					begin
@@ -192,7 +218,7 @@ begin
 			end
 	endcase
 end //always de logica cambio de estado
-	
+	*/
 
 
 endmodule

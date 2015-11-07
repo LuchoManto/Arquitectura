@@ -4,10 +4,10 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   17:24:13 11/06/2015
+// Create Date:   19:48:02 11/06/2015
 // Design Name:   rx_fifo_and_test_modules
-// Module Name:   E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/UART/Uart/test_rx_fifo_and_test_modules.v
-// Project Name:  Uart
+// Module Name:   E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/UART/UARTS/test_rx_fifo_and_test_modules.v
+// Project Name:  UARTS
 // Target Device:  
 // Tool versions:  
 // Description: 
@@ -23,7 +23,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 module test_rx_fifo_and_test_modules;
-
 	// Inputs
 	reg i_rx;
 	reg clk;
@@ -32,7 +31,6 @@ module test_rx_fifo_and_test_modules;
 	// Outputs
 	wire [7:0] w_data;
 	wire wr;
-	wire [7:0] leds;
 
 	// Instantiate the Unit Under Test (UUT)
 	rx_fifo_and_test_modules uut (
@@ -40,8 +38,7 @@ module test_rx_fifo_and_test_modules;
 		.clk(clk), 
 		.tx_full(tx_full), 
 		.w_data(w_data), 
-		.wr(wr),
-		.leds(leds)
+		.wr(wr)
 	);
 	
 	always #1
@@ -160,7 +157,7 @@ module test_rx_fifo_and_test_modules;
 		
 		i_rx = 1;
 		clk = 0;
-		tx_full = 0;
+		tx_full = 1;
 
 		recibir_dato(8'b01010101);
 

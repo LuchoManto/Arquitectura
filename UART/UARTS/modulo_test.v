@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    16:41:17 11/06/2015 
+// Create Date:    19:33:31 11/06/2015 
 // Design Name: 
-// Module Name:    fifo_de_rx 
+// Module Name:    modulo_test 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,30 +18,29 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module fifo_de_rx
+module modulo_test
 (
-	input wire [7:0]d_out,
-	input wire rx_done,
-	input wire rd,
+	input wire [7:0]r_data,
 	input wire clk,
-	output reg [7:0]r_data,
-	output reg rx_empty
+	input wire rx_empty,
+	input wire tx_full,
+	output reg [7:0]w_data,
+	output reg rd,
+	output reg wr
 );
-
+		
 //Estados
-localparam [2:0] START = 2'b00,
-					  IDLE = 2'b01,
+localparam [2:0] IDLE = 2'b00,
+					  RECIBO = 2'b01,
 					  ESPERO = 2'b10;
 					  
 					  
 					  
 //Variables internas
+reg [7:0] buffer = 1;
 reg [2:0] current_state = 3'b00;
 reg [2:0] next_state = 3'b00;
 
-reg [7:0] buffer = 0;
-
-reg esperar = 0;
 
 always @(posedge clk)
 begin
@@ -52,31 +51,29 @@ end
 always @(posedge clk) // always de logica de salida
 begin
 	case(current_state)
-		START: // estado inicial. start
+		IDLE: // estado inicial. Idle
 				begin
-					rx_empty = 0;
-				end
-		IDLE: 
-				begin
-					if(rd==1 && rx_empty==0)
-					begin
-						r_data = buffer;
-						rx_empty = 1;
-					end
+					if(rx_empty == 0)
+						rd=1;
 					else
+						rd=0;
+				end
+		RECIBO: 
+				begin
+				w_data = r_data;
+				/*
+					if(rx_empty==1)
 					begin
-						if(rx_empty==1 && rx_done==1)
-						begin
-							buffer = d_out;
-							rx_empty = 0;
-							esperar = 1;
-						end
+						w_data = r_data;
+						//wr = 1;
+						//rd = 0;
 					end
-				end		
+					*/
+				end
 		ESPERO: 
 				begin
-					if(rx_done == 0)
-						esperar = 0;
+					if(tx_full == 1)
+						wr = 0;
 				end
 	endcase
 end//always de logica de salida
@@ -85,22 +82,24 @@ always @*
 begin
 	next_state = IDLE;
 	case(current_state)
-	   START:
-			begin
-				next_state = IDLE;
-			end
 		IDLE:
 			begin
-				if(esperar == 1)
-					next_state = ESPERO;
+				if(rd == 1)
+					next_state = RECIBO;
 				else
 					next_state = IDLE;
 			end
+		RECIBO:
+			begin
+				next_state = IDLE;
+				/*
+				if(wr==1)
+					next_state = ESPERO;
+					*/
+			end
 		ESPERO:
 			begin
-				if(esperar == 1)
-					next_state = ESPERO;
-				else
+				if(wr == 0)
 					next_state = IDLE;
 			end
 	endcase
@@ -108,25 +107,3 @@ end //always de logica cambio de estado
 	
 
 endmodule
-
-/*
-always@(posedge clk)
-begin
-	rx_empty <= aux_rx_empty;
-	if(rd==1 && rx_empty==0)
-	begin
-		r_data <= buffer;
-		aux_rx_empty <= 1;
-	end
-	else
-	begin
-		if(rx_empty==1 && rx_done==1)
-		begin
-			buffer <= d_out;
-			aux_rx_empty <= 0;
-		end
-	end
-end
-
-endmodule
-*/

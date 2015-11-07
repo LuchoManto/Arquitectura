@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    17:11:37 11/06/2015 
+// Create Date:    19:31:52 11/06/2015 
 // Design Name: 
 // Module Name:    rx_fifo_and_test_modules 
 // Project Name: 
@@ -18,13 +18,18 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module rx_fifo_and_test_modules(
-	input wire i_rx,
+module rx_fifo_and_test_modules
+#
+( 
+	parameter BAUD_RATE = 9600,
+	parameter CLOCK =50000000
+)
+(
+   input wire i_rx,
 	input wire clk,
 	input wire tx_full,
 	output reg [7:0]w_data,
-	output reg wr,
-	output reg [7:0] leds
+	output reg wr
     );
 
 //wire de baud_rate
@@ -44,13 +49,18 @@ wire [7:0] test_w_data;
 wire test_wr;
 
 
-baud_gen baudrate (
+baud_gen
+#(
+	.BAUD_RATE(BAUD_RATE),
+	.CLOCK(CLOCK)
+) 
+baudrate (
 	.clk(clk),
-	.bauds(baud_gen_baud)
+	.baud(baud_gen_baud)
 );
 
 rx receptor(
-	.rx(i_rx),
+	.senial(i_rx),
 	.clk(clk),
 	.baud(baud_gen_baud),
 	.d_out(rx_d_out),
@@ -80,7 +90,6 @@ always@(posedge clk)
 begin
 	w_data <= test_w_data;
 	wr <= test_wr;
-	leds <= w_data;
 end
 
 

@@ -18,7 +18,8 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module modulo_test(
+module modulo_test
+(
 	input wire [7:0]r_data,
 	input wire clk,
 	input wire rx_empty,
