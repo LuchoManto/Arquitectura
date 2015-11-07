@@ -21,27 +21,32 @@
 module prueba
 #
 ( 
-	parameter BAUD_RATE = 9600,
+	parameter BAUD_RATE = 9_600,
 	parameter CLOCK =100_000_000
 )
 (
    input wire i_rx,
 	input wire clk,
-	input wire reset,
 	output reg [7:0]salida,
-	output reg [3:0]salida1,
-	output reg [3:0]salida2
+	output reg wr
 );
 
 //wire de baud_rate
 wire baud_gen_baud;
-wire baud_leds;
 
 //wires de rx a fifo
 wire [7:0] rx_d_out;
 wire rx_rx_done;
-wire [3:0]rx_salida1;
-wire [3:0]rx_salida2;
+
+//wires de fifo a test
+wire [7:0] fifo_r_data;
+wire fifo_rx_empty;
+
+//wires de test a fifo
+wire test_rd;
+wire [7:0] test_w_data;
+wire test_wr;
+
 
 baud
 #(
@@ -59,16 +64,33 @@ receptor
 	.clk(clk),
 	.baud(baud_gen_baud),
 	.d_out(rx_d_out),
-	.salida1(rx_salida1),
-	.salida2(rx_salida2),
 	.rx_done(rx_rx_done)
+);
+
+fifo_de_rx fiforx(
+	.d_out(rx_d_out),
+	.rx_done(rx_rx_done),
+	.rd(test_rd),
+	.clk(clk),
+	.r_data(fifo_r_data),
+	.rx_empty(fifo_rx_empty)
+);
+
+
+modulo_test tester(
+	.r_data(fifo_r_data),
+	.clk(clk),
+	.rx_empty(fifo_rx_empty),
+	.tx_full(tx_full),
+	.w_data(test_w_data),
+	.rd(test_rd),
+	.wr(test_wr)
 );
 
 always@(posedge clk)
 begin
-	salida <= rx_d_out;
-	salida1 <= rx_salida1;
-	salida2 <= rx_salida2;
+	salida <= test_w_data;
+	wr <= test_wr;
 end
 
 endmodule

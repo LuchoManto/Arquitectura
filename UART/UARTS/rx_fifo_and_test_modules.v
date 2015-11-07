@@ -51,12 +51,11 @@ wire test_wr;
 
 baud_gen
 #(
-	.BAUD_RATE(BAUD_RATE),
-	.CLOCK(CLOCK)
+	.COUNT(651)
 ) 
 baudrate (
-	.clk(clk),
-	.baud(baud_gen_baud)
+	.clock(clk),
+	.baud_rate(baud_gen_baud)
 );
 
 rx receptor(

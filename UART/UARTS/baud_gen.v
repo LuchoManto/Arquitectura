@@ -19,38 +19,15 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module baud_gen
-#(
-	parameter BAUD_RATE=9600,
-	parameter CLOCK=50000000
-)
+#(parameter COUNT = 651 )
 (
-	input clk,
-	output reg baud
-);
-	 
-localparam CONTADOR_ESPERA=CLOCK/(BAUD_RATE*16*2);//medio ciclo de espera
-
-reg [9:0] contador;
-reg init = 1;
-
-always @(posedge clk)
-begin
-	if(init == 1)
-	begin
-		baud<=1'd0;
-		contador<=10'd0;
-		init <= 0;
-	end
-	else
-	begin	
-		if(contador==CONTADOR_ESPERA)
-		begin
-			baud<=~baud;
-			contador<=10'd0;
-		end
-		else
-			contador<=contador+1'b1;
-	end
-end
-
+		input clock,
+		output reg baud_rate
+ );
+ 
+	 reg [15:0]counter=0;
+	 always @(posedge clock) begin
+		counter <= (counter < COUNT)? counter+16'b1 : 16'b0;
+		baud_rate <= (counter == COUNT)? 1'b1 : 1'b0;
+	 end
 endmodule

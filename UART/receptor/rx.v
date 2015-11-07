@@ -44,17 +44,14 @@ reg [3:0] n = 0;
 reg [3:0] s = 0;
 reg [7:0] buffer = 1;
 
-/*
 always @(posedge clk)
 begin
-		current_state <= next_state;
+	current_state <= next_state;
 end
-*/
 		
 always @(posedge clk) // always de logica de salida
 begin
-	d_out = buffer;
-	current_state = next_state;
+	//d_out = buffer;
 	//current_state = next_state;
 	case(current_state)
 		IDLE: // estado inicial. Idle
@@ -100,6 +97,8 @@ begin
 							end
 							else
 							begin
+								d_out = buffer;
+								rx_done=1;
 								next_state = WAIT;
 								state_after_wait = STOP;
 							end
@@ -114,20 +113,30 @@ begin
 				end
 		STOP: // se guarda el dato en el buffer
 				begin
-					if(baud == 0)
+					if(senial == 0)
 					begin
-						s=s+1;
-						if(s == 15)
+						next_state = START;
+						rx_done = 0;
+						s = 0;
+						n = 0;
+					end
+					else
+					begin
+						if(baud == 0)
 						begin
-							d_out = buffer;
-							rx_done=1;
-							next_state = WAIT;
-							state_after_wait = IDLE;
-						end
-						else
-						begin
-							next_state = WAIT;
-							state_after_wait = STOP;
+							s=s+1;
+							if(s == 15)
+							begin
+								//d_out = buffer;
+								//rx_done=1;
+								next_state = IDLE;
+								state_after_wait = IDLE;
+							end
+							else
+							begin
+								next_state = WAIT;
+								state_after_wait = STOP;
+							end
 						end
 					end
 				end
@@ -145,80 +154,5 @@ begin
 	endcase
 end//always de logica de salida
 	
-	/*
-always @(*)
-begin
-	//next_state = IDLE;
-	case(current_state)
-		IDLE:
-			begin
-				if(senial == 0)
-					next_state = START;
-				else
-					next_state = IDLE;
-			end
-		START:
-			begin
-				if(baud==0)
-				begin
-					if(n == 1)
-					begin
-						next_state = WAIT;
-						state_after_wait = DATA;
-					end
-					else
-					begin
-						next_state = WAIT;
-						state_after_wait = START;
-					end
-				end
-			end
-		DATA:
-			begin
-				if(baud==0)
-				begin
-					if(n==9)
-					begin
-						next_state = WAIT;
-						state_after_wait = STOP;
-					end
-					else
-					begin
-						next_state = WAIT;
-						state_after_wait = DATA;
-					end
-				end
-			end
-		STOP:
-			begin
-				if(baud==0)
-				begin
-					if(s==15)
-					begin
-						next_state = WAIT;
-						state_after_wait = IDLE;
-					end
-					else
-					begin
-						next_state = WAIT;
-						state_after_wait = STOP;
-					end
-				end
-			end
-		WAIT:
-			begin
-				if(baud==0)
-				begin
-					next_state = WAIT;
-				end
-				else
-				begin
-					next_state = state_after_wait;
-				end
-			end
-	endcase
-end //always de logica cambio de estado
-	*/
-
 
 endmodule

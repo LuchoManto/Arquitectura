@@ -45,20 +45,21 @@ reg [3:0] s = 0;
 reg [7:0] buffer = 1;
 
 
-always @(posedge clk)
-begin
-		current_state <= next_state;
-end
-
 		
 always @(posedge clk) // always de logica de salida
 begin
+	//d_out = buffer;
+	current_state = next_state;
 	case(current_state)
 		IDLE: // estado inicial. Idle
 				begin
 					rx_done = 0;
 					s = 0;
 					n = 0;
+					if(senial == 0)
+						next_state = START;
+					else
+						next_state = IDLE;
 				end
 		START: // se recibe el bit de start
 				begin
@@ -68,13 +69,17 @@ begin
 						begin
 							s=0;
 							n=1;
+							next_state = WAIT;
+							state_after_wait = DATA;
 						end
 						else
 						begin
 							s = s+1;
+							next_state = WAIT;
+							state_after_wait = START;
 						end
 					end
-				end
+				end	
 		DATA: // se espera incrementando s
 				begin
 					if(baud == 0)
@@ -87,10 +92,17 @@ begin
 							begin
 								n = n+1;
 							end
+							else
+							begin
+								next_state = WAIT;
+								state_after_wait = STOP;
+							end
 						end
 						else
 						begin
 							s = s+1;
+							next_state = WAIT;
+							state_after_wait = DATA;
 						end
 					end
 				end
@@ -103,83 +115,16 @@ begin
 						begin
 							d_out = buffer;
 							rx_done=1;
+							next_state = WAIT;
+							state_after_wait = IDLE;
+						end
+						else
+						begin
+							next_state = WAIT;
+							state_after_wait = STOP;
 						end
 					end
 				end
-	endcase
-end//always de logica de salida
-	
-always @*
-begin
-	next_state = IDLE;
-	case(current_state)
-		IDLE:
-			begin
-				if(senial == 0)
-					next_state = START;
-				else
-					next_state = IDLE;
-			end
-		START:
-			begin
-				if(baud==1)
-				begin
-					next_state = START;
-				end
-				else
-				begin
-					if(n == 1)
-					begin
-						next_state = WAIT;
-						state_after_wait = DATA;
-					end
-					else
-					begin
-						next_state = WAIT;
-						state_after_wait = START;
-					end
-				end
-			end
-		DATA:
-			begin
-				if(baud==1)
-				begin
-					next_state = DATA;
-				end
-				else
-				begin
-					if(n==9)
-					begin
-						next_state = WAIT;
-						state_after_wait = STOP;
-					end
-					else
-					begin
-						next_state = WAIT;
-						state_after_wait = DATA;
-					end
-				end
-			end
-		STOP:
-			begin
-				if(baud==1)
-				begin
-					next_state = STOP;
-				end
-				else
-				begin
-					if(s==15)
-					begin
-						next_state = WAIT;
-						state_after_wait = IDLE;
-					end
-					else
-					begin
-						next_state = WAIT;
-						state_after_wait = STOP;
-					end
-				end
-			end
 		WAIT:
 			begin
 				if(baud==0)
@@ -192,8 +137,7 @@ begin
 				end
 			end
 	endcase
-end //always de logica cambio de estado
+end//always de logica de salida
 	
-
 
 endmodule
