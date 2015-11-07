@@ -23,14 +23,20 @@ module top(
 	input [4:0]r2,
 	input [4:0]write_reg,
 	input [31:0]write_data,
-	input reg_write_flag,
+	output reg [31:0] reg_toprint,
 	output reg [31:0]d1,
 	output reg [31:0]d2,
-	input clk
+	input clk,
+	
+	input reg_write_flag,
+	input print_all_flag,
+	output reg finish_print
     );
 	 
 	 
 	 reg [31:0] bank [31:0];
+	 reg [4:0]counter;
+	 reg printing;
 	 
 	 always@(posedge clk)
 	 begin
@@ -38,7 +44,33 @@ module top(
 	 d1 <= bank[r1];
 	 d2 <= bank[r2];
 	 
-	 bank[write_reg] <= (reg_write_flag == 1) ? write_data : bank[write_reg];
+	 bank[write_reg] <= reg_write_flag ? write_data : bank[write_reg];
+	 
+	 if(print_all_flag)
+	 begin
+		printing <= 1;
+		counter <= 0;
+	 end
+	 
+	 if(printing)
+	 begin
+		if(counter < 31)
+		begin
+			counter <= counter + 1;		
+			reg_toprint <= bank[counter];
+			printing <= 1;
+		end
+		else
+		begin
+			counter <= 0;
+			reg_toprint <= reg_toprint;
+			printing <= 0;
+			finish_print <= 1;
+		end
+		
+	 end
+	 
+	 
 	 
 	 end
 	 

@@ -142,4 +142,8 @@
 -write_data:        40
 -time:                 165
 ---------------------------
-Termina la simulacion. -Time:                  210
+------------REGISTROS---------------
+
+---------------------------
+
+Termina la simulacion. -Time:                  320

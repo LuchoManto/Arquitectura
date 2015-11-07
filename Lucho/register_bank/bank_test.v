@@ -28,26 +28,34 @@ module bank_test;
 	reg [4:0] r1;
 	reg [4:0] r2;
 	reg [4:0] write_reg;
-	reg [31:0] write_data;
+	reg [31:0] write_data;	
+	reg clk;	
 	reg reg_write_flag;
-	reg clk;
+	reg print_all_flag;
 
 	// Outputs
 	wire [31:0] d1;
 	wire [31:0] d2;
+	wire finish_print;
+	wire [31:0] reg_toprint;
+
 
 	// Instantiate the Unit Under Test (UUT)
 	top uut (
 		.r1(r1), 
 		.r2(r2), 
 		.write_reg(write_reg), 
-		.write_data(write_data), 
-		.reg_write_flag(reg_write_flag), 
+		.write_data(write_data),
+		.reg_toprint(reg_toprint),
 		.d1(d1), 
-		.d2(d2), 
-		.clk(clk)
+		.d2(d2),
+		.clk(clk),
+		.reg_write_flag(reg_write_flag),
+		.print_all_flag(print_all_flag),
+		.finish_print(finish_print)
 	);
 	integer f;
+	integer i;
 	initial begin
 	
 	f = $fopen("test_salida.txt", "w");
@@ -62,6 +70,7 @@ module bank_test;
 		write_data = 30;
 		reg_write_flag = 0;
 		clk = 0;
+		print_all_flag = 0;
 
 		// Wait 100 ns for global reset to finish
 		#20;
@@ -81,6 +90,15 @@ module bank_test;
 		r2 = 5;
 		#50;
 		
+		print_all_flag = 1;
+		#10;
+		print_all_flag = 0;
+		
+		#100;
+
+		$fdisplay(f,"------------REGISTROS---------------\n");
+		$fmonitor(f,reg_toprint);
+		$fdisplay(f,"---------------------------\n");
 		
 		
 		
