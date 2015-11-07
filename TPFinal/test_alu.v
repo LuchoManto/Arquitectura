@@ -33,7 +33,6 @@ module test_alu;
 	// Outputs
 	wire [31:0] result;
 	wire zero;
-	wire carry;
 
 	// Instantiate the Unit Under Test (UUT)
 	ALU uut (
@@ -42,7 +41,6 @@ module test_alu;
 		.operation(operation), 
 		.result(result), 
 		.zero(zero), 
-		.carry(carry), 
 		.clk(clk)
 	);
 
