@@ -19,28 +19,37 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ALU
-#(parameter N=7)
+#(parameter N=32)
 (
-	input signed [N:0] input1,
-	input signed [N:0] input2,
+	input signed [N-1:0] input1,
+	input signed [N-1:0] input2,
 	input wire [5:0]	operation,
-	output reg	[N:0]	result,
+	output reg	[N-1:0]	result,
+	output reg zero,
+	output reg carry,
 	input clk
 );
+
+	wire temp[N:0];
 
 	always @(posedge clk)
 	begin
 		 case(operation)
-		 6'b100000: result <= input1 + input2;
-		 6'b100010: result <= input1 - input2; //resta
+		 6'b100000: {carry,result} <= input1 + input2; // suma
+		 6'b100010: {carry,result} <= input1 - input2; //resta
 		 6'b100100: result <= input1 & input2; //and
 		 6'b100101: result <= input1 | input2; //or
 		 6'b100110: result <= input1 ^ input2; //xor
 		 6'b000011: result <= input1 >>> input2; //shift aritmetico
 		 6'b000010: result <= input1 >> input2; //shift logico
 		 6'b100111: result <= ~(input1 | input2); //nor
-		 default: result<=8'b11111111;
+		 default: result <= result;
 		 endcase
+		 
+		 if(result == 0)
+			zero <= 1;
+		 else
+			zero <= 0;
 	end
 
 
