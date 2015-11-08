@@ -28,7 +28,7 @@ module prueba
    input wire i_rx,
 	input wire clk,
 	output reg [7:0]salida,
-	output reg wr
+	output reg tx
 );
 
 //wire de baud_rate
@@ -47,6 +47,14 @@ wire test_rd;
 wire [7:0] test_w_data;
 wire test_wr;
 
+//wire salida de fifotx
+wire [7:0] fifo_tx_d_in;
+wire fifo_tx_tx_start;
+wire fifo_tx_tx_full;
+
+//wire salida de tx
+wire tx_tx_done;
+wire tx_o_tx;
 
 baud
 #(
@@ -81,16 +89,37 @@ modulo_test tester(
 	.r_data(fifo_r_data),
 	.clk(clk),
 	.rx_empty(fifo_rx_empty),
-	.tx_full(tx_full),
+	.tx_full(fifo_tx_tx_full),
 	.w_data(test_w_data),
 	.rd(test_rd),
 	.wr(test_wr)
 );
 
+fifo_de_tx fifotx
+(
+	.w_data(test_w_data),
+	.wr(test_wr),
+	.tx_done(tx_tx_done),
+	.clk(clk),
+	.tx_full(fifo_tx_tx_full),
+	.tx_start(fifo_tx_tx_start),
+	.d_in(fifo_tx_d_in)
+);
+
+tx transmisor
+(
+	.tx_start(fifo_tx_tx_start),
+	.d_in(fifo_tx_d_in),
+	.clk(clk),
+	.baud(baud_gen_baud),
+	.tx(tx_o_tx),
+	.tx_done(tx_tx_done)
+);
+
 always@(posedge clk)
 begin
-	salida <= test_w_data;
-	wr <= test_wr;
+	salida <= fifo_tx_d_in;
+	tx <= tx_o_tx;
 end
 
 endmodule

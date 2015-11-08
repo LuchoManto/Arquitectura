@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    19:33:31 11/06/2015 
+// Create Date:    15:15:11 11/07/2015 
 // Design Name: 
-// Module Name:    modulo_test 
+// Module Name:    fifo_de_tx 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,29 +18,30 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module modulo_test
+module fifo_de_tx
 (
-	input wire [7:0]r_data,
+	input wire [7:0]w_data,
+	input wire wr,
+	input wire tx_done,
 	input wire clk,
-	input wire rx_empty,
-	input wire tx_full,
-	output reg [7:0]w_data,
-	output reg rd,
-	output reg wr
+	output reg tx_full,
+	output reg tx_start,
+	output reg [7:0]d_in
 );
-		
+
 //Estados
 localparam [2:0] START = 2'b00,
 					  IDLE = 2'b01,
-					  RECIBO = 2'b10,
+					  ENVIO = 2'b10,
 					  ESPERO = 2'b11;
 					  
 					  
 					  
 //Variables internas
-reg [7:0] buffer = 1;
 reg [2:0] current_state = 3'b00;
 reg [2:0] next_state = 3'b00;
+
+reg [7:0] buffer = 1;
 
 
 always @(posedge clk)
@@ -52,40 +53,36 @@ end
 always @(posedge clk) // always de logica de salida
 begin
 	case(current_state)
-		START:
+		START: // estado inicial. start
+				begin
+					tx_start = 0;
+					d_in = 1;
+					tx_full = 0;
+				end
+		IDLE: 
+				begin
+					if(wr==1)
+					begin
+						buffer = w_data;
+						tx_full = 1;
+					end
+				end		
+		ENVIO: 
+				begin
+					if(tx_done == 1)
+					begin
+						d_in = buffer;
+						tx_start = 1;
+						tx_full = 0;
+					end
+				end
+		ESPERO:
 			begin
-				w_data=buffer;
-				rd = 0;
-				wr = 0;
+				if(tx_done == 0)
+				begin
+					tx_start=0;
+				end
 			end
-		IDLE: // estado inicial. Idle
-				begin
-					if(rx_empty == 0)
-					begin
-						rd=1;
-						//next_state = RECIBO;
-					end
-					else
-					begin
-						rd=0;
-						//next_state = IDLE;
-					end
-				end
-		RECIBO: 
-				begin
-					w_data = r_data;
-					if(tx_full==0)
-					begin
-						//w_data = r_data;
-						wr = 1;
-						rd = 0;
-					end
-				end
-		ESPERO: 
-				begin
-					if(tx_full == 1)
-						wr = 0;
-				end
 	endcase
 end//always de logica de salida
 	
@@ -93,31 +90,34 @@ always @*
 begin
 	next_state = IDLE;
 	case(current_state)
-		START:
+	   START:
 			begin
 				next_state = IDLE;
 			end
 		IDLE:
 			begin
-				if(rd == 1)
-					next_state = RECIBO;
+				if(tx_full == 1)
+					next_state = ENVIO;
 				else
 					next_state = IDLE;
 			end
-		RECIBO:
+		ENVIO:
 			begin
-				//next_state = IDLE;
-				if(wr==1)
+				if(tx_full == 0)
 					next_state = ESPERO;
 				else
-					next_state = RECIBO;
+					next_state = ENVIO;
 			end
 		ESPERO:
 			begin
-				if(wr == 0)
+				if(tx_start == 0)
+				begin
 					next_state = IDLE;
+				end
 				else
+				begin
 					next_state = ESPERO;
+				end
 			end
 	endcase
 end //always de logica cambio de estado

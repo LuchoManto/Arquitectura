@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    19:32:38 11/06/2015 
+// Create Date:    16:14:53 11/07/2015 
 // Design Name: 
-// Module Name:    rx 
+// Module Name:    tx 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,15 +18,16 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module rx
+module tx
 (
-	input wire senial,
+	input wire tx_start,
+	input wire [7:0]d_in,
 	input wire clk,
 	input wire baud,
-	output reg [7:0]d_out,
-	output reg rx_done
+	output reg tx,
+	output reg tx_done
 );
-		
+
 //Estados
 localparam [3:0] IDLE = 3'b000,
 					  START = 3'b001,
@@ -56,11 +57,15 @@ begin
 	case(current_state)
 		IDLE: // estado inicial. Idle
 				begin
-					rx_done = 0;
-					s = 0;
-					n = 0;
-					if(senial == 0)
-						next_state = START;
+					tx_done = 1;
+					tx = 1;
+					if(tx_start == 1)
+					begin
+						buffer = d_in;
+						tx_done = 0;
+						s = 0;
+						next_state = START;	
+					end
 					else
 						next_state = IDLE;
 				end
@@ -68,10 +73,11 @@ begin
 				begin
 					if(baud==0)
 					begin
-						if(s==7)
+						tx = 0;
+						if(s==15)
 						begin
 							s=0;
-							n=1;
+							n=0;
 							next_state = WAIT;
 							state_after_wait = DATA;
 						end
@@ -83,24 +89,25 @@ begin
 						end
 					end
 				end	
-		DATA: // se espera incrementando s
+		DATA: 
 				begin
 					if(baud == 0)
 					begin
+						tx = buffer[n];
 						if(s==15)
 						begin
-							s=0;
-							buffer[n-1]=senial;
-							if(n<9)
+							if(n==7)
 							begin
-								n = n+1;
+								s=0;
+								next_state = WAIT;
+								state_after_wait = STOP;
 							end
 							else
 							begin
-								d_out = buffer;
-								rx_done=1;
+								n=n+1;
+								s=0;
 								next_state = WAIT;
-								state_after_wait = STOP;
+								state_after_wait = DATA;
 							end
 						end
 						else
@@ -113,30 +120,19 @@ begin
 				end
 		STOP: // se guarda el dato en el buffer
 				begin
-					if(senial == 0)
+					if(baud == 0)
 					begin
-						next_state = START;
-						rx_done = 0;
-						s = 0;
-						n = 0;
-					end
-					else
-					begin
-						if(baud == 0)
+						tx=1;
+						if(s == 15)
+						begin
+							next_state = IDLE;
+							state_after_wait = IDLE;
+						end
+						else
 						begin
 							s=s+1;
-							if(s == 15)
-							begin
-								//d_out = buffer;
-								//rx_done=1;
-								next_state = IDLE;
-								state_after_wait = IDLE;
-							end
-							else
-							begin
-								next_state = WAIT;
-								state_after_wait = STOP;
-							end
+							next_state = WAIT;
+							state_after_wait = STOP;
 						end
 					end
 				end
@@ -156,3 +152,4 @@ end//always de logica de salida
 	
 
 endmodule
+

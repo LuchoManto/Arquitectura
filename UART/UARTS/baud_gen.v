@@ -19,7 +19,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module baud_gen
-#(parameter COUNT = 651 )
+#(parameter COUNT = 163 )
 (
 		input clock,
 		output reg baud_rate

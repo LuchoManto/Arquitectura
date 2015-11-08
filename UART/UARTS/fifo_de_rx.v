@@ -54,7 +54,7 @@ begin
 	case(current_state)
 		START: // estado inicial. start
 				begin
-					rx_empty = 0;
+					rx_empty = 1;
 				end
 		IDLE: 
 				begin

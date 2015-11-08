@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   19:48:02 11/06/2015
-// Design Name:   rx_fifo_and_test_modules
-// Module Name:   E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/UART/UARTS/test_rx_fifo_and_test_modules.v
-// Project Name:  UARTS
+// Create Date:   18:52:58 11/08/2015
+// Design Name:   prueba
+// Module Name:   E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/UART/receptor/test_prueba.v
+// Project Name:  receptor
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: rx_fifo_and_test_modules
+// Verilog Test Fixture created by ISE for module: prueba
 //
 // Dependencies:
 // 
@@ -22,28 +22,28 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module test_rx_fifo_and_test_modules;
+module test_prueba;
+
 	// Inputs
 	reg i_rx;
 	reg clk;
 
 	// Outputs
-	wire [7:0] w_data;
+	wire [7:0] salida;
 	wire tx;
 
 	// Instantiate the Unit Under Test (UUT)
-	rx_fifo_and_test_modules uut (
-		.i_rx(i_rx),  
+	prueba uut (
+		.i_rx(i_rx), 
 		.clk(clk), 
-		.w_data(w_data), 
+		.salida(salida), 
 		.tx(tx)
 	);
-	
+
 	always #1
 	begin
 		clk = ~clk;
 	end
-	
 	task recibir_dato(input [7:0] dato);
 	begin
 		$fdisplay(f,"\n -----------------------------------------------------------------------------------------------------"," Time: ",$time, " \n");
