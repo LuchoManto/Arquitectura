@@ -20,14 +20,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 module add_pc(
 	input wire pc,
-	input wire clk,
 	output reg [31:0] o_pc
     );
 
 
-always @(posedge clk)
+always @(*)
 begin 
-	o_pc <= pc + 4; 
+	o_pc <= pc + 1; 
 end
 
 endmodule

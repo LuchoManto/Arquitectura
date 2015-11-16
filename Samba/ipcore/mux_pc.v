@@ -19,14 +19,12 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module mux_pc(
-	input wire clk,
-	input wire pc,
 	input wire pc_alu,
 	input wire pcsrc,
 	output reg [31:0] o_pc1
     );
 
-always @(posedge clk)
+always @(*)
 begin
       if (pcsrc)
          o_pc1 <= pc;

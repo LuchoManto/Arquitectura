@@ -2,6 +2,7 @@
 _xmsgs\pn_parser.xmsgs
 ip_core.asy
 ip_core.gise
+ip_core.mif
 ip_core.ngc
 ip_core.sym
 ip_core.v
