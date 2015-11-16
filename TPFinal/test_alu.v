@@ -35,7 +35,7 @@ module test_alu;
 	wire zero;
 
 	// Instantiate the Unit Under Test (UUT)
-	ALU uut (
+	alu uut (
 		.input1(input1), 
 		.input2(input2), 
 		.operation(operation), 
