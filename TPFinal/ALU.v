@@ -24,8 +24,8 @@ module alu
 	input signed [N-1:0] input1,
 	input signed [N-1:0] input2,
 	input wire [3:0]	operation,
-	output reg	[N-1:0]	result,
-	output reg zero
+	output reg	[N-1:0]	result
+//	output reg zero
 );
 
 	
@@ -51,10 +51,10 @@ module alu
 		 default: 	result <= result;
 		 endcase
 		 
-		 if(result == 0)
-			zero <= 1;
-		 else
-			zero <= 0;
+//		 if(result == 0)
+//			zero <= 1;
+//		 else
+//			zero <= 0;
 	end
 
 
