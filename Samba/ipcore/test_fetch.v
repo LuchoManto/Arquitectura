@@ -26,33 +26,43 @@ module test_fetch;
 
 	// Inputs
 	reg clk;
-	reg RegWriteW;
-	reg [31:0] PCBranchD;
+	reg PCSrcD;
+	reg [8:0] PCBranchD;
 
 	// Outputs
-	wire [31:0] PCPlus4D;
-	wire InstrD;
+	wire [8:0] PCPlus4D;
+	wire [31:0] InstrD;
 
 	// Instantiate the Unit Under Test (UUT)
 	fetch uut (
 		.clk(clk), 
-		.RegWriteW(RegWriteW), 
+		.PCSrcD(PCSrcD), 
 		.PCBranchD(PCBranchD), 
 		.PCPlus4D(PCPlus4D), 
 		.InstrD(InstrD)
 	);
+	
+	always #1
+	begin
+		clk = ~clk;
+	end
 
 	initial begin
 		// Initialize Inputs
+		$display("Comienza la simulacion");
+		$monitor("\n ----------------------------- \n - PCSrcD: %b",PCSrcD,
+		" \n - InstrD: %h",InstrD," \n -  PCPlus4D: %b",PCPlus4D,
+		" \n - Time: ",$time, "\n ----------------------------------");
 		clk = 0;
-		RegWriteW = 0;
+		PCSrcD = 0;
 		PCBranchD = 0;
 
 		// Wait 100 ns for global reset to finish
-		#100;
+		#10;
         
 		// Add stimulus here
-
+		$display("Termina la simulacion. -Time: ",$time);
+		$finish;
 	end
       
 endmodule

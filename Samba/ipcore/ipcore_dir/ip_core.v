@@ -38,32 +38,34 @@
 
 module ip_core(
   clka,
+  ena,
   addra,
   douta
 );
 
 input clka;
-input [31 : 0] addra;
+input ena;
+input [8 : 0] addra;
 output [31 : 0] douta;
 
 // synthesis translate_off
 
   BLK_MEM_GEN_V7_3 #(
-    .C_ADDRA_WIDTH(32),
-    .C_ADDRB_WIDTH(32),
+    .C_ADDRA_WIDTH(9),
+    .C_ADDRB_WIDTH(9),
     .C_ALGORITHM(1),
     .C_AXI_ID_WIDTH(4),
     .C_AXI_SLAVE_TYPE(0),
     .C_AXI_TYPE(1),
-    .C_BYTE_SIZE(8),
+    .C_BYTE_SIZE(9),
     .C_COMMON_CLK(0),
     .C_DEFAULT_DATA("0"),
     .C_DISABLE_WARN_BHV_COLL(0),
     .C_DISABLE_WARN_BHV_RANGE(0),
-    .C_ENABLE_32BIT_ADDRESS(1),
+    .C_ENABLE_32BIT_ADDRESS(0),
     .C_FAMILY("spartan6"),
     .C_HAS_AXI_ID(0),
-    .C_HAS_ENA(0),
+    .C_HAS_ENA(1),
     .C_HAS_ENB(0),
     .C_HAS_INJECTERR(0),
     .C_HAS_MEM_OUTPUT_REGS_A(0),
@@ -85,8 +87,8 @@ output [31 : 0] douta;
     .C_MEM_TYPE(3),
     .C_MUX_PIPELINE_STAGES(0),
     .C_PRIM_TYPE(1),
-    .C_READ_DEPTH_A(1024),
-    .C_READ_DEPTH_B(1024),
+    .C_READ_DEPTH_A(512),
+    .C_READ_DEPTH_B(512),
     .C_READ_WIDTH_A(32),
     .C_READ_WIDTH_B(32),
     .C_RST_PRIORITY_A("CE"),
@@ -103,8 +105,8 @@ output [31 : 0] douta;
     .C_USE_SOFTECC(0),
     .C_WEA_WIDTH(1),
     .C_WEB_WIDTH(1),
-    .C_WRITE_DEPTH_A(1024),
-    .C_WRITE_DEPTH_B(1024),
+    .C_WRITE_DEPTH_A(512),
+    .C_WRITE_DEPTH_B(512),
     .C_WRITE_MODE_A("WRITE_FIRST"),
     .C_WRITE_MODE_B("WRITE_FIRST"),
     .C_WRITE_WIDTH_A(32),
@@ -113,10 +115,10 @@ output [31 : 0] douta;
   )
   inst (
     .CLKA(clka),
+    .ENA(ena),
     .ADDRA(addra),
     .DOUTA(douta),
     .RSTA(),
-    .ENA(),
     .REGCEA(),
     .WEA(),
     .DINA(),

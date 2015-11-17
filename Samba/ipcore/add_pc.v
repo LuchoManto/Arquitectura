@@ -19,8 +19,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module add_pc(
-	input wire pc,
-	output reg [31:0] o_pc
+	input wire [8:0] pc,
+	output reg [8:0] o_pc
     );
 
 

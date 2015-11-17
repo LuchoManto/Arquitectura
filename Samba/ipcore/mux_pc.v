@@ -19,16 +19,17 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module mux_pc(
-	input wire pc_alu,
+	input wire [8:0]pc,
+	input wire [8:0]pc_alu,
 	input wire pcsrc,
-	output reg [31:0] o_pc1
+	output reg [8:0] o_pc1
     );
 
 always @(*)
 begin
       if (pcsrc)
-         o_pc1 <= pc;
+			o_pc1 <= pc_alu;
       else
-         o_pc1 <= pc_alu;
+         o_pc1 <= pc;
 end
 endmodule
