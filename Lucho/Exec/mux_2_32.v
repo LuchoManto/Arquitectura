@@ -31,9 +31,9 @@ module mux_ALUSrcE(
 	 begin
 	 
 		 if(ALUSrcE)
-			SrcBE <= WriteDataE;
-		 else
 			SrcBE <= SignImmE;
+		 else
+			SrcBE <= WriteDataE;
 	 
 	 end
 

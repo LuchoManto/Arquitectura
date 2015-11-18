@@ -20,25 +20,23 @@
 //////////////////////////////////////////////////////////////////////////////////
 module Pipe
 (
-	input wire clk
+	input wire clk,
+	output reg Test
 );
 
+//--------------------------------------------------------------------------------
+//Señales de control hardcode 
+//--------------------------------------------------------------------------------
+
 //AUX - Senal entrante a enable de memoria en Fetch
-reg PE_MEM = 1;
+reg En_Instr_Mem = 1;
+
+//AUX - Senal enable memoria datos
+reg EN_Data_Mem = 1;
 
 //AUX - Senales de control de latch en fetch
 reg StalIF = 1;
 reg StalID = 1;
- 
-//AUX - Senal A3-WD3 de banco de registro
-reg [4:0]WriteRegW 	= 'b0000; 
-reg [31:0]ResultW 	= 0; 
-
-//AUX - Senal de control WE3 banco de registros ID
-reg RegWriteW = 0; 
-
-//AUX - Senal ALUOutM entrada a muxForwardAD/muxForwardBD
-reg [31:0]ALUOutM = 0; 
 
 //AUX - Senal de control ForwardAD mux
 reg ForwardAD = 0; 
@@ -49,16 +47,27 @@ reg ForwardBD = 0;
 //AUX - Senal de control latch fin de etapa ID
 reg FlushE = 0;
 
-//------------------------------------------------------
+//AUX - Senal de control a Mux forwardAE
+reg [1:0]ForwardAE=0;
+
+//AUX - Senal de control a Mux forwardBE
+reg [1:0]ForwardBE=0;
+
+
+//--------------------------------------------------------------------------------
 //Etapa fetch 
+//--------------------------------------------------------------------------------
+
 wire [8:0]PC1;
 wire [8:0]PCF;
 wire [8:0]PCPlus4F;
 wire [31:0]Instr;
 
 
-//------------------------------------------------------
+//--------------------------------------------------------------------------------
 //Etapa ID
+//--------------------------------------------------------------------------------
+
 //Latchs entrada
 wire [31:0]InstrD; 
 wire [8:0]PCPlus4D;
@@ -92,8 +101,9 @@ wire PCSrcD;
 wire [8:0]PCBranchD;
 
 
-//------------------------------------------------------
+//--------------------------------------------------------------------------------
 //Etapa EX
+//--------------------------------------------------------------------------------
 //Latch entrada
 wire RegWriteE;
 wire MemtoRegE;
@@ -103,14 +113,52 @@ wire ALUSrcE;
 wire RegDstE;
 wire [31:0]RD1E;
 wire [31:0]RD2E;
-wire [0:4]RsE;
-wire [0:4]RtE;
-wire [0:4]RdE;
+wire [4:0]RsE;
+wire [4:0]RtE;
+wire [4:0]RdE;
 wire [31:0]SignImmE;
+//mux regdste
+wire [4:0]WriteRegE;
+//mux forwardAE
+wire [31:0]SrcAE;
+//mux forwardBE
+wire [31:0]WriteDataE;
+//mux ALUSrcE
+wire [31:0]SrcBE;
+//alu exec
+wire [31:0]ALUOut;
 
 
-//------------------------------------------------------
+//--------------------------------------------------------------------------------
+//Etapa MEM
+//--------------------------------------------------------------------------------
+//Latch entrada Mem
+wire RegWriteM;
+wire MemtoRegM;
+wire MemWriteM;
+wire [31:0]ALUOutM;
+wire [31:0]WriteDataM;
+wire [4:0]WriteRegM;
+//SalidaMem
+wire [31:0]ReadData;
+
+
+//--------------------------------------------------------------------------------
+//Etapa Write Back
+//--------------------------------------------------------------------------------
+//Latch entrada Write Back
+wire RegWriteW;
+wire MemtoRegW;
+wire [31:0]ReadDataW;
+wire [31:0]ALUOutW;
+wire [4:0]WriteRegW;
+//Mux memtoregW
+wire [31:0]ResultW;
+
+
+//--------------------------------------------------------------------------------
 //Fetch
+//--------------------------------------------------------------------------------
 
 //Mux para pc de etapa de fetch	
 mux_pc mux_pc1(
@@ -134,7 +182,7 @@ ip_core ip_core1 (
   .clka(clk), // input clka
   .addra(PCF), // input [31 : 0] addra
   .douta(Instr), // output [31 : 0] douta
-  .ena(PE_MEM)
+  .ena(En_Instr_Mem)
 );	
 
 //Sumador de etapa de fetch.
@@ -163,8 +211,9 @@ PC_Latch pclach
 	.PCPlus4D(PCPlus4D)
 );
 
-//------------------------------------------------------
+//--------------------------------------------------------------------------------
 //Etapa ID
+//--------------------------------------------------------------------------------
 
 //Unidad de control en etapa ID
 Control_Unit controlunit
@@ -285,6 +334,155 @@ Latch_Fin_ID latchfinid
 	.SignImmE(SignImmE)
 );
 
+//--------------------------------------------------------------------------------
+//Etapa EXEC
+//--------------------------------------------------------------------------------
 
+//mux regdste
+mux_RegDstE muxregdste
+(
+	.RtE(RtE),
+	.RdE(RdE),
+	.RegDstE(RegDstE),
+	.WriteRegE(WriteRegE)
+);
+
+//mux forwardAE
+mux_ForwardAE muxforwardAE
+(
+	.RD1E(RD1E),
+	.ResultW(ResultW),
+	.ALUOutM(ALUOutM),
+	.ForwardAE(ForwardAE),
+	.SrcAE(SrcAE)
+);
+
+//mux forwardBE
+mux_ForwardBE muxforwardBE
+(
+	.RD2E(RD2E),
+	.ResultW(ResultW),
+	.ALUOutM(ALUOutM),
+	.ForwardBE(ForwardBE),
+	.WriteDataE(WriteDataE)
+);
+
+//mux ALUSrcE
+mux_ALUSrcE muxalusrcE
+(
+	.WriteDataE(WriteDataE),
+	.SignImmE(SignImmE),
+	.ALUSrcE(ALUSrcE),
+	.SrcBE(SrcBE)
+);
+
+//alu etapa exe
+alu_exec aluexec
+(
+	.SrcAE(SrcAE),
+	.SrcBE(SrcBE),
+	.ALUControlIE(ALUControlIE),
+	.ALUOut(ALUOut)
+);
+
+//Latch fin de etapa EXEC
+Latch_Fin_Exec latchfinEXEC
+(
+	.RegWriteE(RegWriteE),
+	.MemtoRegE(MemtoRegE),
+	.MemWriteE(MemWriteE),
+	.ALUOut(ALUOut),
+	.WriteDataE(WriteDataE),
+	.WriteRegE(WriteRegE),
+	.clk(clk),
+	.RegWriteM(RegWriteM),
+	.MemtoRegM(MemtoRegM),
+	.MemWriteM(MemWriteM),
+	.ALUOutM(ALUOutM),
+	.WriteDataM(WriteDataM),
+	.WriteRegM(WriteRegM)
+);
+
+
+//--------------------------------------------------------------------------------
+//Etapa MEM
+//--------------------------------------------------------------------------------
+
+memoria_datos memdatos1
+(
+  .clka(clk), // input clka
+  .ena(EN_Data_Mem), // input ena
+  .wea(MemWriteM), // input [0 : 0] wea
+  .addra(ALUOutM[11:0]), // input [11 : 0] addra
+  .dina(WriteDataM[7:0]), // input [7 : 0] dina
+  .douta(ReadData[7:0]) // output [7 : 0] douta
+);
+//ena i_read_en|i_write_en && i_clk_en
+
+memoria_datos memdatos2
+(
+  .clka(clk), // input clka
+  .ena(EN_Data_Mem), // input ena
+  .wea(MemWriteM), // input [0 : 0] wea
+  .addra(ALUOutM[11:0]), // input [11 : 0] addra
+  .dina(WriteDataM[15:8]), // input [7 : 0] dina
+  .douta(ReadData[15:8]) // output [7 : 0] douta
+);
+
+memoria_datos memdatos3
+(
+  .clka(clk), // input clka
+  .ena(EN_Data_Mem), // input ena
+  .wea(MemWriteM), // input [0 : 0] wea
+  .addra(ALUOutM[11:0]), // input [11 : 0] addra
+  .dina(WriteDataM[23:16]), // input [7 : 0] dina
+  .douta(ReadData[23:16]) // output [7 : 0] douta
+);
+
+memoria_datos memdatos4
+(
+  .clka(clk), // input clka
+  .ena(EN_Data_Mem), // input ena
+  .wea(MemWriteM), // input [0 : 0] wea
+  .addra(ALUOutM[11:0]), // input [11 : 0] addra
+  .dina(WriteDataM[31:24]), // input [7 : 0] dina
+  .douta(ReadData[31:24]) // output [7 : 0] douta
+);
+
+
+//Latch fin mem
+Latch_Fin_Mem latchfinMEM
+(
+	.RegWriteM(RegWriteM),
+	.MemtoRegM(MemtoRegM),
+	.ReadData(ReadData),
+	.ALUOutM(ALUOutM),
+	.WriteRegM(WriteRegM),
+	.clk(clk),
+	.RegWriteW(RegWriteW),
+	.MemtoRegW(MemtoRegW),
+	.ReadDataW(ReadDataW),
+	.ALUOutW(ALUOutW),
+	.WriteRegW(WriteRegW)
+);
+
+//--------------------------------------------------------------------------------
+//Etapa Write-Back
+//--------------------------------------------------------------------------------
+
+//mux MemtoRegW
+mux_MemtoRegW muxmemtoregW
+(
+	.ReadDataW(ReadDataW),
+	.ALUOutW(ALUOutW),
+	.MemtoRegW(MemtoRegW),
+	.ResultW(ResultW)
+);
+
+
+always@(posedge clk)
+begin
+	Test<=ResultW;
+end
 
 endmodule

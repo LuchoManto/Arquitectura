@@ -1,0 +1,44 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    01:10:19 11/18/2015 
+// Design Name: 
+// Module Name:    Latch_Fin_Mem 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module Latch_Fin_Mem(
+	input wire RegWriteM,
+	input wire MemtoRegM,
+	input wire [31:0]ReadData,
+	input wire [31:0]ALUOutM,
+	input wire [4:0]WriteRegM,
+	input wire clk,
+	output reg RegWriteW,
+	output reg MemtoRegW,
+	output reg [31:0]ReadDataW,
+	output reg [31:0]ALUOutW,
+	output reg [4:0]WriteRegW
+);
+
+always@(posedge clk)
+begin
+	RegWriteW <= RegWriteM;
+	MemtoRegW <= MemtoRegM;
+	ReadDataW <= ReadData;
+	ALUOutW <= ALUOutM;
+	WriteRegW <= WriteRegM;
+end
+
+endmodule

@@ -71,7 +71,6 @@ module Register_File(
 		 
 		bank[A3] <= WE3 ? WD3 : bank[A3];
 		 
-
 		out0 <= bank[0];
 		out1 <= bank[1];
 		out2 <= bank[2];
@@ -104,6 +103,5 @@ module Register_File(
 		out29 <= bank[29];
 		out30 <= bank[30];
 		out31 <= bank[31];
-
 	 end
 endmodule
