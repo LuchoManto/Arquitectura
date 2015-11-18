@@ -41,13 +41,13 @@ module exec(
 		
     );
 	 
-	 wire WriteDataE;
-	 wire SrcBE;
-	 wire SrcAE;
-	 wire ALUOutE;
+	 wire [31:0]WriteDataE;
+	 wire [31:0]SrcBE;
+	 wire [31:0]SrcAE;
+	 wire [31:0]ALUOutE;
 	 
-	 wire temp_WriteDataM;
-	 wire temp_WriteRegM;
+	 wire [31:0]temp_WriteDataM;
+	 wire [31:0]temp_WriteRegM;
 	 
 	 // multiplexor con control de riesgos para señal de ForwardBE
 	 mux_ForwardBE muxForwardBE ( .RD2(RD2),

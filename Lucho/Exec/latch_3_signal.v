@@ -20,13 +20,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 module latch_exec_out(
 
-	input wire ALUoutE,
-	input wire WriteDataE,
-	input wire WriteRegE,
+	input wire [31:0]ALUoutE,
+	input wire [31:0]WriteDataE,
+	input wire [31:0]WriteRegE,
 	
-	output reg ALUoutM,
-	output reg WriteDataM,
-	output reg WriteRegM,
+	output reg [31:0]ALUoutM,
+	output reg [31:0]WriteDataM,
+	output reg [31:0]WriteRegM,
 	
 	input wire clk
     );
