@@ -43,7 +43,7 @@ begin
 		6'b 000000:							   //Operacion del tipo R
 		begin				
 						regW 				<= 0;
-						RegD 				<= 0;
+						RegD 				<= 1;
 						Branch 			<= 0;
 						memWritte 		<=	0;
 						MemReg 			<= 0;
@@ -64,17 +64,17 @@ begin
 						if(Opcode == 'b000000) //SLL SHIFT LOGICAL LEFT
 						begin
 							AluControl <= 'b0110;
-							AluSrcD <= 'b01;	  //Deberia llegar el shift por el inmediato, bit del 6 al 10 de la instruccion..
+							AluSrcD <= 'b00;	  //Deberia llegar el shift por el inmediato, bit del 6 al 10 de la instruccion..
 						end
 						if(Opcode == 'b000010) //SRL SHIFT LOGICAL RIGHT
 						begin
 							AluControl 	<= 'b0111;
-							AluSrcD 		<= 'b01;	  //Deberia llegar el shift por el inmediato bit del 6 al 10 de la instruccion.	
+							AluSrcD 		<= 'b00;	  //Deberia llegar el shift por el inmediato bit del 6 al 10 de la instruccion.	
 						end
 						if(Opcode == 'b000011) //SRA SHIT ARITMETIC RIGHT
 						begin
 							AluControl 	<= 'b1000; 
-							AluSrcD 		<= 'b01;	  //Se hace el shift con los bits 6 al 10 de la instruccion.
+							AluSrcD 		<= 'b00;	  //Se hace el shift con los bits 6 al 10 de la instruccion.
 						end
 						if(Opcode == 'b000110) //SRLV SHIFT LOGICAL RIGHT VARIABLE
 						begin
