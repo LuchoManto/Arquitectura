@@ -30,7 +30,7 @@ module exec(
 	input wire ALUSrcE,
 	input wire [1:0]ForwardAE,
 	input wire [1:0]ForwardBE,
-	input wire ALUControlE,
+	input wire [3:0]ALUControlE,
 	
 	output reg [31:0]ALUOutM,
 	output reg [31:0]WriteDataM,
@@ -45,9 +45,11 @@ module exec(
 	 wire [31:0]SrcBE;
 	 wire [31:0]SrcAE;
 	 wire [31:0]ALUOutE;
+	 wire [4:0]WriteRegE;
 	 
 	 wire [31:0]temp_WriteDataM;
-	 wire [31:0]temp_WriteRegM;
+	 wire [4:0]temp_WriteRegM;
+	 wire [31:0]temp_ALUOutM;
 	 
 	 // multiplexor con control de riesgos para señal de ForwardBE
 	 mux_ForwardBE muxForwardBE ( .RD2(RD2),
@@ -88,7 +90,7 @@ module exec(
 	latch_exec_out latch_out (		.ALUoutE(ALUoutE),
 											.WriteDataE(WriteDataE),
 											.WriteRegE(WriteRegE),
-											.ALUoutM(ALUoutM),
+											.ALUoutM(temp_ALUOutM),
 											.WriteDataM(temp_WriteDataM),
 											.WriteRegM(temp_WriteRegM),
 											.clk(clk)
@@ -97,8 +99,9 @@ module exec(
 	always@(*)
 	begin
 	
-	WriteDataM <= temp_WriteDataM;
-	WriteRegM <= temp_WriteRegM;
+		WriteDataM <= temp_WriteDataM;
+		WriteRegM <= temp_WriteRegM;
+		ALUOutM <= temp_ALUOutM;
 	
 	end
 

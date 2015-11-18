@@ -36,7 +36,7 @@ module test_exec;
 	reg ALUSrcE;
 	reg [1:0] ForwardAE;
 	reg [1:0] ForwardBE;
-	reg ALUControlE;
+	reg [3:0]ALUControlE;
 	reg clk;
 
 	// Outputs
@@ -66,11 +66,11 @@ module test_exec;
 
 	initial begin
 		// Initialize Inputs
-		RD1 = 0;
-		RD2 = 0;
+		RD1 = 1000;
+		RD2 = 2000;
 		ResultW = 0;
 		ALUoutM = 0;
-		RtE = 0;
+		RtE = 8;
 		RdE = 0;
 		RegDstE = 0;
 		SignImmE = 0;

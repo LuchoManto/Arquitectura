@@ -22,11 +22,11 @@ module latch_exec_out(
 
 	input wire [31:0]ALUoutE,
 	input wire [31:0]WriteDataE,
-	input wire [31:0]WriteRegE,
+	input wire [4:0]WriteRegE,
 	
 	output reg [31:0]ALUoutM,
 	output reg [31:0]WriteDataM,
-	output reg [31:0]WriteRegM,
+	output reg [4:0]WriteRegM,
 	
 	input wire clk
     );
@@ -34,7 +34,7 @@ module latch_exec_out(
 	 always@(posedge clk)
 	 begin
 			ALUoutM <= ALUoutE;
-			WriteDataM<= WriteDataE;
+			WriteDataM <= WriteDataE;
 			WriteRegM <= WriteRegE;
 	 end
 
