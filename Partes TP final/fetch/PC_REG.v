@@ -22,19 +22,18 @@ module PC_REG(
 	input clk,
 	input wire en,
 	input wire [8:0]PC1,
+	input wire inicio,
 	output reg [8:0]PCF
     );
 	
-reg reset = 1;	
 	
 always@(posedge clk)
 begin
 	if(en == 1)
 	begin
-		if(reset == 1)
+		if(inicio == 1)
 		begin
-			PCF 	<= 0;
-			reset <= 0;
+			PCF <= 0;
 		end	
 		else
 		begin

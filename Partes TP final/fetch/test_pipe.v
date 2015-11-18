@@ -1,52 +1,25 @@
 `timescale 1ns / 1ps
-
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer:
-//
-// Create Date:   19:21:03 11/17/2015
-// Design Name:   Pipe
-// Module Name:   E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/Partes TP final/fetch/test_pipe.v
-// Project Name:  ipcore
-// Target Device:  
-// Tool versions:  
+// Engineer: 
+// 
+// Create Date:    15:58:58 11/18/2015 
+// Design Name: 
+// Module Name:    test_pipe 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: Pipe
+// Dependencies: 
 //
-// Dependencies:
-// 
-// Revision:
+// Revision: 
 // Revision 0.01 - File Created
-// Additional Comments:
-// 
-////////////////////////////////////////////////////////////////////////////////
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module test_pipe(
+    );
 
-module test_pipe;
 
-	// Inputs
-	reg clk;
-
-	// Instantiate the Unit Under Test (UUT)
-	Pipe uut (
-		.clk(clk)
-	);
-	
-	always #1
-	begin
-		clk = ~clk;
-	end
-
-	initial begin
-		// Initialize Inputs
-		$display("Comienza la simulacion");
-		clk = 0;
-
-		#20;
-
-		$display("Termina la simulacion. -Time: ",$time);
-		$finish;
-	end
-      
 endmodule
-

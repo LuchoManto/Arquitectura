@@ -21,6 +21,7 @@
 module Pipe
 (
 	input wire clk,
+	input wire inicio,
 	output reg Test
 );
 
@@ -174,6 +175,7 @@ PC_REG pcreg
 	.clk(clk),
 	.en(StalIF),
 	.PC1(PC1),
+	.inicio(inicio),
 	.PCF(PCF)
 );
 
@@ -241,6 +243,7 @@ Register_File bancoregistros
 	.A3(WriteRegW),
 	.WD3(ResultW),
 	.WE3(RegWriteW),
+	.inicio(inicio),
 	.RD1(RD1),
 	.RD2(RD2)
 );
