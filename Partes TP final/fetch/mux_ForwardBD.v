@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    20:41:07 11/16/2015 
+// Create Date:    17:17:24 11/17/2015 
 // Design Name: 
-// Module Name:    PC_REG 
+// Module Name:    mux_ForwardBD 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,31 +18,18 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PC_REG(
-	input clk,
-	input wire en,
-	input wire [8:0]PC1,
-	output reg [8:0]PCF
+module mux_ForwardBD(
+	input wire [31:0]RD2,
+	input wire [31:0]ALUOutM,
+	input wire ForwardBD,
+	output reg [31:0] out
     );
-	
-reg reset = 1;	
-	
-always@(posedge clk)
+
+always @(*)
 begin
-	if(en == 1)
-	begin
-		if(reset == 1)
-		begin
-			PCF 	<= 0;
-			reset <= 0;
-		end	
-		else
-		begin
-			PCF <= PC1;
-		end
-	end
+      if(ForwardBD)
+			out <= ALUOutM;
+      else
+         out <= RD2;
 end
-
-
-
 endmodule

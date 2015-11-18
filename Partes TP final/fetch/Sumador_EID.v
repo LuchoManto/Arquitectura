@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    20:41:07 11/16/2015 
+// Create Date:    18:11:43 11/17/2015 
 // Design Name: 
-// Module Name:    PC_REG 
+// Module Name:    Sumador_EID 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,31 +18,16 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PC_REG(
-	input clk,
-	input wire en,
-	input wire [8:0]PC1,
-	output reg [8:0]PCF
-    );
-	
-reg reset = 1;	
-	
-always@(posedge clk)
-begin
-	if(en == 1)
-	begin
-		if(reset == 1)
-		begin
-			PCF 	<= 0;
-			reset <= 0;
-		end	
-		else
-		begin
-			PCF <= PC1;
-		end
-	end
-end
+module Sumador_EID(
+	input wire [8:0] input1,
+	input wire [8:0] PCPlus4D,
+	output reg [8:0] PCBranchD
+);
 
+always@(*)
+begin
+	PCBranchD <= input1 + PCPlus4D;
+end
 
 
 endmodule

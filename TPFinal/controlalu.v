@@ -37,7 +37,7 @@ module controlalu(
 
 //ADD (0000), SUB(0001), AND(0010), OR(0011), XOR(0100), NOR(0101), SLL(0110), SRL(0111), SRA(1000), SLT(1001)(SET ON LESS THAN, RESULTADO ES UNO SI EL A ES MENOR QUE B)
 
-always @(posedge clk)
+always @(*)
 begin
 	case(Inst_op)
 		6'b 000000:							   //Operacion del tipo R

@@ -21,15 +21,23 @@
 module Instr_Lach(
 	input wire clk,
 	input wire en,
+	input wire clr,
 	input wire [31:0] Instr,
 	output reg [31:0] InstrD
     );
 
 always@(posedge clk)
 begin
-	if(en == 0)
+	if(en == 1)
 	begin
-		InstrD <= Instr;
+		if(clr)
+		begin
+			InstrD <= 0;
+		end
+		else
+		begin
+			InstrD <= Instr;
+		end
 	end
 end
 

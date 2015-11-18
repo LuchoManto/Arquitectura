@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    20:41:07 11/16/2015 
+// Create Date:    17:10:53 11/17/2015 
 // Design Name: 
-// Module Name:    PC_REG 
+// Module Name:    mux_ForwardAD 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,31 +18,18 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PC_REG(
-	input clk,
-	input wire en,
-	input wire [8:0]PC1,
-	output reg [8:0]PCF
+module mux_ForwardAD(
+	input wire [31:0]RD1,
+	input wire [31:0]ALUOutM,
+	input wire ForwardAD,
+	output reg [31:0] out
     );
-	
-reg reset = 1;	
-	
-always@(posedge clk)
+
+always @(*)
 begin
-	if(en == 1)
-	begin
-		if(reset == 1)
-		begin
-			PCF 	<= 0;
-			reset <= 0;
-		end	
-		else
-		begin
-			PCF <= PC1;
-		end
-	end
+      if(ForwardAD)
+			out <= ALUOutM;
+      else
+         out <= RD1;
 end
-
-
-
 endmodule

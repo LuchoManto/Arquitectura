@@ -21,15 +21,23 @@
 module PC_Latch(
 	input wire clk,
 	input wire en,
+	input wire clr,
 	input wire [8:0] PCPlus4F,
 	output reg [8:0] PCPlus4D
     );
 
 always@(posedge clk)
 begin
-	if(en == 0)
+	if(en == 1)
 	begin
-		PCPlus4D <= PCPlus4F;
+		if(clr)
+		begin
+			PCPlus4D <= 0;
+		end
+		else
+		begin
+			PCPlus4D <= PCPlus4F;
+		end
 	end
 end
 
