@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 14.7
-# Date: Tue Nov 17 00:07:22 2015
+# Date: Wed Nov 18 21:13:52 2015
 #
 ##############################################################
 #
@@ -46,7 +46,7 @@ CSET axi_id_width=4
 CSET axi_slave_type=Memory_Slave
 CSET axi_type=AXI4_Full
 CSET byte_size=9
-CSET coe_file=E:\Documents\Windows\proyectos\Ensamblador\salida.coe
+CSET coe_file="E:\Downloads\PRACTICO_ARQUITECTURA\PRACTICO_ARQUITECTURA\traductor\salida_hexa - Copy.coe"
 CSET collision_warnings=ALL
 CSET component_name=ip_core
 CSET disable_collision_warnings=false
@@ -105,4 +105,4 @@ CSET write_width_b=32
 MISC pkg_timestamp=2012-11-19T16:22:25Z
 # END Extra information
 GENERATE
-# CRC: c06411af
+# CRC: a257ac8c

@@ -53,7 +53,7 @@ module testt;
 		
 		inicio = 0;
 
-		#20;
+		#40;
 
 		$display("Termina la simulacion. -Time: ",$time);
 		$finish;

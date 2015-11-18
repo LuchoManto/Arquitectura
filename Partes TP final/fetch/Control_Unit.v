@@ -39,7 +39,7 @@ module Control_Unit(
 
 always @(*)
 begin
-	case(Funct)
+	case(Op)
 		6'b 000000:							   //Operacion del tipo R
 		begin				
 						RegWriteD 		<= 0;
@@ -51,67 +51,67 @@ begin
 						MemWriteByte	<= 'b1111;
 						ShiftD			<= 0;
 						
-						if(Op == 'b100000) //ADD
+						if(Funct == 'b100000) //ADD
 						begin
 							ALUControlID 	<= 'b0000;
 							ALUSrcD 			<= 0;
 						end
-						if(Op == 'b100100) //AND
+						if(Funct == 'b100100) //AND
 						begin
 							ALUControlID 	<= 'b0010;
 							ALUSrcD 			<= 0;
 						end
-						if(Op == 'b000000) //SLL SHIFT LOGICAL LEFT
+						if(Funct == 'b000000) //SLL SHIFT LOGICAL LEFT
 						begin
 							ALUControlID 	<= 'b0110;
 							ALUSrcD 			<= 1;	  //Deberia llegar el shift por el inmediato, bit del 6 al 10 de la instruccion..
 						end
-						if(Op == 'b000010) //SRL SHIFT LOGICAL RIGHT
+						if(Funct == 'b000010) //SRL SHIFT LOGICAL RIGHT
 						begin
 							ALUControlID 	<= 'b0111;
 							ALUSrcD 			<= 1;	  //Deberia llegar el shift por el inmediato bit del 6 al 10 de la instruccion.	
 						end
-						if(Op == 'b000011) //SRA SHIT ARITMETIC RIGHT
+						if(Funct == 'b000011) //SRA SHIT ARITMETIC RIGHT
 						begin
 							ALUControlID 	<= 'b1000; 
 							ALUSrcD 			<= 1;	  //Se hace el shift con los bits 6 al 10 de la instruccion.
 						end
-						if(Op == 'b000110) //SRLV SHIFT LOGICAL RIGHT VARIABLE
+						if(Funct == 'b000110) //SRLV SHIFT LOGICAL RIGHT VARIABLE
 						begin
 							ALUControlID 	<= 'b0111;
 							ALUSrcD 			<= 0;	  //El shift se hace con el registro B
 						end
-						if(Op == 'b000111) //SRAV SHIFT ARITMETIC RIGHT VARIABLE
+						if(Funct == 'b000111) //SRAV SHIFT ARITMETIC RIGHT VARIABLE
 						begin
 							ALUControlID 	<= 'b1000;
 							ALUSrcD 			<= 0;	  //El shift se hace con el registro B	
 						end
-						if(Op == 'b000100) //SLLV SHIFT LEFT WORD BY VARIABLE
+						if(Funct == 'b000100) //SLLV SHIFT LEFT WORD BY VARIABLE
 						begin
 							ALUControlID 	<= 'b0110;
 							ALUSrcD 			<= 0;	  //El shift se hace con el registro B.	
 						end
-						if(Op == 'b100010) //SUB 
+						if(Funct == 'b100010) //SUB 
 						begin
 							ALUControlID 	<= 'b0001;
 							ALUSrcD 			<= 0;	  //Con el registro B.	
 						end
-						if(Op == 'b100110) //XOR
+						if(Funct == 'b100110) //XOR
 						begin
 							ALUControlID 	<= 'b0100;
 							ALUSrcD 			<= 0;	  //Con el registro B.
 						end
-						if(Op == 'b100101) //OR
+						if(Funct == 'b100101) //OR
 						begin
 							ALUControlID 	<= 'b0011;
 							ALUSrcD 			<= 0;		//Con el registro B
 						end
-						if(Op == 'b100111) //NOR
+						if(Funct == 'b100111) //NOR
 						begin
 							ALUControlID 	<= 'b0101;
 							ALUSrcD 			<= 0;
 						end
-						if(Op == 'b100111) //SLT
+						if(Funct == 'b100111) //SLT
 						begin
 							RegDstD		  	<= 1;
 							ALUControlID 	<= 'b1001;

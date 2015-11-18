@@ -65,7 +65,7 @@ module Register_File(
 	 
 	 reg [31:0] bank [31:0];
 	 
-	 always@(posedge clk)
+	 always@(negedge clk)
 	 begin
 		if(inicio == 1)
 		begin
@@ -104,11 +104,14 @@ module Register_File(
 		end
 		else
 		begin
+			bank[A3] <= WE3 ? WD3 : bank[A3];
+		end
+	 end
+	 
+	 always@(*)
+	 begin
 			RD1 <= bank[A1];
 			RD2 <= bank[A2];
-			 
-			bank[A3] <= WE3 ? WD3 : bank[A3];
-			 
 			out0 <= bank[0];
 			out1 <= bank[1];
 			out2 <= bank[2];
@@ -141,6 +144,5 @@ module Register_File(
 			out29 <= bank[29];
 			out30 <= bank[30];
 			out31 <= bank[31];
-		end
 	 end
 endmodule
