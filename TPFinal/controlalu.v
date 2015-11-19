@@ -42,8 +42,8 @@ begin
 	case(Inst_op)
 		6'b 000000:							   //Operacion del tipo R
 		begin				
-						regW 				<= 1;
-						RegD 				<= 1;
+						regW 				<= 0;
+						RegD 				<= 0;
 						Branch 			<= 0;
 						memWritte 		<=	0;
 						MemReg 			<= 0;
@@ -244,7 +244,7 @@ begin
 						memWritte 		<= 1;
 						MemReg 			<= 0;
 						MemReadByte 	<= 'b1111;
-						MemWriteByte	<= 'b1111;
+						MemWriteByte	<= 'b0001;
 						ShiftF			<= 0;
 						AluControl 		<= 0000;
 		end
@@ -277,7 +277,7 @@ begin
 		6'b 001101:								//Operacion ORI.
 		begin
 						regW 				<= 1;
-						RegD 				<= 1;
+						RegD 				<= 0;
 						AluSrcD 			<= 'b01;
 						Branch 			<= 0;
 						memWritte 		<= 0;
@@ -326,7 +326,7 @@ begin
 						ShiftD			<=  0; 
 						AluControl 		<= 1001; //SLT		
 		end
-		6'b 000101:								//Operacion BNE. 
+		6'b 001010:								//Operacion BNE. 
 		begin
 						regW 				<= 0;
 						RegD 				<= 1;
