@@ -40,10 +40,10 @@ module Control_Unit(
 always @(*)
 begin
 	case(Op)
-		6'b 000000:							   //Operacion del tipo R
+		6'b 000000:	//Operacion del tipo R
 		begin				
-						RegWriteD 		<= 0;
-						RegDstD 			<= 0;
+						RegWriteD 		<= 1;
+						RegDstD 			<= 1;
 						BranchD 			<= 0;
 						MemWriteD 		<=	0;
 						MemtoRegD 		<= 0;
@@ -53,7 +53,7 @@ begin
 						
 						if(Funct == 'b100000) //ADD
 						begin
-							ALUControlID 	<= 'b0000;
+							ALUControlID 	<= 'b0000; 
 							ALUSrcD 			<= 0;
 						end
 						if(Funct == 'b100100) //AND
@@ -79,96 +79,43 @@ begin
 						if(Funct == 'b000110) //SRLV SHIFT LOGICAL RIGHT VARIABLE
 						begin
 							ALUControlID 	<= 'b0111;
-							ALUSrcD 			<= 0;	  //El shift se hace con el registro B
+							ALUSrcD 			<= 0;	 
 						end
 						if(Funct == 'b000111) //SRAV SHIFT ARITMETIC RIGHT VARIABLE
 						begin
 							ALUControlID 	<= 'b1000;
-							ALUSrcD 			<= 0;	  //El shift se hace con el registro B	
+							ALUSrcD 			<= 0;	  
 						end
 						if(Funct == 'b000100) //SLLV SHIFT LEFT WORD BY VARIABLE
 						begin
 							ALUControlID 	<= 'b0110;
-							ALUSrcD 			<= 0;	  //El shift se hace con el registro B.	
+							ALUSrcD 			<= 0;	  
 						end
 						if(Funct == 'b100010) //SUB 
 						begin
 							ALUControlID 	<= 'b0001;
-							ALUSrcD 			<= 0;	  //Con el registro B.	
+							ALUSrcD 			<= 0;	  
 						end
 						if(Funct == 'b100110) //XOR
 						begin
 							ALUControlID 	<= 'b0100;
-							ALUSrcD 			<= 0;	  //Con el registro B.
+							ALUSrcD 			<= 0;	  
 						end
 						if(Funct == 'b100101) //OR
 						begin
 							ALUControlID 	<= 'b0011;
-							ALUSrcD 			<= 0;		//Con el registro B
+							ALUSrcD 			<= 0;		
 						end
 						if(Funct == 'b100111) //NOR
 						begin
 							ALUControlID 	<= 'b0101;
 							ALUSrcD 			<= 0;
 						end
-						if(Funct == 'b100111) //SLT
+						if(Funct == 'b101010) //SLT
 						begin
-							RegDstD		  	<= 1;
 							ALUControlID 	<= 'b1001;
 							ALUSrcD 			<= 0;
 						end
-		end
-		6'b 100011: 							//Operacion del tipo Load.
-		begin
-						RegWriteD 		<= 1;
-						RegDstD 			<= 0;
-						ALUSrcD 			<= 1;
-						BranchD 			<= 0;
-						MemWriteD 		<= 0;
-						MemtoRegD 		<= 1;
-						MemReadByte 	<= 'b1111; //tengo que cargar toda la linea. 32 bits.
-						MemWriteByte	<= 'b1111;
-						ShiftD			<= 0; 
-						ALUControlID 	<= 'b0000; //sumo
-		end
-		6'b 101011: 							//Operacion del tipo Storage.
-		begin
-						RegWriteD 		<= 0;
-						RegDstD 			<= 0;
-						ALUSrcD 			<= 1;
-						BranchD 			<= 0;
-						MemWriteD 		<= 1;
-						MemtoRegD 		<= 0;
-						MemReadByte 	<= 'b1111;
-						MemWriteByte	<= 'b1111;
-						ShiftD			<= 0;
-						ALUControlID 	<= 'b0000;
-		end
-		6'b 000100: 							//Operacion del tipo BEQ
-		begin
-						RegWriteD 		<= 0;
-						RegDstD 			<= 1;
-						ALUSrcD 			<= 1;
-						BranchD 			<= 1;
-						MemWriteD 		<= 0;
-						MemtoRegD 		<= 0;
-						MemReadByte 	<= 'b1111;
-						MemWriteByte	<= 'b1111;
-						ShiftD			<= 0;
-						ALUControlID 	<= 'b0001; //resto
-		end
-		6'b 001000:								//Operacion del tipo ADDI
-		begin
-						RegWriteD 		<= 1;
-						RegDstD 			<= 0;
-						ALUSrcD 			<= 1;
-						BranchD 			<= 0;
-						MemWriteD 		<= 0;
-						MemtoRegD 		<= 0;
-						MemReadByte 	<= 'b1111;
-						MemWriteByte	<= 'b1111;
-						ShiftD			<= 0;
-						ALUControlID 	<= 'b0000;
 		end
 		6'b 100000:								//Operacion LB, Load a Byte
 		begin
@@ -181,20 +128,7 @@ begin
 						MemReadByte 	<= 'b0001;
 						MemWriteByte	<= 'b1111;
 						ShiftD			<= 0;
-						ALUControlID 	<= 'b0000;
-		end
-		6'b 100100:								//Operacion LBU, Load Unsigned. Hay que tomarlo como el Load comun.
-		begin
-						RegWriteD 		<= 1;
-						RegDstD 			<= 0;
-						ALUSrcD 			<= 1;
-						BranchD 			<= 0;
-						MemWriteD 		<= 0;
-						MemtoRegD 		<= 1;
-						MemReadByte 	<= 'b0001;
-						MemWriteByte	<= 'b1111;
-						ShiftD			<= 0;
-						ALUControlID 	<= 'b0000;
+						ALUControlID 	<= 'b0000;  //ADD
 		end
 		6'b 100001:								//Operacion LH, Load a 2 Byte
 		begin
@@ -207,9 +141,9 @@ begin
 						MemReadByte 	<= 'b0011;
 						MemWriteByte	<= 'b1111;
 						ShiftD			<= 0;
-						ALUControlID 	<= 'b0000;
+						ALUControlID 	<= 'b0000;	//ADD
 		end
-		6'b 100101	:								//Operacion LHU, Load Unsigned. Hay que tomarlo como el Load comun.
+		6'b 100011: 							//Operacion del tipo Load. LW
 		begin
 						RegWriteD 		<= 1;
 						RegDstD 			<= 0;
@@ -217,10 +151,10 @@ begin
 						BranchD 			<= 0;
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
-						MemReadByte 	<= 'b0011;
+						MemReadByte 	<= 'b1111; //tengo que cargar toda la linea. 32 bits.
 						MemWriteByte	<= 'b1111;
-						ShiftD			<= 0;
-						ALUControlID 	<= 'b0000;
+						ShiftD			<= 0; 
+						ALUControlID 	<= 'b0000; //ADD
 		end
 		6'b 100111:								//Operacion LWU, Load Unsigned. Hay que tomarlo como el Load comun.
 		begin
@@ -233,33 +167,85 @@ begin
 						MemReadByte 	<= 'b1111;
 						MemWriteByte	<= 'b1111;
 						ShiftD			<= 0;
-						ALUControlID 	<= 'b0000;
-		end
-		6'b 101000:								//Operacion SU.
+						ALUControlID 	<= 'b0000;	//ADD
+		end	
+		6'b 100100:								//Operacion LBU, Load Unsigned. Hay que tomarlo como el Load comun.
 		begin
-						RegWriteD 		<= 0;
+						RegWriteD 		<= 1;
 						RegDstD 			<= 0;
 						ALUSrcD 			<= 1;
 						BranchD 			<= 0;
-						MemWriteD 		<= 1;
-						MemtoRegD 		<= 0;
+						MemWriteD 		<= 0;
+						MemtoRegD 		<= 1;
+						MemReadByte 	<= 'b0001;
+						MemWriteByte	<= 'b1111;
+						ShiftD			<= 0;
+						ALUControlID 	<= 'b0000;	//ADD
+		end		
+		6'b 100101	:								//Operacion LHU, Load Unsigned. Hay que tomarlo como el Load comun.
+		begin
+						RegWriteD 		<= 1;
+						RegDstD 			<= 0;
+						ALUSrcD 			<= 1;
+						BranchD 			<= 0;
+						MemWriteD 		<= 0;
+						MemtoRegD 		<= 1;
+						MemReadByte 	<= 'b0011;
+						MemWriteByte	<= 'b1111;
+						ShiftD			<= 0;
+						ALUControlID 	<= 'b0000;	//ADD
+		end
+		6'b 101000:								//Operacion SB.
+		begin
+						RegWriteD 		<= 0;
+						RegDstD 			<= 1'bX;
+						ALUSrcD 			<= 1;
+						BranchD 			<= 0;
+						MemWriteD 		<= 1;   //SOLO GRABARIA UN BYTE (1 DE 4 MEMORIAS)
+						MemtoRegD 		<= 1'bX;
 						MemReadByte 	<= 'b1111;
 						MemWriteByte	<= 'b0001;
 						ShiftD			<= 0;
-						ALUControlID 	<= 'b0000;
+						ALUControlID 	<= 'b0000;	//ADD
 		end
-		6'b 101001:								//Operacion SH
+		6'b 101001:								//Operacion SH STORE HALF
 		begin
 						RegWriteD 		<= 0;
-						RegDstD 			<= 0;
+						RegDstD 			<= 1'bX;
 						ALUSrcD 			<= 1;
 						BranchD 			<= 0;
-						MemWriteD 		<= 1;
-						MemtoRegD 		<= 0;
+						MemWriteD 		<= 1;   //SOLO GUARDARIA EN 2 DE 4 MEMORIAS
+						MemtoRegD 		<= 1'bX;
 						MemReadByte 	<= 'b1111;
 						MemWriteByte	<= 'b0011;
 						ShiftD			<= 0;
-						ALUControlID 	<= 'b0000;
+						ALUControlID 	<= 'b0000;	//ADD
+		end
+		6'b 101011: 							//Operacion del tipo Storage. SW
+		begin
+						RegWriteD 		<= 0;
+						RegDstD 			<= 1'bX;
+						ALUSrcD 			<= 1;
+						BranchD 			<= 0; 
+						MemWriteD 		<= 1;  //GUARDARIA EN LAS 4 MEMORIAS
+						MemtoRegD 		<= 1'bX;
+						MemReadByte 	<= 'b1111;
+						MemWriteByte	<= 'b1111;
+						ShiftD			<= 0;
+						ALUControlID 	<= 'b0000;	//ADD
+		end
+		6'b 001000:								//Operacion del tipo ADDI
+		begin
+						RegWriteD 		<= 1;
+						RegDstD 			<= 0;
+						ALUSrcD 			<= 1;
+						BranchD 			<= 0;
+						MemWriteD 		<= 0;
+						MemtoRegD 		<= 0;
+						MemReadByte 	<= 'b1111;
+						MemWriteByte	<= 'b1111;
+						ShiftD			<= 0;
+						ALUControlID 	<= 'b0000;	//ADD
 		end
 		6'b 001100:								//Operacion ANDI.
 		begin
@@ -272,7 +258,20 @@ begin
 						MemReadByte 	<= 'b1111;
 						MemWriteByte	<= 'b1111;
 						ShiftD			<= 0;
-						ALUControlID 	<= 'b0010;
+						ALUControlID 	<= 'b0010;	//AND
+		end
+		6'b 001110:								//Operacion XORI.
+		begin
+						RegWriteD 		<= 1;
+						RegDstD 			<= 0;
+						ALUSrcD 			<= 1;
+						BranchD 			<= 0;
+						MemWriteD 		<= 0;
+						MemtoRegD 		<= 0;
+						MemReadByte 	<= 'b1111;
+						MemWriteByte	<= 'b1111;
+						ShiftD			<=	0;
+						ALUControlID 	<= 'b0100;	//XOR
 		end
 		6'b 001101:								//Operacion ORI.
 		begin
@@ -285,33 +284,7 @@ begin
 						MemReadByte 	<= 'b1111;
 						MemWriteByte	<= 'b1111;
 						ShiftD			<=	0;
-						ALUControlID 	<= 'b0011;
-		end		
-		6'b 001110:								//Operacion XORI.
-		begin
-						RegWriteD 		<= 1;
-						RegDstD 			<= 0;
-						ALUSrcD 			<= 1;
-						BranchD 			<= 0;
-						MemWriteD 		<= 0;
-						MemtoRegD 		<= 0;
-						MemReadByte 	<= 'b1111;
-						MemWriteByte	<= 'b1111;
-						ShiftD			<=	0;
-						ALUControlID 	<= 'b0100;
-		end
-		6'b 001100:								//Operacion LUI. 
-		begin
-						RegWriteD 		<= 1;
-						RegDstD 			<= 0;
-						ALUSrcD 			<= 1;
-						BranchD 			<= 0;
-						MemWriteD 		<= 0;
-						MemtoRegD 		<= 1;
-						MemReadByte 	<= 'b1111;
-						MemWriteByte	<= 'b1111;
-						ShiftD			<=  16; 
-						ALUControlID 	<= 'b0110; //SLL
+						ALUControlID 	<= 'b0011;	//OR
 		end
 		6'b 001010:								//Operacion SLTI. 
 		begin
@@ -326,22 +299,50 @@ begin
 						ShiftD			<=  0; 
 						ALUControlID 	<= 'b1001; //SLT		
 		end
-		6'b 001010:								//Operacion BNE. 
+		6'b 001111:								//Operacion LUI. 
 		begin
-						RegWriteD 		<= 0;
-						RegDstD 			<= 1;
-						ALUSrcD 			<= 1;
-						BranchD 			<= 1;
+						RegWriteD 		<= 1;
+						RegDstD 			<= 0;
+						ALUSrcD 			<= 1;   //VER QUE PONEN 16?¿?
+						BranchD 			<= 0;
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadByte 	<= 'b1111;
 						MemWriteByte	<= 'b1111;
-						ShiftD			<=  0; 
-						ALUControlID 	<= 'b0001; //SLT		
+						ShiftD			<=  16; 
+						ALUControlID 	<= 'b0110; //SLL
 		end
+		
+		/*
+		6'b 000100: 							//Operacion del tipo BEQ
+		begin
+						RegWriteD 		<= 0;
+						RegDstD 			<= 1'bX;
+						ALUSrcD 			<= 0;
+						BranchD 			<= 1;
+						MemWriteD 		<= 0;
+						MemtoRegD 		<= 1'bX;
+						MemReadByte 	<= 'b1111;
+						MemWriteByte	<= 'b1111;
+						ShiftD			<= 0;
+						ALUControlID 	<= 'b0001; //resto
+		end		
+		6'b 000101:								//Operacion BNE. 
+		begin
+						RegWriteD 		<= 0;
+						RegDstD 			<= 1'bX;
+						ALUSrcD 			<= 0;
+						BranchD 			<= 1;
+						MemWriteD 		<= 0;
+						MemtoRegD 		<= 1'bX;
+						MemReadByte 	<= 'b1111;
+						MemWriteByte	<= 'b1111;
+						ShiftD			<=  0; 
+						ALUControlID 	<= 'b0001; //RESTA	
+		end
+		*/
 		
 	endcase
 end
-
 
 endmodule

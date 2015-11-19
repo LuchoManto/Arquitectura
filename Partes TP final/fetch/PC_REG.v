@@ -29,7 +29,7 @@ module PC_REG(
 	
 always@(posedge clk)
 begin
-	if(en == 1)
+	if(en == 0)
 	begin
 		if(inicio == 1)
 		begin

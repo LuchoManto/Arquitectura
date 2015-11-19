@@ -35,25 +35,6 @@ reg En_Instr_Mem = 1;
 //AUX - Senal enable memoria datos
 reg EN_Data_Mem = 1;
 
-//AUX - Senales de control de latch en fetch
-reg StalIF = 1;
-reg StalID = 1;
-
-//AUX - Senal de control ForwardAD mux
-reg ForwardAD = 0; 
-
-//AUX - Senal de control ForwardBD mux
-reg ForwardBD = 0; 
-
-//AUX - Senal de control latch fin de etapa ID
-reg FlushE = 0;
-
-//AUX - Senal de control a Mux forwardAE
-reg [1:0]ForwardAE=0;
-
-//AUX - Senal de control a Mux forwardBE
-reg [1:0]ForwardBE=0;
-
 
 //--------------------------------------------------------------------------------
 //Etapa fetch 
@@ -158,6 +139,19 @@ wire [31:0]ResultW;
 
 
 //--------------------------------------------------------------------------------
+//Wires unidad de riesgos 
+//--------------------------------------------------------------------------------
+wire StallF;
+wire StallD;
+wire ForwardAD; 
+wire ForwardBD; 
+wire FlushE;
+wire [1:0]ForwardAE;
+wire [1:0]ForwardBE;
+
+
+
+//--------------------------------------------------------------------------------
 //Fetch
 //--------------------------------------------------------------------------------
 
@@ -173,7 +167,7 @@ mux_pc mux_pc1(
 PC_REG pcreg
 (
 	.clk(clk),
-	.en(StalIF),
+	.en(StallF),
 	.PC1(PC1),
 	.inicio(inicio),
 	.PCF(PCF)
@@ -197,7 +191,7 @@ add_pc add_pc1(
 Instr_Lach instrlach
 (
 	.clk(clk),
-	.en(StalID),
+	.en(StallD),
 	.clr(PCSrcD),
 	.Instr(Instr),
 	.InstrD(InstrD)
@@ -207,7 +201,7 @@ Instr_Lach instrlach
 PC_Latch pclach
 (
 	.clk(clk),
-	.en(StalID),
+	.en(StallD),
 	.clr(PCSrcD),
 	.PCPlus4F(PCPlus4F),
 	.PCPlus4D(PCPlus4D)
@@ -316,13 +310,14 @@ Latch_Fin_ID latchfinid
 	.ALUSrcD(ALUSrcD),
 	.RegDstD(RegDstD),
 	.RD1(RD1),
-	.RD2(RD1),
+	.RD2(RD2),
 	.RsD(InstrD[25:21]),
 	.RtD(InstrD[20:16]),
 	.RdD(InstrD[15:11]),
 	.SignImmD(SignImmD),
 	.clk(clk),
 	.FlushE(FlushE),
+	.inicio(inicio),
 	.RegWriteE(RegWriteE),
 	.MemtoRegE(MemtoRegE),
 	.MemWriteE(MemWriteE),
@@ -481,6 +476,36 @@ mux_MemtoRegW muxmemtoregW
 	.MemtoRegW(MemtoRegW),
 	.ResultW(ResultW)
 );
+
+
+//--------------------------------------------------------------------------------
+//Unidad de riesgos
+//--------------------------------------------------------------------------------
+unidad_riesgos unidadderiesgos
+(
+	.BranchD(BranchD),
+	.RsD(InstrD[25:21]),
+	.RtD(InstrD[20:16]),
+	.RsE(RsE),
+	.RtE(RtE),
+	.WriteRegE(WriteRegE),
+	.MemtoRegE(MemtoRegE),
+	.RegWriteE(RegWriteE),
+	.WriteRegM(WriteRegM),
+	.RegWriteM(RegWriteM),
+	.WriteRegW(WriteRegW),
+	.RegWriteW(RegWriteW),
+	.MemtoRegM(MemtoRegM),
+	.inicio(inicio),
+	.StallF(StallF),
+	.StallD(StallD),
+	.ForwardAD(ForwardAD),
+	.ForwardBD(ForwardBD),
+	.FlushE(FlushE),
+	.ForwardAE(ForwardAE),
+	.ForwardBE(ForwardBE)
+);
+
 
 
 always@(posedge clk)

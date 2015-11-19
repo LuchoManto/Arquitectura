@@ -41,7 +41,7 @@ module alu_exec
 			 4'b0110: 	ALUOut <= SrcAE << SrcBE; //shift logico izquierza 
 			 4'b0111: 	ALUOut <= SrcAE >> SrcBE;//shift logico derecha.
 			 4'b1000: 	ALUOut <= SrcAE >>> SrcBE; //shift aritmetico derecha
-			 4'b1001:	begin
+			 4'b1001:	begin  //SLT
 								if(SrcAE <= SrcBE)
 									ALUOut <= 1;
 								else 

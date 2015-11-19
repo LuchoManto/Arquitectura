@@ -33,6 +33,7 @@ module Latch_Fin_ID(
 	input wire [31:0]SignImmD,
 	input wire clk,
 	input wire FlushE,
+	input wire inicio,
 	output reg RegWriteE,
 	output reg MemtoRegE,
 	output reg MemWriteE,
@@ -49,7 +50,7 @@ module Latch_Fin_ID(
 
 always@(posedge clk)
 begin
-	if(FlushE)
+	if(FlushE || inicio)
 	begin
 		RegWriteE <= 0;
 		MemtoRegE <= 0;
