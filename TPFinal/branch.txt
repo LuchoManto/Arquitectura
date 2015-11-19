@@ -1,0 +1,21 @@
+; programa con saltos
+
+
+;etapa inicial
+; r0 = 2
+; r1 = 3
+; r2 = 0
+; r3 = 1
+; r4 = 5
+
+ADD 0,0,1; r0 = 3
+SUB 4,4,3; r4 = r4 - 1 
+BNE 4,2,-1 ; si r4 != r2, salta una para atras
+ADD 1,1,1 ; r1 = 6;
+
+;etapa final
+; r0 = 3
+; r1 = 6
+; r2 = 0
+; r3 = 1
+; r4 = 0
