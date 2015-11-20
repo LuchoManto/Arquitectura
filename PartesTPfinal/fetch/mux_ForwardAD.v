@@ -21,15 +21,26 @@
 module mux_ForwardAD(
 	input wire [31:0]RD1,
 	input wire [31:0]ALUOutM,
-	input wire ForwardAD,
+	input wire [31:0]ALUOut,
+	input wire [1:0]ForwardAD,
 	output reg [31:0] out
     );
 
 always @(*)
 begin
-      if(ForwardAD)
-			out <= ALUOutM;
-      else
-         out <= RD1;
+		case(ForwardAD)
+			2'b00:								
+			begin
+				out <= RD1;
+			end
+			2'b01:								
+			begin
+				out <= ALUOutM;
+			end
+			2'b10:								
+			begin
+				out <= ALUOut;
+			end
+		endcase
 end
 endmodule

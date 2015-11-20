@@ -144,8 +144,8 @@ wire [31:0]ResultW;
 //--------------------------------------------------------------------------------
 wire StallF;
 wire StallD;
-wire ForwardAD; 
-wire ForwardBD; 
+wire [1:0]ForwardAD; 
+wire [1:0]ForwardBD; 
 wire FlushE;
 wire [1:0]ForwardAE;
 wire [1:0]ForwardBE;
@@ -256,6 +256,7 @@ mux_ForwardAD muxForwardAD
 (
 	.RD1(RD1),
 	.ALUOutM(ALUOutM),
+	.ALUOut(ALUOut),
 	.ForwardAD(ForwardAD),
 	.out(out_mux_forwardAD)
 );
@@ -265,6 +266,7 @@ mux_ForwardBD muxForwardBD
 (
 	.RD2(RD2),
 	.ALUOutM(ALUOutM),
+	.ALUOut(ALUOut),
 	.ForwardBD(ForwardBD),
 	.out(out_mux_forwardBD)
 );
