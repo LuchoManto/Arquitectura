@@ -65,7 +65,7 @@ wire [31:0]RD2;
 //Sign extend
 wire[31:0]SignImmD;
 //Left Shift 2
-//wire[31:0]out_left_shift2;
+wire[31:0]out_left_shift2;
 //Mux ForwardAD
 wire [31:0]out_mux_forwardAD;
 //Mux ForwardBD
@@ -178,8 +178,9 @@ PC_REG pcreg
 ip_core ip_core1 (
   .clka(clk), // input clka
   .addra(PCF), // input [31 : 0] addra
+  //.addra(PC1),
   .douta(Instr), // output [31 : 0] douta
-  .ena(~StallF)
+  .ena(~StallF && ~inicio)
 );	
 
 //Sumador de etapa de fetch.
@@ -243,14 +244,12 @@ Sign_Extend signextend
 	.SignImmD(SignImmD)
 );
 
-//NO VA YA QUE VAN DE A 1 LOS PC Left shift 2 etapa ID
-/*
 Left_Shift2 leftshift2
 (
 	.in(SignImmD),
 	.out(out_left_shift2)
 );
-*/
+
 
 //Mux forwardAD etapa ID
 mux_ForwardAD muxForwardAD
@@ -273,6 +272,7 @@ mux_ForwardBD muxForwardBD
 //Comparador de igualdad ID
 Comparador_Igualdad comparador
 (
+	.Op(InstrD[31:26]),
 	.input1(out_mux_forwardAD),
 	.input2(out_mux_forwardBD),
 	.EqualD(EqualD)
@@ -289,7 +289,8 @@ And_PCSrcD andpcsrcd
 //Sumador para PCBranchD en etapa ID
 Sumador_EID sumadoreid
 (
-	.input1(SignImmD[8:0]),
+	//.input1(SignImmD[8:0]),
+	.input1(out_left_shift2[8:0]),
 	.PCPlus4D(PCPlus4D),
 	.PCBranchD(PCBranchD)
 );

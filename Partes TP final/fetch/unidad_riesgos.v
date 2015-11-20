@@ -91,16 +91,28 @@ begin
 			end
 		end
 		
+		/*
+		Detiene cuando hay un load en la etapa ex y el registro destino
+		lo utiliza como parametro la instruccion que le sigue.
+		*/
 		lwstall <=((RsD == RtE) || (RtD == RtE)) && MemtoRegE;
 		//lwstall <= MemtoRegM;
 		StallF <= lwstall;
 		StallD <= lwstall;
 		FlushE <= lwstall;	
 		
-		ForwardAD <= (RsD != 0) && (RsD == WriteRegM) && RegWriteM;
-		ForwardBD <= (RtD != 0) && (RtD == WriteRegM) && RegWriteM;
+		/*
+		Cortocircuito cuando branch utiliza un registro que una intruccion anterior
+		todavia no escribio.
+		*/
+		ForwardAD <= (RsD == WriteRegM) && RegWriteM;
+		ForwardBD <= (RtD == WriteRegM) && RegWriteM;
 		
 		
+		/*
+		Para mi (BranchD && RegWriteE && (WriteRegE == RsD || WriteRegE == RtD))
+		no es necesario que esto haga stall, puede hacer un cortocircuito con la salida de la alu en etapa de ex (ALUOut)
+		*/
 		branchstall <= (BranchD && RegWriteE && (WriteRegE == RsD || WriteRegE == RtD)) || (BranchD && MemtoRegM && (WriteRegM == RsD || WriteRegM == RtD));
 		StallF <= (lwstall || branchstall);
 		StallD <= (lwstall || branchstall);

@@ -53,7 +53,7 @@ begin
 	else
 	begin
 	case(Op)
-		6'b 000000:	//Operacion del tipo R
+		6'b000000:	//Operacion del tipo R
 		begin				
 						RegWriteD 		<= 1;
 						RegDstD 		<= 1;
@@ -308,6 +308,30 @@ begin
 						ShiftD			<=  16; 
 						ALUControlID 	<= 'b0110; //SLL
 		end
+		6'b 000100: 							//Operacion del tipo BEQ
+		begin
+						RegWriteD 		<= 0;
+						RegDstD 			<= 0;
+						ALUSrcD 			<= 0;
+						BranchD 			<= 1;
+						MemWriteD 		<= 0;
+						MemtoRegD 		<= 0;
+						MemReadD 	<= 0;
+						ShiftD			<= 0;
+						ALUControlID 	<= 0; 
+		end
+		6'b 000101:								//Operacion BNE. 
+		begin
+						RegWriteD 		<= 0;
+						RegDstD 			<= 0;
+						ALUSrcD 			<= 0;
+						BranchD 			<= 1;
+						MemWriteD 		<= 0;
+						MemtoRegD 		<= 0;
+						MemReadD 	<= 0;
+						ShiftD			<=  0; 
+						ALUControlID 	<= 0; 	
+		end
 		6'b 111111:								//Operacion END. 
 		begin
 			ALUControlID <= 0;
@@ -319,33 +343,8 @@ begin
 			RegDstD <= 0;				 
 			ShiftD <= 0;
 			MemReadD <= 0;
-		end
-		/*
-		6'b 000100: 							//Operacion del tipo BEQ
-		begin
-						RegWriteD 		<= 0;
-						RegDstD 			<= 0;
-						ALUSrcD 			<= 0;
-						BranchD 			<= 1;
-						MemWriteD 		<= 0;
-						MemtoRegD 		<= 0;
-						MemReadD 	<= 0;
-						ShiftD			<= 0;
-						ALUControlID 	<= 'b0001; //resto
-		end		
-		6'b 000101:								//Operacion BNE. 
-		begin
-						RegWriteD 		<= 0;
-						RegDstD 			<= 0;
-						ALUSrcD 			<= 0;
-						BranchD 			<= 1;
-						MemWriteD 		<= 0;
-						MemtoRegD 		<= 0;
-						MemReadD 	<= 0;
-						ShiftD			<=  0; 
-						ALUControlID 	<= 'b0001; //RESTA	
-		end
-		*/
+		end	
+		
 		
 	endcase
 	end

@@ -25,7 +25,11 @@ module Left_Shift2(
 	 	 
 always@(*)
 begin
-	out <= in << 2;
+	if(in[31] == 1)
+		out <= in-1;
+	else
+		out <= in+1;
+	//out <= in << 2;
 end
 
 endmodule

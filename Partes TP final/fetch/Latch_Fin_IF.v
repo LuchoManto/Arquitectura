@@ -29,21 +29,42 @@ module Latch_Fin_IF(
 	output reg [8:0] PCPlus4D
 );
 
+reg espera_clr = 0;
+
 always@(posedge clk)
 begin
 	if(en == 0)
 	begin
 		if(clr || inicio)
 		begin
-			InstrD <= 32'bx;
 			PCPlus4D <= 0;
+			InstrD <= 32'hFC00_0000;
+			if(clr)
+			begin
+				espera_clr = 1;
+			end
 		end
 		else
 		begin
-			InstrD <= Instr;
 			PCPlus4D <= PCPlus4F;
+			//InstrD <= Instr;
 		end
 	end
 end
+
+
+always@(Instr)
+begin
+	if(espera_clr == 0)
+	begin
+		InstrD <= Instr;
+	end
+	else
+	begin
+		InstrD <= 32'hFC00_0000;
+		espera_clr = 0;
+	end
+end
+
 
 endmodule
