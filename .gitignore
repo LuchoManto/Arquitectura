@@ -11,6 +11,7 @@
 
 # ...even if they are in subdirectories
 !*/
+!PartesTPfinal/fetch
 <<<<<<< HEAD
 Gaston/Combinacionales/problema_1_pad.txt
 =======

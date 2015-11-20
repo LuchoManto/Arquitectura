@@ -27,6 +27,7 @@ module PC_REG(
     );
 	
 	
+//always@(*)
 always@(posedge clk)
 begin
 	if(en == 0)
