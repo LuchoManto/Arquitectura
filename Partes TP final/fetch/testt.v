@@ -42,14 +42,20 @@ module testt;
 	always #1
 		clk = ~clk;
 
-
+	reg [255:0] i=0;
+	
 	initial begin
 		// Initialize Inputs
 		$display("Comienza la simulacion");
 		clk = 0;
 		inicio = 1;
 		
-		#2;
+		for (i=0; i<40; i=i+1)
+		begin
+			#2;
+			$finish;
+		end
+		
 		
 		inicio = 0;
 
