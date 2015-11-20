@@ -28,10 +28,6 @@ module Pipe
 //--------------------------------------------------------------------------------
 //Señales de control hardcode 
 //--------------------------------------------------------------------------------
-
-//AUX - Senal entrante a enable de memoria en Fetch
-reg En_Instr_Mem = 1;
-
 //AUX - Senal enable memoria datos
 reg EN_Data_Mem = 1;
 
@@ -58,12 +54,12 @@ wire RegWriteD;
 wire MemtoRegD;
 wire MemWriteD;
 wire [3:0]ALUControlID;
-wire ALUSrcD;
+wire [1:0]ALUSrcD;
 wire RegDstD;
 wire BranchD;
 wire [3:0]ShiftD;
-wire [3:0]MemReadByte; 
-wire [3:0]MemWriteByte;
+wire [1:0]MemReadD; 
+wire [1:0]MemWriteD3;
 //Banco de registro
 wire [31:0]RD1;
 wire [31:0]RD2;
@@ -91,7 +87,7 @@ wire RegWriteE;
 wire MemtoRegE;
 wire MemWriteE;
 wire [3:0]ALUControlIE;
-wire ALUSrcE;
+wire [1:0]ALUSrcE;
 wire RegDstE;
 wire [31:0]RD1E;
 wire [31:0]RD2E;
@@ -105,6 +101,8 @@ wire [4:0]WriteRegE;
 wire [31:0]SrcAE;
 //mux forwardBE
 wire [31:0]WriteDataE;
+//mux ALUSrcE_A
+wire [31:0]SrcAE1;
 //mux ALUSrcE
 wire [31:0]SrcBE;
 //alu exec
@@ -178,7 +176,7 @@ ip_core ip_core1 (
   .clka(clk), // input clka
   .addra(PCF), // input [31 : 0] addra
   .douta(Instr), // output [31 : 0] douta
-  .ena(En_Instr_Mem)
+  .ena(~StallF)
 );	
 
 //Sumador de etapa de fetch.
@@ -187,23 +185,16 @@ add_pc add_pc1(
 	.PCPlus4F(PCPlus4F)
 );
 
-//Latch de instr terminando etapa de fetch
-Instr_Lach instrlach
+//Latch fin etapa IF.
+Latch_Fin_IF latchfinif
 (
-	.clk(clk),
-	.en(StallD),
-	.clr(PCSrcD),
 	.Instr(Instr),
-	.InstrD(InstrD)
-);
-
-//Latch de PC terminando etapa de fetch.
-PC_Latch pclach
-(
+	.PCPlus4F(PCPlus4F),
 	.clk(clk),
 	.en(StallD),
 	.clr(PCSrcD),
-	.PCPlus4F(PCPlus4F),
+	.inicio(inicio),
+	.InstrD(InstrD),
 	.PCPlus4D(PCPlus4D)
 );
 
@@ -216,6 +207,7 @@ Control_Unit controlunit
 (
 	.Op(InstrD[31:26]),
 	.Funct(InstrD[5:0]),
+	.inicio(inicio),
 	.ALUControlID(ALUControlID),
 	.RegWriteD(RegWriteD),
 	.MemtoRegD(MemtoRegD),
@@ -224,8 +216,8 @@ Control_Unit controlunit
 	.ALUSrcD(ALUSrcD),
 	.RegDstD(RegDstD),	
 	.ShiftD(ShiftD),
-	.MemReadByte(MemReadByte), 
-	.MemWriteByte(MemWriteByte)
+	.MemReadD(MemReadD), 
+	.MemWriteD3(MemWriteD3)
 );
 
 //Banco de registros etapa ID
@@ -365,6 +357,14 @@ mux_ForwardBE muxforwardBE
 	.WriteDataE(WriteDataE)
 );
 
+mux_ALUSrcE_A muxalusrcE_A
+(
+	.SrcAE(SrcAE),
+	.WriteDataE(WriteDataE),
+	.ALUSrcE(ALUSrcE),
+	.SrcAE1(SrcAE1)
+);
+
 //mux ALUSrcE
 mux_ALUSrcE muxalusrcE
 (
@@ -377,7 +377,7 @@ mux_ALUSrcE muxalusrcE
 //alu etapa exe
 alu_exec aluexec
 (
-	.SrcAE(SrcAE),
+	.SrcAE(SrcAE1),
 	.SrcBE(SrcBE),
 	.ALUControlIE(ALUControlIE),
 	.ALUOut(ALUOut)
@@ -393,6 +393,7 @@ Latch_Fin_Exec latchfinEXEC
 	.WriteDataE(WriteDataE),
 	.WriteRegE(WriteRegE),
 	.clk(clk),
+	.inicio(inicio),
 	.RegWriteM(RegWriteM),
 	.MemtoRegM(MemtoRegM),
 	.MemWriteM(MemWriteM),
@@ -457,6 +458,7 @@ Latch_Fin_Mem latchfinMEM
 	.ALUOutM(ALUOutM),
 	.WriteRegM(WriteRegM),
 	.clk(clk),
+	.inicio(inicio),
 	.RegWriteW(RegWriteW),
 	.MemtoRegW(MemtoRegW),
 	.ReadDataW(ReadDataW),
@@ -476,6 +478,7 @@ mux_MemtoRegW muxmemtoregW
 	.MemtoRegW(MemtoRegW),
 	.ResultW(ResultW)
 );
+
 
 
 //--------------------------------------------------------------------------------
@@ -505,7 +508,6 @@ unidad_riesgos unidadderiesgos
 	.ForwardAE(ForwardAE),
 	.ForwardBE(ForwardBE)
 );
-
 
 
 always@(posedge clk)

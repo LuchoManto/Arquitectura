@@ -70,13 +70,13 @@ module Register_File(
 		if(inicio == 1)
 		begin
 			 bank[0] <= 2;
-		    bank[1] <= 0;
+		    bank[1] <= 2;
 		    bank[2] <= 2;
 		    bank[3] <= 5;
 		    bank[4] <= 2;
 		    bank[5] <= 5;
-		    bank[6] <= 0;
-		    bank[7] <= 0;
+		    bank[6] <= 1;
+		    bank[7] <= 2;
 		    bank[8] <= 3;
 		    bank[9] <= 0;
 		    bank[10] <= 0;

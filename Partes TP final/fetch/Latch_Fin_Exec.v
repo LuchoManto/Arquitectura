@@ -26,6 +26,7 @@ module Latch_Fin_Exec(
 	input wire [31:0]WriteDataE,
 	input wire [4:0]WriteRegE,
 	input wire clk,
+	input wire inicio,
 	output reg RegWriteM,
 	output reg MemtoRegM,
 	output reg MemWriteM,
@@ -36,12 +37,24 @@ module Latch_Fin_Exec(
 
 always@(posedge clk)
 begin
-	RegWriteM <= RegWriteE;
-	MemtoRegM <= MemtoRegE;
-	MemWriteM <= MemWriteE;
-	ALUOutM <= ALUOut;
-	WriteDataM <= WriteDataE;
-	WriteRegM <= WriteRegE;
+	if(inicio)
+	begin
+		RegWriteM <= 0;
+		MemtoRegM <= 0;
+		MemWriteM <= 0;
+		ALUOutM <= 0;
+		WriteDataM <= 0;
+		WriteRegM <= 0;
+	end
+	else
+	begin
+		RegWriteM <= RegWriteE;
+		MemtoRegM <= MemtoRegE;
+		MemWriteM <= MemWriteE;
+		ALUOutM <= ALUOut;
+		WriteDataM <= WriteDataE;
+		WriteRegM <= WriteRegE;
+	end
 end
 
 endmodule

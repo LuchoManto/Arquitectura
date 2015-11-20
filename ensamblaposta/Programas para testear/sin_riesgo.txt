@@ -1,0 +1,26 @@
+;programa que no provoca ninguna señal de riesgo
+
+; estado inicial:
+; r0 = 2
+; r1 = 2
+; r2 = 2
+; r3 = 5
+; r4 = 2
+; r5 = 5
+; r6 = 1
+; r7 = 2
+; r8 = 3
+; r9 = 0
+; r15 = 80
+
+
+ADD 0,2,3 ; R0 = 7
+AND 2,4,5 ; R2 = 0
+SW 8,0(15) ; mem(80) = 3
+LW 9,0(15) ; r9 = 3
+SUB 0,0,5 ; r0 = 7 - 5 = 2
+ADD 2,2,4; R2 = 0 + 2 = 2
+SUB 9,9,8; R9 = 3 - 3 = 0
+END
+
+;estado final igual al inicial

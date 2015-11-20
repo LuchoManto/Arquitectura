@@ -91,8 +91,8 @@ begin
 			end
 		end
 		
-		//lwstall <=((RsD == RtE) || (RtD == RtE)) && MemtoRegE;
-		lwstall <= MemtoRegM;
+		lwstall <=((RsD == RtE) || (RtD == RtE)) && MemtoRegE;
+		//lwstall <= MemtoRegM;
 		StallF <= lwstall;
 		StallD <= lwstall;
 		FlushE <= lwstall;	

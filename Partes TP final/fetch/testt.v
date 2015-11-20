@@ -50,6 +50,11 @@ module testt;
 		clk = 0;
 		inicio = 1;
 		
+		#2;
+		
+		inicio = 0;
+		
+		
 		for (i=0; i<40; i=i+1)
 		begin
 			#2;
@@ -57,7 +62,7 @@ module testt;
 		end
 		
 		
-		inicio = 0;
+		
 
 		#40;
 
