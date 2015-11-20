@@ -1,0 +1,47 @@
+ADD 0, 2, 3 
+AND 6, 0, 1
+OR 7, 4, 0
+SUB 8, 0, 5
+			;bank[0] <= 0;
+		    ;bank[1] <= 1;
+		    ;bank[2] <= 1;
+		    ;bank[3] <= 2;
+		    ;bank[4] <= 4;
+		    ;bank[5] <= 1;
+;LW 1, 0(20)         ;Load, instrucción tipo I
+;LW 0, 0(20)         ;Load, instrucción tipo I
+;XOR 2, 2, 2         ;Xor, instrucción tipo R
+;ADD 3, 1, 2         ;Add, instrucción tipo
+
+;Pruebas mias (los inmediatos en decimal)
+XORI 3, 2, 25916    ;Xori, instrucción tipo I con inmediato sin parentesis
+
+
+	output reg [3:0]ALUControlID, alu_operation 
+	output reg RegWriteD, registers_write_enable
+	output reg MemtoRegD, memtoreg_mux INVERTIDO!
+	output reg MemWriteD, memory_enable_write (4b por las memorias)
+	output reg BranchD, salto_pc_mux
+	output reg ALUSrcD, selector_OP2ALU_mux = 0;					    AlusrcD 0 dato RD2, 1 DESPLAZAMIENTO?,2 SIGNIM,3 16
+	output reg RegDstD,	selector_registro_escritura_mux INVERTIDO!
+	output reg [3:0]ShiftD,
+	output reg [3:0]MemReadByte
+	output reg [3:0] MemWriteByte
+
+ADDI 0,1,3264  ;0 SE GUARDA 3265
+ADDI 1,0,3264  ;1 SE GUARDA 6529
+ADDI 2,0,3264  ;2 SE GUARDA 6529
+ADD 0, 2, 3    ;0 SE GUARDA 6531
+AND 6, 0, 5    ;6 SE GUARDA 1
+OR 7, 4, 0     ;7 SE GUARDA 6535
+LW 0, 0(20)	   ;0 SE GUARDA 0
+LW 1, 0(20)	   ;1 SE GUARDA 0
+ADD 0, 7, 6    ;0 SE GUARDA 6536
+LW 0, 0(20)	   ;0 SE GUARDA 0
+
+;bank[0] <= 0;
+;bank[1] <= 1;
+;bank[2] <= 1;
+;bank[3] <= 2;
+;bank[4] <= 4;
+;bank[5] <= 1;
