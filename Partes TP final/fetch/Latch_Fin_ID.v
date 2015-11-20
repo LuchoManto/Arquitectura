@@ -19,9 +19,10 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module Latch_Fin_ID(
+	input wire [1:0]MemReadD,
 	input wire RegWriteD,
 	input wire MemtoRegD,
-	input wire MemWriteD,
+	input wire [3:0]MemWriteD,
 	input wire [3:0]ALUControlID,
 	input wire [1:0]ALUSrcD,
 	input wire RegDstD,
@@ -34,9 +35,10 @@ module Latch_Fin_ID(
 	input wire clk,
 	input wire FlushE,
 	input wire inicio,
+	output reg [1:0]MemReadE,
 	output reg RegWriteE,
 	output reg MemtoRegE,
-	output reg MemWriteE,
+	output reg [3:0]MemWriteE,
 	output reg [3:0]ALUControlIE,
 	output reg [1:0]ALUSrcE,
 	output reg RegDstE,
@@ -52,6 +54,7 @@ always@(posedge clk)
 begin
 	if(FlushE || inicio)
 	begin
+		MemReadE <= 0;
 		RegWriteE <= 0;
 		MemtoRegE <= 0;
 		MemWriteE <= 0;
@@ -67,6 +70,7 @@ begin
 	end
 	else
 	begin
+		MemReadE <= MemReadD;
 		RegWriteE <= RegWriteD;
 		MemtoRegE <= MemtoRegD;
 		MemWriteE <= MemWriteD;

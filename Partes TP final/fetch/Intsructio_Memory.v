@@ -52,14 +52,13 @@ wire [8:0]PCPlus4D;
 //Unidad de control
 wire RegWriteD;
 wire MemtoRegD;
-wire MemWriteD;
+wire [3:0]MemWriteD;
 wire [3:0]ALUControlID;
 wire [1:0]ALUSrcD;
 wire RegDstD;
 wire BranchD;
 wire [3:0]ShiftD;
 wire [1:0]MemReadD; 
-wire [1:0]MemWriteD3;
 //Banco de registro
 wire [31:0]RD1;
 wire [31:0]RD2;
@@ -83,9 +82,10 @@ wire [8:0]PCBranchD;
 //Etapa EX
 //--------------------------------------------------------------------------------
 //Latch entrada
+wire [1:0]MemReadE;
 wire RegWriteE;
 wire MemtoRegE;
-wire MemWriteE;
+wire [3:0]MemWriteE;
 wire [3:0]ALUControlIE;
 wire [1:0]ALUSrcE;
 wire RegDstE;
@@ -113,13 +113,16 @@ wire [31:0]ALUOut;
 //Etapa MEM
 //--------------------------------------------------------------------------------
 //Latch entrada Mem
+wire [1:0]MemReadM;
 wire RegWriteM;
 wire MemtoRegM;
-wire MemWriteM;
+wire [3:0]MemWriteM;
 wire [31:0]ALUOutM;
 wire [31:0]WriteDataM;
 wire [4:0]WriteRegM;
 //SalidaMem
+wire [31:0]ReadDataM;
+//Salida maskMemReadM
 wire [31:0]ReadData;
 
 
@@ -216,8 +219,7 @@ Control_Unit controlunit
 	.ALUSrcD(ALUSrcD),
 	.RegDstD(RegDstD),	
 	.ShiftD(ShiftD),
-	.MemReadD(MemReadD), 
-	.MemWriteD3(MemWriteD3)
+	.MemReadD(MemReadD)
 );
 
 //Banco de registros etapa ID
@@ -295,6 +297,7 @@ Sumador_EID sumadoreid
 //Latch fin de etapa ID
 Latch_Fin_ID latchfinid
 (
+	.MemReadD(MemReadD),
 	.RegWriteD(RegWriteD),
 	.MemtoRegD(MemtoRegD),
 	.MemWriteD(MemWriteD),
@@ -310,6 +313,7 @@ Latch_Fin_ID latchfinid
 	.clk(clk),
 	.FlushE(FlushE),
 	.inicio(inicio),
+	.MemReadE(MemReadE),
 	.RegWriteE(RegWriteE),
 	.MemtoRegE(MemtoRegE),
 	.MemWriteE(MemWriteE),
@@ -386,6 +390,7 @@ alu_exec aluexec
 //Latch fin de etapa EXEC
 Latch_Fin_Exec latchfinEXEC
 (
+	.MemReadE(MemReadE),
 	.RegWriteE(RegWriteE),
 	.MemtoRegE(MemtoRegE),
 	.MemWriteE(MemWriteE),
@@ -394,6 +399,7 @@ Latch_Fin_Exec latchfinEXEC
 	.WriteRegE(WriteRegE),
 	.clk(clk),
 	.inicio(inicio),
+	.MemReadM(MemReadM),
 	.RegWriteM(RegWriteM),
 	.MemtoRegM(MemtoRegM),
 	.MemWriteM(MemWriteM),
@@ -407,6 +413,24 @@ Latch_Fin_Exec latchfinEXEC
 //Etapa MEM
 //--------------------------------------------------------------------------------
 
+memoria_de_datos memdatos
+(  
+  .clka(clk), // input clka
+  .ena(EN_Data_Mem), // input ena
+  .wea(MemWriteM), // input [3 : 0] wea
+  .addra(ALUOutM[11:0]), // input [11 : 0] addra
+  .dina(WriteDataM), // input [31 : 0] dina
+  .douta(ReadDataM) // output [31 : 0] douta
+);
+
+mask_MemReadM maskmemreadM
+(
+	.ReadDataM(ReadDataM),
+	.MemReadM(ReadDataM), 
+	.ReadData(ReadData)
+);
+
+/*
 memoria_datos memdatos1
 (
   .clka(clk), // input clka
@@ -414,7 +438,7 @@ memoria_datos memdatos1
   .wea(MemWriteM), // input [0 : 0] wea
   .addra(ALUOutM[11:0]), // input [11 : 0] addra
   .dina(WriteDataM[7:0]), // input [7 : 0] dina
-  .douta(ReadData[7:0]) // output [7 : 0] douta
+  .douta(ReadDataM[7:0]) // output [7 : 0] douta
 );
 //ena i_read_en|i_write_en && i_clk_en
 
@@ -425,7 +449,7 @@ memoria_datos memdatos2
   .wea(MemWriteM), // input [0 : 0] wea
   .addra(ALUOutM[11:0]), // input [11 : 0] addra
   .dina(WriteDataM[15:8]), // input [7 : 0] dina
-  .douta(ReadData[15:8]) // output [7 : 0] douta
+  .douta(ReadDataM[15:8]) // output [7 : 0] douta
 );
 
 memoria_datos memdatos3
@@ -435,7 +459,7 @@ memoria_datos memdatos3
   .wea(MemWriteM), // input [0 : 0] wea
   .addra(ALUOutM[11:0]), // input [11 : 0] addra
   .dina(WriteDataM[23:16]), // input [7 : 0] dina
-  .douta(ReadData[23:16]) // output [7 : 0] douta
+  .douta(ReadDataM[23:16]) // output [7 : 0] douta
 );
 
 memoria_datos memdatos4
@@ -445,9 +469,9 @@ memoria_datos memdatos4
   .wea(MemWriteM), // input [0 : 0] wea
   .addra(ALUOutM[11:0]), // input [11 : 0] addra
   .dina(WriteDataM[31:24]), // input [7 : 0] dina
-  .douta(ReadData[31:24]) // output [7 : 0] douta
+  .douta(ReadDataM[31:24]) // output [7 : 0] douta
 );
-
+*/
 
 //Latch fin mem
 Latch_Fin_Mem latchfinMEM

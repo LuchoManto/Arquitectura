@@ -25,13 +25,12 @@ module Control_Unit(
 	output reg [3:0]ALUControlID,
 	output reg RegWriteD,
 	output reg MemtoRegD,
-	output reg MemWriteD,
+	output reg [3:0]MemWriteD,		//NO Write 0000, Write Byte 0001, Write half 0011, Write ALL 1111
 	output reg BranchD,
 	output reg [1:0]ALUSrcD,  		//0 WriteDataE, 1 SignImmE, 2 SignImmE[10:6] para B y para A 2 WriteDataE y 0-1 SrcAE
 	output reg RegDstD,				  
 	output reg [3:0]ShiftD,
-	output reg [1:0]MemReadD,    //Read ALL 0, Read Byte 1, Read half 2
-	output reg [1:0]MemWriteD3   //NO Write 0, Write Byte 1, Write half 2, Write ALL 3
+	output reg [1:0]MemReadD    //Read ALL 0, Read Byte 1, Read half 2
 );
 
 //ADD (0000), SUB(0001), AND(0010), OR(0011), XOR(0100), 
@@ -50,7 +49,6 @@ begin
 		RegDstD <= 0;				 
 		ShiftD <= 0;
 		MemReadD <= 0;
-		MemWriteD3  <= 0;
 	end
 	else
 	begin
@@ -63,7 +61,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 		<= 0;
-						MemWriteD3		<= 0;
 						ShiftD			<= 0;
 						
 						if(Funct == 'b100000) //ADD
@@ -141,7 +138,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 1;
-						MemWriteD3	<= 0;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;  //ADD
 		end
@@ -154,7 +150,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 2;
-						MemWriteD3	<= 0;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
@@ -167,7 +162,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 0; 
-						MemWriteD3	<= 0;
 						ShiftD			<= 0; 
 						ALUControlID 	<= 'b0000; //ADD
 		end
@@ -180,7 +174,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 0;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end	
@@ -193,7 +186,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 1;
-						MemWriteD3	<= 0;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end		
@@ -206,7 +198,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 2;
-						MemWriteD3	<= 0;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
@@ -216,11 +207,9 @@ begin
 						RegDstD 			<= 0;
 						ALUSrcD 			<= 1;
 						BranchD 			<= 0;
-						MemWriteD 		<= 1;   //SOLO GRABARIA UN BYTE (1 DE 4 MEMORIAS)
+						MemWriteD 		<= 'b0001;   //SOLO GRABARIA UN BYTE (1 DE 4 MEMORIAS)
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 1;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
 		6'b 101001:								//Operacion SH STORE HALF
@@ -229,10 +218,9 @@ begin
 						RegDstD 			<= 0;
 						ALUSrcD 			<= 1;
 						BranchD 			<= 0;
-						MemWriteD 		<= 1;   //SOLO GUARDARIA EN 2 DE 4 MEMORIAS
+						MemWriteD 		<= 'b0011;   //SOLO GUARDARIA EN 2 DE 4 MEMORIAS
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 2;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
@@ -242,10 +230,9 @@ begin
 						RegDstD 			<= 0;
 						ALUSrcD 			<= 1;
 						BranchD 			<= 0; 
-						MemWriteD 		<= 1;  //GUARDARIA EN LAS 4 MEMORIAS
+						MemWriteD 		<= 'b1111;  //GUARDARIA EN LAS 4 MEMORIAS
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 3;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
@@ -258,7 +245,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 0;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
@@ -271,7 +257,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 0;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0010;	//AND
 		end
@@ -284,7 +269,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 0;
 						ShiftD			<=	0;
 						ALUControlID 	<= 'b0100;	//XOR
 		end
@@ -297,7 +281,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 0;
 						ShiftD			<=	0;
 						ALUControlID 	<= 'b0011;	//OR
 		end
@@ -310,7 +293,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 0;
 						ShiftD			<=  0; 
 						ALUControlID 	<= 'b1001; //SLT		
 		end
@@ -323,7 +305,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 0;
 						ShiftD			<=  16; 
 						ALUControlID 	<= 'b0110; //SLL
 		end
@@ -338,7 +319,6 @@ begin
 			RegDstD <= 0;				 
 			ShiftD <= 0;
 			MemReadD <= 0;
-			MemWriteD3  <= 0;
 		end
 		/*
 		6'b 000100: 							//Operacion del tipo BEQ
@@ -350,7 +330,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 0;
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0001; //resto
 		end		
@@ -363,7 +342,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						MemWriteD3	<= 0;
 						ShiftD			<=  0; 
 						ALUControlID 	<= 'b0001; //RESTA	
 		end
