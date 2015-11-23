@@ -40,6 +40,10 @@ module mux_ALUSrcE(
 			begin
 				SrcBE <= {{27{2'b0}},SignImmE[10:6]};
 			end
+			2'b11:								
+			begin
+				SrcBE <= 16;
+			end
 		endcase
 	 end
 

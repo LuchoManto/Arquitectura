@@ -57,7 +57,6 @@ wire [3:0]ALUControlID;
 wire [1:0]ALUSrcD;
 wire RegDstD;
 wire BranchD;
-wire [3:0]ShiftD;
 wire [1:0]MemReadD; 
 //Banco de registro
 wire [31:0]RD1;
@@ -219,7 +218,6 @@ Control_Unit controlunit
 	.BranchD(BranchD),
 	.ALUSrcD(ALUSrcD),
 	.RegDstD(RegDstD),	
-	.ShiftD(ShiftD),
 	.MemReadD(MemReadD)
 );
 
@@ -364,10 +362,12 @@ mux_ForwardBE muxforwardBE
 	.WriteDataE(WriteDataE)
 );
 
+//Mux AluSrcE a entrada ALU A.
 mux_ALUSrcE_A muxalusrcE_A
 (
 	.SrcAE(SrcAE),
 	.WriteDataE(WriteDataE),
+	.SignImmE(SignImmE),
 	.ALUSrcE(ALUSrcE),
 	.SrcAE1(SrcAE1)
 );

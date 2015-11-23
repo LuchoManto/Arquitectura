@@ -21,12 +21,14 @@
 module mux_ALUSrcE_A(
 	input wire [31:0]SrcAE,
 	input wire [31:0]WriteDataE,
+	input wire [31:0]SignImmE,
 	input wire [1:0]ALUSrcE,
 	output reg [31:0]SrcAE1
 );
 	 
 	 always@(*)
 	 begin
+			/*
 			if(ALUSrcE == 2'b10)
 			begin
 				SrcAE1 <= WriteDataE;
@@ -35,6 +37,19 @@ module mux_ALUSrcE_A(
 			begin
 				SrcAE1 <= SrcAE;
 			end
+			*/
+		case(ALUSrcE)
+			2'b10:								
+			begin
+				SrcAE1 <= WriteDataE;
+			end
+			2'b11:								
+			begin
+				SrcAE1 <= SignImmE;
+			end
+			default:
+				SrcAE1 <= SrcAE;
+		endcase
 	 end
 
 

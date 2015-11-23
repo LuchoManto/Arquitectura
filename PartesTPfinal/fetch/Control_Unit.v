@@ -29,7 +29,6 @@ module Control_Unit(
 	output reg BranchD,
 	output reg [1:0]ALUSrcD,  		//0 WriteDataE, 1 SignImmE, 2 SignImmE[10:6] para B y para A 2 WriteDataE y 0-1 SrcAE
 	output reg RegDstD,				  
-	output reg [3:0]ShiftD,
 	output reg [1:0]MemReadD    //Read ALL 0, Read Byte 1, Read half 2
 );
 
@@ -47,7 +46,6 @@ begin
 		BranchD <= 0;
 		ALUSrcD <= 0;
 		RegDstD <= 0;				 
-		ShiftD <= 0;
 		MemReadD <= 0;
 	end
 	else
@@ -61,7 +59,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 		<= 0;
-						ShiftD			<= 0;
 						
 						if(Funct == 'b100000) //ADD
 						begin
@@ -138,7 +135,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 1;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;  //ADD
 		end
 		6'b 100001:								//Operacion LH, Load a 2 Byte
@@ -150,7 +146,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 2;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
 		6'b 100011: 							//Operacion del tipo Load. LW
@@ -162,7 +157,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 0; 
-						ShiftD			<= 0; 
 						ALUControlID 	<= 'b0000; //ADD
 		end
 		6'b 100111:								//Operacion LWU, Load Unsigned. Hay que tomarlo como el Load comun.
@@ -174,7 +168,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 0;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end	
 		6'b 100100:								//Operacion LBU, Load Unsigned. Hay que tomarlo como el Load comun.
@@ -186,7 +179,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 1;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end		
 		6'b 100101	:								//Operacion LHU, Load Unsigned. Hay que tomarlo como el Load comun.
@@ -198,7 +190,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 2;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
 		6'b 101000:								//Operacion SB.
@@ -221,7 +212,6 @@ begin
 						MemWriteD 		<= 'b0011;   //SOLO GUARDARIA EN 2 DE 4 MEMORIAS
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
 		6'b 101011: 							//Operacion del tipo Storage. SW
@@ -233,7 +223,6 @@ begin
 						MemWriteD 		<= 'b1111;  //GUARDARIA EN LAS 4 MEMORIAS
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
 		6'b 001000:								//Operacion del tipo ADDI
@@ -245,7 +234,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
 		6'b 001100:								//Operacion ANDI.
@@ -257,7 +245,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<= 0;
 						ALUControlID 	<= 'b0010;	//AND
 		end
 		6'b 001110:								//Operacion XORI.
@@ -269,7 +256,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<=	0;
 						ALUControlID 	<= 'b0100;	//XOR
 		end
 		6'b 001101:								//Operacion ORI.
@@ -281,7 +267,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<=	0;
 						ALUControlID 	<= 'b0011;	//OR
 		end
 		6'b 001010:								//Operacion SLTI. 
@@ -293,19 +278,17 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<=  0; 
 						ALUControlID 	<= 'b1001; //SLT		
 		end
 		6'b 001111:								//Operacion LUI. 
 		begin
 						RegWriteD 		<= 1;
 						RegDstD 			<= 0;
-						ALUSrcD 			<= 1;   //VER QUE PONEN 16?¿?
+						ALUSrcD 			<= 3;   //VER QUE PONEN 16
 						BranchD 			<= 0;
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<=  16; 
 						ALUControlID 	<= 'b0110; //SLL
 		end
 		6'b 000100: 							//Operacion del tipo BEQ
@@ -317,7 +300,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<= 0;
 						ALUControlID 	<= 0; 
 		end
 		6'b 000101:								//Operacion BNE. 
@@ -329,7 +311,6 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ShiftD			<=  0; 
 						ALUControlID 	<= 0; 	
 		end
 		6'b 111111:								//Operacion END. 
@@ -341,7 +322,6 @@ begin
 			BranchD <= 0;
 			ALUSrcD <= 0;
 			RegDstD <= 0;				 
-			ShiftD <= 0;
 			MemReadD <= 0;
 		end	
 		

@@ -69,22 +69,22 @@ module Register_File(
 	 begin
 		if(inicio == 1)
 		begin
-			 bank[0] <= 2;
+			 bank[0] <= 4;
 		    bank[1] <= 2;
 		    bank[2] <= 2;
-		    bank[3] <= 5;
-		    bank[4] <= 2;
-		    bank[5] <= 5;
+		    bank[3] <= 4;
+		    bank[4] <= 7;
+		    bank[5] <= 1;
 		    bank[6] <= 1;
 		    bank[7] <= 2;
-		    bank[8] <= 3;
+		    bank[8] <= 0;
 		    bank[9] <= 0;
 		    bank[10] <= 0;
 		    bank[11] <= 0;
 		    bank[12] <= 0;
 		    bank[13] <= 0;
 		    bank[14] <= 0;
-		    bank[15] <= 80;
+		    bank[15] <= 0;
 		    bank[16] <= 0;
 		    bank[17] <= 0;
 		    bank[18] <= 0;
