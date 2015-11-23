@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/Samba/ipcore/test_fetch_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="test_fetch" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="11" />
+   <wvobject fp_name="/test_fetch/uut/PCPlus4F" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCPlus4F[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCPlus4F[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#0000ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/PCBranchD" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCBranchD[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCBranchD[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#0000ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/PCSrcD" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">PCSrcD</obj_property>
+      <obj_property name="ObjectShortName">PCSrcD</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#0000ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/PC1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PC1[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PC1[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#0000ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/pcreg/PC1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PC1[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PC1[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/pcreg/PCF" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCF[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCF[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/ip_core/addra" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addra[8:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/ip_core/douta" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">douta[31:0]</obj_property>
+      <obj_property name="ObjectShortName">douta[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/add_pc/pc" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pc[8:0]</obj_property>
+      <obj_property name="ObjectShortName">pc[8:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/add_pc/o_pc" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_pc[8:0]</obj_property>
+      <obj_property name="ObjectShortName">o_pc[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+</wave_config>

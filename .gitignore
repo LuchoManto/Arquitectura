@@ -7,6 +7,8 @@
 !*.pdf
 !*.docx
 !*.xco
+!*.py
+!*.wcfg
 # etc...
 
 # ...even if they are in subdirectories

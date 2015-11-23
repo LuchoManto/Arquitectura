@@ -1,36 +1,32 @@
-;programa que provoca riesgo de lectura despues de escritura
+; LUI con branch
 
-;estado inicial
-; r0 = 4
+; estado inicial:
+; r0 = 2
 ; r1 = 2
 ; r2 = 2
-; r3 = 4
-; r4 = 7
-; r5 = 1
+; r3 = 5
+; r4 = 2
+; r5 = 5
 ; r6 = 1
 ; r7 = 2
+; r8 = 3
+; r9 = 0
+; r13 = 0xFFFF0003 
+; r14 = 0xFFFFFF05 
+; r15 = 80
 
 
-XORI 0,2,3 ; r0 = 2 xor 3 = 1
-NOR 5,0,1 ; r5 = ~(1 | 2) = -4
-SW 5,0(7); mem(2) =3
-ADDI 4,5,2; R4 = -4+2 = -2
-LW 4,0(7); R4 = -4;
-LW 6,0(7)	R6 = -4;
-SLTI 6,8,1; R6 = 1
-SW 6,0(3); mem(4) = 1
-ADDI 2,2,1; R2 = 2+1 = 3
-ADDI 3,3,2; R3 = 4+2 = 6
-ADDI 4,3,3; R4 = 6+3 = 9
-ADDI 5,4,2; R5 = 9+2 = 11
-ADDI 4,5,1; R4 = 11+1 =12
+SH 13,0(15); mem(80) = 3
+LW 9,0(15); r9 = 3;
+BEQ 9,8,3; si r8 == r9, salta a la 21
+ADD 0,7,8 ; esto NO se deberia hacer
+ADD 0,7,8 ; esto NO se deberia hacer
+SB 14,0(15); mem(80) = 5
+LW 6,0(15); r6 = 5;
+SRA 5,6,1; R5 = 2
+LUI 5,1 ; R5 = 65536
+SW 14,0(15); mem(80) = 0xFFFFFF05 
+LB 4,0(15); r4 = 5;
+LH 7,0(15); r7 = 0xFF05
 
-;estado final
-; r0 = 1
-; r1 = 2
-; r2 = 3
-; r3 = 4
-; r4 = 5
-; r5 = 6
-; r6 = 1 deje en 1 este para que puedas ver rapido el SLTI (set on less than inmediate) si anda
-; r7 = 7
+END

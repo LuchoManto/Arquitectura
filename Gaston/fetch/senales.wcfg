@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/Gaston/fetch/test_fetch_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="test_fetch" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="17" />
+   <wvobject fp_name="/test_fetch/uut/mux_pc1/PCSrcD" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">PCSrcD</obj_property>
+      <obj_property name="ObjectShortName">PCSrcD</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#008000</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/mux_pc1/PCPlus4F" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCPlus4F[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCPlus4F[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#008000</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/mux_pc1/PCBranchD" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCBranchD[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCBranchD[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#008000</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/mux_pc1/PC1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PC1[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PC1[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#008000</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/pcreg/PC1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PC1[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PC1[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#a0a0a4</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/pcreg/PCF" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCF[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCF[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#a0a0a4</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/ip_core1/addra" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addra[8:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#808000</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/ip_core1/douta" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">douta[31:0]</obj_property>
+      <obj_property name="ObjectShortName">douta[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#808000</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/add_pc1/PCF" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCF[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCF[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/add_pc1/PCPlus4F" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCPlus4F[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCPlus4F[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/instrlach/Instr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">Instr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">Instr[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/instrlach/InstrD" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">InstrD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">InstrD[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/pclach/PCPlus4F" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCPlus4F[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCPlus4F[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/pclach/PCPlus4D" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">PCPlus4D[8:0]</obj_property>
+      <obj_property name="ObjectShortName">PCPlus4D[8:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/T_InstrD" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">T_InstrD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">T_InstrD[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/T_PCPlus4D" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">T_PCPlus4D[8:0]</obj_property>
+      <obj_property name="ObjectShortName">T_PCPlus4D[8:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_fetch/uut/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+</wave_config>

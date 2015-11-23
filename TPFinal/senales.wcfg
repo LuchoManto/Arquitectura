@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/TPFinal/test_register_bank_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="test_register_bank" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="25" />
+   <wvobject fp_name="/test_register_bank/d1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">d1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">d1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/d2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">d2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">d2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/i_r1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i_r1[4:0]</obj_property>
+      <obj_property name="ObjectShortName">i_r1[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/i_r2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i_r2[4:0]</obj_property>
+      <obj_property name="ObjectShortName">i_r2[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/write_register" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">write_register[4:0]</obj_property>
+      <obj_property name="ObjectShortName">write_register[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/write_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">write_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">write_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/regwrite" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">regwrite</obj_property>
+      <obj_property name="ObjectShortName">regwrite</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/r0/input_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">input_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">input_data[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#000080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/r0/chip_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">chip_en</obj_property>
+      <obj_property name="ObjectShortName">chip_en</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#000080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/r0/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#000080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/r0/output_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">output_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output_data[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#000080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/multiplexor1/selector" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">selector[4:0]</obj_property>
+      <obj_property name="ObjectShortName">selector[4:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/multiplexor1/entrada0" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">entrada0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">entrada0[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/multiplexor1/entrada1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">entrada1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">entrada1[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/multiplexor1/salida" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">salida[31:0]</obj_property>
+      <obj_property name="ObjectShortName">salida[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/demultiplexor1/selector" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">selector[4:0]</obj_property>
+      <obj_property name="ObjectShortName">selector[4:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/demultiplexor1/entrada" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">entrada</obj_property>
+      <obj_property name="ObjectShortName">entrada</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/demultiplexor1/salida0" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">salida0</obj_property>
+      <obj_property name="ObjectShortName">salida0</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/demultiplexor1/salida1" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">salida1</obj_property>
+      <obj_property name="ObjectShortName">salida1</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/demultiplexor1/salida2" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">salida2</obj_property>
+      <obj_property name="ObjectShortName">salida2</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/r1/input_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">input_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">input_data[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/r1/chip_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">chip_en</obj_property>
+      <obj_property name="ObjectShortName">chip_en</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/r1/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_register_bank/uut/r1/output_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">output_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output_data[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+</wave_config>
