@@ -1,1 +1,32 @@
 ; LUI con branch
+
+; estado inicial:
+; r0 = 2
+; r1 = 2
+; r2 = 2
+; r3 = 5
+; r4 = 2
+; r5 = 5
+; r6 = 1
+; r7 = 2
+; r8 = 3
+; r9 = 0
+; r13 = 0xFFFF0003 
+; r14 = 0xFFFFFF05 
+; r15 = 80
+
+
+SH 13,0(15); mem(80) = 3
+LW 9,0(15); r9 = 3;
+BEQ 9,8,3; si r8 == r9, salta a la 21
+ADD 0,7,8 ; esto NO se deberia hacer
+ADD 0,7,8 ; esto NO se deberia hacer
+SB 14,0(15); mem(80) = 5
+LW 6,0(15); r6 = 5;
+SRA 5,6,1; R5 = 2
+LUI 5,1 ; R5 = 65536
+SW 14,0(15); mem(80) = 0xFFFFFF05 
+LB 4,0(15); r4 = 5;
+LH 7,0(15); r7 = 0xFF05
+
+END
