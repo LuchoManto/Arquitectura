@@ -50,6 +50,24 @@ SUB 5,5,6; r5 = r5 - 1
 BNE 5,9,-1 ; si r5 != 0, salta una para atras
 ADD 5,7,8 ; r5 = 2 + 3 = 5
 
+
+;LUI BRANCHE
+
+SH 13,0(15); mem(80) = 3
+LW 9,0(15); r9 = 3;
+BEQ 9,8,3; si r8 == r9, salta a la 21
+ADD 0,7,8 ; esto NO se deberia hacer
+ADD 0,7,8 ; esto NO se deberia hacer
+SB 14,0(15); mem(80) = 5
+LW 6,0(15); r6 = 5;
+SRA 5,6,1; R5 = 2
+LUI 5,1 ; R5 = 65536
+SW 14,0(15); mem(80) = 0xFFFFFF05
+END 
+LB 4,0(15); r4 = 5;
+END
+LH 7,0(15); r7 = 0xFF05
+
 END
 
 
