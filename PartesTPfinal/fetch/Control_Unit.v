@@ -61,8 +61,10 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 		<= 0;
-						ShiftD			<= 0;
-						
+						ShiftD			<= 0; // valores por defecto para TODAS las operaciones de tipo R
+			
+	///--------------LOGICA PARA OBTENER LA OPERACION DE LA ALU-------------///		
+			
 						if(Funct == 'b100000) //ADD
 						begin
 							ALUControlID 	<= 'b0000; 
@@ -128,6 +130,7 @@ begin
 							ALUControlID 	<= 'b1001;
 							ALUSrcD 			<= 0;
 						end
+		//------------------------------------------------------------//
 		end
 		6'b 100000:								//Operacion LB, Load a Byte
 		begin
@@ -137,7 +140,7 @@ begin
 						BranchD 			<= 0;
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
-						MemReadD 	<= 1;
+						MemReadD 	<= 1;   // mask a byte  de la salida de memoria de datos
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;  //ADD
 		end
@@ -149,7 +152,7 @@ begin
 						BranchD 			<= 0;
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
-						MemReadD 	<= 2;
+						MemReadD 	<= 2;  // mask a half-word de la salidad de memoria de datos
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end
@@ -161,7 +164,7 @@ begin
 						BranchD 			<= 0;
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 1;
-						MemReadD 	<= 0; 
+						MemReadD 	<= 0; // no hay mascara. se obtienen los 32 bits
 						ShiftD			<= 0; 
 						ALUControlID 	<= 'b0000; //ADD
 		end
@@ -177,7 +180,7 @@ begin
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end	
-		6'b 100100:								//Operacion LBU, Load Unsigned. Hay que tomarlo como el Load comun.
+		6'b 100100:								//Operacion LBU, Load Byte Unsigned. Hay que tomarlo como el Load comun.
 		begin
 						RegWriteD 		<= 1;
 						RegDstD 			<= 0;
@@ -189,7 +192,7 @@ begin
 						ShiftD			<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
 		end		
-		6'b 100101	:								//Operacion LHU, Load Unsigned. Hay que tomarlo como el Load comun.
+		6'b 100101	:								//Operacion LHU, Load Half-Word Unsigned. Hay que tomarlo como el Load comun.
 		begin
 						RegWriteD 		<= 1;
 						RegDstD 			<= 0;
