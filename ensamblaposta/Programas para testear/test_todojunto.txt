@@ -50,5 +50,7 @@ SUB 5,5,6; r5 = r5 - 1
 BNE 5,9,-1 ; si r5 != 0, salta una para atras
 ADD 5,7,8 ; r5 = 2 + 3 = 5
 
+END
+
 
 ; estado final igual al inicial
