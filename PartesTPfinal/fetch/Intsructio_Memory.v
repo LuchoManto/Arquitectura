@@ -129,6 +129,7 @@ wire [31:0]ReadData;
 //Etapa Write Back
 //--------------------------------------------------------------------------------
 //Latch entrada Write Back
+wire [1:0]MemReadW;
 wire RegWriteW;
 wire MemtoRegW;
 wire [31:0]ReadDataW;
@@ -429,7 +430,7 @@ memoria_de_datos memdatos
 mask_MemReadM maskmemreadM
 (
 	.ReadDataM(ReadDataM),
-	.MemReadM(ReadDataM), 
+	.MemReadW(MemReadW), 
 	.ReadData(ReadData)
 );
 
@@ -479,6 +480,7 @@ memoria_datos memdatos4
 //Latch fin mem
 Latch_Fin_Mem latchfinMEM
 (
+	.MemReadM(MemReadM),
 	.RegWriteM(RegWriteM),
 	.MemtoRegM(MemtoRegM),
 	.ReadData(ReadData),
@@ -486,6 +488,7 @@ Latch_Fin_Mem latchfinMEM
 	.WriteRegM(WriteRegM),
 	.clk(clk),
 	.inicio(inicio),
+	.MemReadW(MemReadW),
 	.RegWriteW(RegWriteW),
 	.MemtoRegW(MemtoRegW),
 	.ReadDataW(ReadDataW),

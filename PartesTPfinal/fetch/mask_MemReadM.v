@@ -20,14 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 module mask_MemReadM(
 	input wire [31:0]ReadDataM,
-	input wire [1:0]MemReadM, //Read ALL 0, Read Byte 1, Read half 2
+	input wire [1:0]MemReadW, //Read ALL 0, Read Byte 1, Read half 2
 	output reg [31:0]ReadData
 );
 
 
 always @(*)
 begin
-      case(MemReadM)
+      case(MemReadW)
 			2'b00:	
 			begin
 				ReadData <= ReadDataM;

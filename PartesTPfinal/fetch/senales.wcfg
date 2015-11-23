@@ -3,17 +3,14 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/PartesTPfinal/fetch/testt_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="F:/LUCHO/Facu/Quinto/ArquitecturaDeComputadora/Repo/Arquitectura/PartesTPfinal/testt_isim_beh.wdb" id="1" type="auto">
          <top_modules>
             <top_module name="glbl" />
             <top_module name="testt" />
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="50" />
-   <wave_markers>
-      <marker time="7580000" label="" />
-   </wave_markers>
+   <WVObjectSize size="8" />
    <wvobject fp_name="group56" type="group">
       <obj_property name="label">Etapa fetch</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -247,17 +244,215 @@
             <obj_property name="UseCustomSignalColor">true</obj_property>
             <obj_property name="CustomSignalColor">#ff00ff</obj_property>
          </wvobject>
-         <wvobject fp_name="/testt/uut/controlunit/ShiftD" type="array" db_ref_id="1">
-            <obj_property name="ElementShortName">ShiftD[3:0]</obj_property>
-            <obj_property name="ObjectShortName">ShiftD[3:0]</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-         </wvobject>
          <wvobject fp_name="/testt/uut/controlunit/MemReadD" type="array" db_ref_id="1">
             <obj_property name="ElementShortName">MemReadD[1:0]</obj_property>
             <obj_property name="ObjectShortName">MemReadD[1:0]</obj_property>
             <obj_property name="UseCustomSignalColor">true</obj_property>
             <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group289" type="group">
+         <obj_property name="label">Bancoregistros</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/testt/uut/bancoregistros/clk" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">clk</obj_property>
+            <obj_property name="ObjectShortName">clk</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/bancoregistros/A1" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">A1[4:0]</obj_property>
+            <obj_property name="ObjectShortName">A1[4:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/bancoregistros/A2" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">A2[4:0]</obj_property>
+            <obj_property name="ObjectShortName">A2[4:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/bancoregistros/A3" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">A3[4:0]</obj_property>
+            <obj_property name="ObjectShortName">A3[4:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/bancoregistros/WD3" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">WD3[31:0]</obj_property>
+            <obj_property name="ObjectShortName">WD3[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/bancoregistros/WE3" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">WE3</obj_property>
+            <obj_property name="ObjectShortName">WE3</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/bancoregistros/inicio" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">inicio</obj_property>
+            <obj_property name="ObjectShortName">inicio</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/bancoregistros/RD1" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">RD1[31:0]</obj_property>
+            <obj_property name="ObjectShortName">RD1[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/bancoregistros/RD2" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">RD2[31:0]</obj_property>
+            <obj_property name="ObjectShortName">RD2[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/bancoregistros/bank" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">bank[31:0,31:0]</obj_property>
+            <obj_property name="ObjectShortName">bank[31:0,31:0]</obj_property>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[31]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[31,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[31,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[30]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[30,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[30,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[29]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[29,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[29,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[28]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[28,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[28,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[27]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[27,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[27,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[26]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[26,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[26,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[25]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[25,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[25,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[24]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[24,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[24,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[23]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[23,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[23,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[22]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[22,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[22,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[21]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[21,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[21,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[20]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[20,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[20,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[19]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[19,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[19,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[18]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[18,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[18,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[17]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[17,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[17,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[16]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[16,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[16,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[15]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[15,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[15,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[14]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[14,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[14,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[13]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[13,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[13,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[12]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[12,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[12,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[11]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[11,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[11,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[10]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[10,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[10,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[9]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[9,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[9,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[8]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[8,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[8,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[7]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[7,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[7,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[6]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[6,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[6,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[5]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[5,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[5,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[4]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[4,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[4,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[3]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[3,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[3,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[2]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[2,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[2,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[1]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[1,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[1,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/testt/uut/bancoregistros/bank[0]" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">[0,31:0]</obj_property>
+               <obj_property name="ObjectShortName">bank[0,31:0]</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            </wvobject>
          </wvobject>
       </wvobject>
       <wvobject fp_name="group84" type="group">
@@ -566,6 +761,18 @@
             <obj_property name="CustomSignalColor">#ff00ff</obj_property>
             <obj_property name="Radix">HEXRADIX</obj_property>
          </wvobject>
+         <wvobject fp_name="/testt/uut/latchfinid/MemReadD" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">MemReadD[1:0]</obj_property>
+            <obj_property name="ObjectShortName">MemReadD[1:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/latchfinid/MemReadE" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">MemReadE[1:0]</obj_property>
+            <obj_property name="ObjectShortName">MemReadE[1:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+         </wvobject>
          <wvobject fp_name="/testt/uut/latchfinid/FlushE" type="logic" db_ref_id="1">
             <obj_property name="ElementShortName">FlushE</obj_property>
             <obj_property name="ObjectShortName">FlushE</obj_property>
@@ -857,6 +1064,18 @@
             <obj_property name="UseCustomSignalColor">true</obj_property>
             <obj_property name="CustomSignalColor">#ff00ff</obj_property>
          </wvobject>
+         <wvobject fp_name="/testt/uut/latchfinEXEC/MemReadE" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">MemReadE[1:0]</obj_property>
+            <obj_property name="ObjectShortName">MemReadE[1:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/latchfinEXEC/MemReadM" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">MemReadM[1:0]</obj_property>
+            <obj_property name="ObjectShortName">MemReadM[1:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+         </wvobject>
          <wvobject fp_name="/testt/uut/latchfinEXEC/inicio" type="logic" db_ref_id="1">
             <obj_property name="ElementShortName">inicio</obj_property>
             <obj_property name="ObjectShortName">inicio</obj_property>
@@ -875,18 +1094,58 @@
       <wvobject fp_name="group256" type="group">
          <obj_property name="label">Memdatos1</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/testt/uut/memdatos/clka" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">clka</obj_property>
+            <obj_property name="ObjectShortName">clka</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffff00</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/memdatos/ena" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">ena</obj_property>
+            <obj_property name="ObjectShortName">ena</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffff00</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/memdatos/wea" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">wea[3:0]</obj_property>
+            <obj_property name="ObjectShortName">wea[3:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffff00</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/memdatos/addra" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">addra[11:0]</obj_property>
+            <obj_property name="ObjectShortName">addra[11:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffff00</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/memdatos/dina" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">dina[31:0]</obj_property>
+            <obj_property name="ObjectShortName">dina[31:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffff00</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/memdatos/douta" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">douta[31:0]</obj_property>
+            <obj_property name="ObjectShortName">douta[31:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+         </wvobject>
       </wvobject>
-      <wvobject fp_name="group257" type="group">
-         <obj_property name="label">Memdatos2</obj_property>
+      <wvobject fp_name="group246" type="group">
+         <obj_property name="label">Maskmem</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-      </wvobject>
-      <wvobject fp_name="group259" type="group">
-         <obj_property name="label">Memdatos3</obj_property>
-         <obj_property name="DisplayName">label</obj_property>
-      </wvobject>
-      <wvobject fp_name="group260" type="group">
-         <obj_property name="label">Memdatos4</obj_property>
-         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/testt/uut/maskmemreadM/ReadDataM" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">ReadDataM[31:0]</obj_property>
+            <obj_property name="ObjectShortName">ReadDataM[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/maskmemreadM/MemReadM" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">MemReadM[1:0]</obj_property>
+            <obj_property name="ObjectShortName">MemReadM[1:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testt/uut/maskmemreadM/ReadData" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">ReadData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">ReadData[31:0]</obj_property>
+         </wvobject>
       </wvobject>
       <wvobject fp_name="group286" type="group">
          <obj_property name="label">Latch_Fin_MEM</obj_property>
@@ -954,6 +1213,7 @@
             <obj_property name="ObjectShortName">WriteRegW[4:0]</obj_property>
             <obj_property name="UseCustomSignalColor">true</obj_property>
             <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+            <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
          </wvobject>
          <wvobject fp_name="/testt/uut/latchfinMEM/inicio" type="logic" db_ref_id="1">
             <obj_property name="ElementShortName">inicio</obj_property>
@@ -1137,173 +1397,5 @@
    <wvobject fp_name="/testt/clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/clk" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/A1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">A1[4:0]</obj_property>
-      <obj_property name="ObjectShortName">A1[4:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/A2" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">A2[4:0]</obj_property>
-      <obj_property name="ObjectShortName">A2[4:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/A3" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">A3[4:0]</obj_property>
-      <obj_property name="ObjectShortName">A3[4:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/WD3" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">WD3[31:0]</obj_property>
-      <obj_property name="ObjectShortName">WD3[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/WE3" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">WE3</obj_property>
-      <obj_property name="ObjectShortName">WE3</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/inicio" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">inicio</obj_property>
-      <obj_property name="ObjectShortName">inicio</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/RD1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">RD1[31:0]</obj_property>
-      <obj_property name="ObjectShortName">RD1[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/RD2" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">RD2[31:0]</obj_property>
-      <obj_property name="ObjectShortName">RD2[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out0" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out0[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out0[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out1[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out1[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out2" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out2[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out2[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out3" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out3[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out3[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out4" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out4[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out4[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out5" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out5[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out5[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out6" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out6[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out6[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out7" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out7[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out7[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out8" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out8[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out8[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out9" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out9[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out9[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out10" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out10[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out10[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out11" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out11[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out11[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out12" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out12[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out12[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out13" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out13[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out13[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out14" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out14[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out14[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out15" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out15[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out15[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out16" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out16[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out16[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out17" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out17[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out17[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out18" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out18[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out18[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out19" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out19[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out19[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out20" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out20[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out20[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out21" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out21[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out21[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out22" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out22[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out22[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out23" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out23[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out23[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out24" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out24[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out24[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out25" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out25[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out25[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out26" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out26[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out26[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out27" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out27[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out27[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out28" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out28[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out28[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out29" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out29[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out29[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out30" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out30[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out30[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/out31" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">out31[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out31[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testt/uut/bancoregistros/bank" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">bank[31:0,31:0]</obj_property>
-      <obj_property name="ObjectShortName">bank[31:0,31:0]</obj_property>
    </wvobject>
 </wave_config>

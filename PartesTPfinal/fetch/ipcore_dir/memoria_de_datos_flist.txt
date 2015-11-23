@@ -1,5 +1,4 @@
 # Output products list for <memoria_de_datos>
-_xmsgs\pn_parser.xmsgs
 memoria_de_datos.asy
 memoria_de_datos.gise
 memoria_de_datos.ngc

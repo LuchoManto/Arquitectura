@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 14.7
-# Date: Fri Nov 20 05:43:19 2015
+# Date: Mon Nov 23 20:50:19 2015
 #
 ##############################################################
 #
@@ -46,7 +46,7 @@ CSET axi_id_width=4
 CSET axi_slave_type=Memory_Slave
 CSET axi_type=AXI4_Full
 CSET byte_size=9
-CSET coe_file="E:\Documents\Windows\Facu\Arquitectura de computadoras\ProyectosXilinx\Arquitectura\ensamblaposta\salida_hexa.coe"
+CSET coe_file=F:\LUCHO\Facu\Quinto\ArquitecturaDeComputadora\Repo\Arquitectura\ensamblaposta\salida_hexa.coe
 CSET collision_warnings=ALL
 CSET component_name=blk_mem_gen_v7_3
 CSET disable_collision_warnings=false
@@ -72,7 +72,7 @@ CSET port_a_enable_rate=100
 CSET port_a_write_rate=0
 CSET port_b_clock=0
 CSET port_b_enable_rate=0
-CSET port_b_write_rate=50
+CSET port_b_write_rate=0
 CSET primitive=8kx2
 CSET read_width_a=32
 CSET read_width_b=32
@@ -105,4 +105,4 @@ CSET write_width_b=32
 MISC pkg_timestamp=2012-11-19T16:22:25Z
 # END Extra information
 GENERATE
-# CRC: 5bb61fa6
+# CRC: d0bc77cd
