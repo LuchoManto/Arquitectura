@@ -61,6 +61,7 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 		<= 0;
+						finalD <= 0;
 						
 						///--------------LOGICA PARA OBTENER LA OPERACION DE LA ALU-------------///			
 						if(Funct == 'b100000) //ADD
@@ -141,6 +142,7 @@ begin
 						MemReadD 	<= 1;   // mask a byte  de la salida de memoria de datos
 
 						ALUControlID 	<= 'b0000;  //ADD
+						finalD <= 0;
 		end
 		6'b 100001:								//Operacion LH, Load a 2 Byte
 		begin
@@ -152,6 +154,7 @@ begin
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 2;  // mask a half-word de la salidad de memoria de datos
 						ALUControlID 	<= 'b0000;	//ADD
+						finalD <= 0;
 		end
 		6'b 100011: 							//Operacion del tipo Load. LW
 		begin
@@ -164,6 +167,7 @@ begin
 						MemReadD 	<= 0; // no hay mascara. se obtienen los 32 bits
 
 						ALUControlID 	<= 'b0000; //ADD
+						finalD <= 0;
 		end
 		6'b 100111:								//Operacion LWU, Load Unsigned. Hay que tomarlo como el Load comun.
 		begin
@@ -175,6 +179,7 @@ begin
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
+						finalD <= 0;
 		end	
 		6'b 100100:								//Operacion LBU, Load Byte Unsigned. Hay que tomarlo como el Load comun.
 		begin
@@ -186,6 +191,7 @@ begin
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 1;
 						ALUControlID 	<= 'b0000;	//ADD
+						finalD <= 0;
 		end		
 		6'b 100101	:								//Operacion LHU, Load Half-Word Unsigned. Hay que tomarlo como el Load comun.
 		begin
@@ -197,6 +203,7 @@ begin
 						MemtoRegD 		<= 1;
 						MemReadD 	<= 2;
 						ALUControlID 	<= 'b0000;	//ADD
+						finalD <= 0;
 		end
 		6'b 101000:								//Operacion SB.
 		begin
@@ -208,6 +215,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
+						finalD <= 0;
 		end
 		6'b 101001:								//Operacion SH STORE HALF
 		begin
@@ -219,6 +227,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
+						finalD <= 0;
 		end
 		6'b 101011: 							//Operacion del tipo Storage. SW
 		begin
@@ -230,6 +239,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
+						finalD <= 0;
 		end
 		6'b 001000:								//Operacion del tipo ADDI
 		begin
@@ -241,6 +251,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 'b0000;	//ADD
+						finalD <= 0;
 		end
 		6'b 001100:								//Operacion ANDI.
 		begin
@@ -252,6 +263,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 'b0010;	//AND
+						finalD <= 0;
 		end
 		6'b 001110:								//Operacion XORI.
 		begin
@@ -263,6 +275,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 'b0100;	//XOR
+						finalD <= 0;
 		end
 		6'b 001101:								//Operacion ORI.
 		begin
@@ -274,6 +287,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 'b0011;	//OR
+						finalD <= 0;
 		end
 		6'b 001010:								//Operacion SLTI. 
 		begin
@@ -284,7 +298,8 @@ begin
 						MemWriteD 		<= 0;
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
-						ALUControlID 	<= 'b1001; //SLT		
+						ALUControlID 	<= 'b1001; //SLT	
+						finalD <= 0;						
 		end
 		6'b 001111:								//Operacion LUI. 
 		begin
@@ -296,6 +311,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 'b0110; //SLL
+						finalD <= 0;
 		end
 		6'b 000100: 							//Operacion del tipo BEQ
 		begin
@@ -307,6 +323,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 0; 
+						finalD <= 0;
 		end
 		6'b 000101:								//Operacion BNE. 
 		begin
@@ -318,6 +335,7 @@ begin
 						MemtoRegD 		<= 0;
 						MemReadD 	<= 0;
 						ALUControlID 	<= 0; 	
+						finalD <= 0;
 		end
 		6'b 111111:								//Operacion END. FC
 		begin
@@ -341,6 +359,7 @@ begin
 			ALUSrcD <= 0;
 			RegDstD <= 0;				 
 			MemReadD <= 0;
+			finalD <= 0;
 		end	
 		
 	endcase

@@ -38,7 +38,7 @@ begin
 		if(clr || inicio)
 		begin
 			PCPlus4D <= 0;
-			InstrD <= 32'hFC00_0000;
+			InstrD <= 32'hF800_0000;
 			if(clr)
 			begin
 				espera_clr = 1;

@@ -51,7 +51,7 @@ reg [3:0] next_state = 4'b0000;
 reg inicio = 0; //variable que reinicia todo el pipe a 0.
 reg activo = 0; //Variable que habilita los clk del pipe.
 reg [2:0]s = 0;
-reg [7:0]indice = 0; //variable utilizada para enviar el buffer
+reg signed [14:0]indice = 0; //variable utilizada para enviar el buffer
 reg [7:0]bytes = 148; //cantidad de bytes a enviar en buffer envio
 
 //Cables para el pipe
@@ -261,7 +261,7 @@ begin
 		IDLE: // estado inicial. Idle
 				begin
 					activo = 0;
-					inicio = 0;
+					inicio = -1;
 					if(rx_empty == 0)
 					begin
 						rd=1;
@@ -294,7 +294,7 @@ begin
 		CONTINUO:
 				begin
 					activo = 1;
-					indice = 0;
+					indice = -1;
 					if(finalW == 1)
 					begin
 						next_state = ENVIAR;
@@ -308,6 +308,10 @@ begin
 				begin
 					indice = indice+1;
 					case(indice)
+							0:
+							begin
+								w_data = 99;
+							end
 							1:
 							begin
 								w_data = buffer_envio[(1*8)-1 : (1*8)-8];
@@ -900,6 +904,10 @@ begin
 							begin
 								w_data = buffer_envio[(	148*8)-1 : (	148*8)-8];
 							end
+							149:
+							begin
+								w_data = 102;
+							end
 					endcase
 					//w_data = buffer_envio[(indice*8)-1:(indice*8)-8];
 					//w_data = buffer_envio_aux[indice-1];
@@ -911,7 +919,7 @@ begin
 					if(tx_full == 1)
 					begin
 						wr = 0;
-						if(indice == bytes)
+						if(indice == bytes+1)
 						begin
 							next_state = IDLE;
 						end
