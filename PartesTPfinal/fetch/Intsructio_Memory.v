@@ -22,14 +22,9 @@ module Pipe
 (
 	input wire clk,
 	input wire inicio,
+	input wire activo,
 	output reg Test
 );
-
-//--------------------------------------------------------------------------------
-//Señales de control hardcode 
-//--------------------------------------------------------------------------------
-//AUX - Senal enable memoria datos
-reg EN_Data_Mem = 1;
 
 
 //--------------------------------------------------------------------------------
@@ -168,7 +163,7 @@ mux_pc mux_pc1(
 PC_REG pcreg
 (
 	.clk(clk),
-	.en(StallF),
+	.en(StallF || ~activo),
 	.PC1(PC1),
 	.inicio(inicio),
 	.PCF(PCF)
@@ -180,7 +175,7 @@ ip_core ip_core1 (
   .addra(PCF), // input [31 : 0] addra
   //.addra(PC1),
   .douta(Instr), // output [31 : 0] douta
-  .ena(~StallF && ~inicio)
+  .ena(~StallF && ~inicio && activo)
 );	
 
 //Sumador de etapa de fetch.
@@ -195,7 +190,7 @@ Latch_Fin_IF latchfinif
 	.Instr(Instr),
 	.PCPlus4F(PCPlus4F),
 	.clk(clk),
-	.en(StallD),
+	.en(StallD || ~activo),
 	.clr(PCSrcD),
 	.inicio(inicio),
 	.InstrD(InstrD),
@@ -232,6 +227,7 @@ Register_File bancoregistros
 	.WD3(ResultW),
 	.WE3(RegWriteW),
 	.inicio(inicio),
+	.activo(activo),
 	.RD1(RD1),
 	.RD2(RD2)
 );
@@ -315,6 +311,7 @@ Latch_Fin_ID latchfinid
 	.clk(clk),
 	.FlushE(FlushE),
 	.inicio(inicio),
+	.activo(activo),
 	.MemReadE(MemReadE),
 	.RegWriteE(RegWriteE),
 	.MemtoRegE(MemtoRegE),
@@ -402,6 +399,7 @@ Latch_Fin_Exec latchfinEXEC
 	.WriteDataE(WriteDataE),
 	.WriteRegE(WriteRegE),
 	.clk(clk),
+	.activo(activo),
 	.inicio(inicio),
 	.MemReadM(MemReadM),
 	.RegWriteM(RegWriteM),
@@ -420,7 +418,7 @@ Latch_Fin_Exec latchfinEXEC
 memoria_de_datos memdatos
 (  
   .clka(clk), // input clka
-  .ena(EN_Data_Mem), // input ena
+  .ena(activo), // input ena
   .wea(MemWriteM), // input [3 : 0] wea
   .addra(ALUOutM[11:0]), // input [11 : 0] addra
   .dina(WriteDataM), // input [31 : 0] dina
@@ -488,6 +486,7 @@ Latch_Fin_Mem latchfinMEM
 	.WriteRegM(WriteRegM),
 	.clk(clk),
 	.inicio(inicio),
+	.activo(activo),
 	.MemReadW(MemReadW),
 	.RegWriteW(RegWriteW),
 	.MemtoRegW(MemtoRegW),

@@ -26,6 +26,7 @@ module Register_File(
 	input wire [31:0]WD3,
 	input wire WE3,
 	input wire inicio,
+	input wire activo,
 	output reg [31:0]RD1,
 	output reg [31:0]RD2,
 	output reg [31:0]out0,
@@ -69,22 +70,22 @@ module Register_File(
 	 begin
 		if(inicio == 1)
 		begin
-			 bank[0] <= 2;
-		    bank[1] <= 2;
-		    bank[2] <= 2;
-		    bank[3] <= 5;
-		    bank[4] <= 2;
-		    bank[5] <= 5;
-		    bank[6] <= 1;
-		    bank[7] <= 2;
-		    bank[8] <= 3;
+			 bank[0] <= 0;
+		    bank[1] <= 0;
+		    bank[2] <= 0;
+		    bank[3] <= 0;
+		    bank[4] <= 0;
+		    bank[5] <= 0;
+		    bank[6] <= 0;
+		    bank[7] <= 0;
+		    bank[8] <= 0;
 		    bank[9] <= 0;
 		    bank[10] <= 0;
 		    bank[11] <= 0;
 		    bank[12] <= 0;
-		    bank[13] <= 32'hFFFF0003;
-		    bank[14] <= 32'hFFFFFF05;
-		    bank[15] <= 80;
+		    bank[13] <= 0;
+		    bank[14] <= 0;
+		    bank[15] <= 0;
 		    bank[16] <= 0;
 		    bank[17] <= 0;
 		    bank[18] <= 0;
@@ -104,7 +105,8 @@ module Register_File(
 		end
 		else
 		begin
-			bank[A3] <= WE3 ? WD3 : bank[A3];
+			if(activo)
+				bank[A3] <= WE3 ? WD3 : bank[A3];
 		end
 	 end
 	 

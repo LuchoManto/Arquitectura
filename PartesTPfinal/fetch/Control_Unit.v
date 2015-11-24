@@ -317,7 +317,7 @@ begin
 						MemReadD 	<= 0;
 						ALUControlID 	<= 0; 	
 		end
-		6'b 111111:								//Operacion END. 
+		6'b 111111:								//Operacion END. FC
 		begin
 			ALUControlID <= 0;
 			RegWriteD <= 0;
@@ -328,7 +328,17 @@ begin
 			RegDstD <= 0;				 
 			MemReadD <= 0;
 		end	
-		
+		6'b 111110:								//Operacion FINISH F8. 
+		begin
+			ALUControlID <= 0;
+			RegWriteD <= 0;
+			MemtoRegD <= 0;
+			MemWriteD <= 0;
+			BranchD <= 0;
+			ALUSrcD <= 0;
+			RegDstD <= 0;				 
+			MemReadD <= 0;
+		end	
 		
 	endcase
 	end

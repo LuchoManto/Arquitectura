@@ -35,6 +35,7 @@ module Latch_Fin_ID(
 	input wire clk,
 	input wire FlushE,
 	input wire inicio,
+	input wire activo,
 	output reg [1:0]MemReadE,
 	output reg RegWriteE,
 	output reg MemtoRegE,
@@ -52,37 +53,40 @@ module Latch_Fin_ID(
 
 always@(posedge clk)
 begin
-	if(FlushE || inicio)
+	if(activo)
 	begin
-		MemReadE <= 0;
-		RegWriteE <= 0;
-		MemtoRegE <= 0;
-		MemWriteE <= 0;
-		ALUControlIE <= 0;
-		ALUSrcE <= 0;
-		RegDstE <= 0;
-		RD1E <= 0;
-		RD2E <= 0;
-		RsE <= 0;
-		RtE <= 0;
-		RdE <= 0;
-		SignImmE <= 0;
-	end
-	else
-	begin
-		MemReadE <= MemReadD;
-		RegWriteE <= RegWriteD;
-		MemtoRegE <= MemtoRegD;
-		MemWriteE <= MemWriteD;
-		ALUControlIE <= ALUControlID;
-		ALUSrcE <= ALUSrcD;
-		RegDstE <= RegDstD;	
-		RD1E <= RD1;
-		RD2E <= RD2;
-		RsE <= RsD;
-		RtE <= RtD;
-		RdE <= RdD;
-		SignImmE <= SignImmD;
+		if(FlushE || inicio)
+		begin
+			MemReadE <= 0;
+			RegWriteE <= 0;
+			MemtoRegE <= 0;
+			MemWriteE <= 0;
+			ALUControlIE <= 0;
+			ALUSrcE <= 0;
+			RegDstE <= 0;
+			RD1E <= 0;
+			RD2E <= 0;
+			RsE <= 0;
+			RtE <= 0;
+			RdE <= 0;
+			SignImmE <= 0;
+		end
+		else
+		begin
+			MemReadE <= MemReadD;
+			RegWriteE <= RegWriteD;
+			MemtoRegE <= MemtoRegD;
+			MemWriteE <= MemWriteD;
+			ALUControlIE <= ALUControlID;
+			ALUSrcE <= ALUSrcD;
+			RegDstE <= RegDstD;	
+			RD1E <= RD1;
+			RD2E <= RD2;
+			RsE <= RsD;
+			RtE <= RtD;
+			RdE <= RdD;
+			SignImmE <= SignImmD;
+		end
 	end
 end
 

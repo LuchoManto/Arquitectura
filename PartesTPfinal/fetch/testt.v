@@ -54,17 +54,26 @@ module testt;
 		
 		inicio = 0;
 		
-		
+		/*
 		for (i=0; i<40; i=i+1)
 		begin
 			#2;
 			$finish;
 		end
-		
+		*/
 		
 		
 
-		#40;
+		#60;
+		
+		
+		inicio=1;
+		#4;
+		inicio=0;
+		
+		#60;
+		
+		inicio=0;
 
 		$display("Termina la simulacion. -Time: ",$time);
 		$finish;

@@ -27,6 +27,7 @@ module Latch_Fin_Mem(
 	input wire [4:0]WriteRegM,
 	input wire clk,
 	input wire inicio,
+	input wire activo,
 	output reg [1:0]MemReadW,
 	output reg RegWriteW,
 	output reg MemtoRegW,
@@ -37,22 +38,25 @@ module Latch_Fin_Mem(
 
 always@(posedge clk)
 begin
-	if(inicio)
+	if(activo)
 	begin
-		RegWriteW <= 0;
-		MemtoRegW <= 0;
-		ReadDataW <= 0;
-		ALUOutW <= 0;
-		WriteRegW <= 0;		
-		MemReadW <= 0;
-	end
-	else
-	begin
-		RegWriteW <= RegWriteM;
-		MemtoRegW <= MemtoRegM;
-		ALUOutW <= ALUOutM;
-		WriteRegW <= WriteRegM;
-		MemReadW <= MemReadM;
+		if(inicio)
+		begin
+			RegWriteW <= 0;
+			MemtoRegW <= 0;
+			ReadDataW <= 0;
+			ALUOutW <= 0;
+			WriteRegW <= 0;		
+			MemReadW <= 0;
+		end
+		else
+		begin
+			RegWriteW <= RegWriteM;
+			MemtoRegW <= MemtoRegM;
+			ALUOutW <= ALUOutM;
+			WriteRegW <= WriteRegM;
+			MemReadW <= MemReadM;
+		end
 	end
 end
 

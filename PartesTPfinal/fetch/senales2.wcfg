@@ -3,14 +3,14 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/PartesTPfinal/fetch/test2_isim_beh1.wdb" id="1" type="auto">
+      <db_ref path="E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/PartesTPfinal/fetch/test2_isim_beh.wdb" id="1" type="auto">
          <top_modules>
             <top_module name="glbl" />
             <top_module name="test2" />
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="11" />
+   <WVObjectSize size="14" />
    <wvobject fp_name="group55" type="group">
       <obj_property name="label">FIN_FETCH</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -506,5 +506,17 @@
             <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
          </wvobject>
       </wvobject>
+   </wvobject>
+   <wvobject fp_name="/test2/uut/maskmemreadM/ReadDataM" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ReadDataM[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ReadDataM[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test2/uut/maskmemreadM/MemReadM" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">MemReadM[1:0]</obj_property>
+      <obj_property name="ObjectShortName">MemReadM[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test2/uut/maskmemreadM/ReadData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ReadData[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ReadData[31:0]</obj_property>
    </wvobject>
 </wave_config>
