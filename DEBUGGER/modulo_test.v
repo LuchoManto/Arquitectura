@@ -31,21 +31,28 @@ module modulo_test
 
 	
 //Estados
-localparam [2:0] START = 2'b00,
-					  IDLE = 2'b01,
-					  RECIBO = 2'b10,
-					  ESPERO = 2'b11;
+localparam [2:0] START = 4'b0000,
+					  IDLE = 4'b0001,
+					  RECIBO = 4'b0010,
+					  PASO	= 4'b0011,
+					  CONTINUO = 4'b0100,
+					  ENVIAR = 4'b0101,
+					  ESPERO = 4'b0110;
 					  
 					  
 					  
 //Variables internas
 reg [7:0] buffer = 1;
-reg [2:0] current_state = 3'b00;
-reg [2:0] next_state = 3'b00;
+reg [3:0] current_state = 4'b0000;
+reg [3:0] next_state = 4'b0000;
 
 //Variables para el pipe.
-reg inicio = 0;
-reg activo = 0;
+reg inicio = 0; //variable que reinicia todo el pipe a 0.
+reg activo = 0; //Variable que habilita los clk del pipe.
+reg [2:0]s = 0;
+reg [7:0]indice = 0; //variable utilizada para enviar el buffer
+reg [7:0]bytes = 148; //cantidad de bytes a enviar en buffer envio
+reg [1183:0]buffer_envio = 0;
 
 //Cables para el pipe
 wire [8:0]PCF;
@@ -75,10 +82,24 @@ begin
 				w_data=buffer;
 				rd = 0;
 				wr = 0;
-				next_state = IDLE;
+				//Inicializo el pipe
+				inicio = 1;
+				activo = 1;
+				if(s == 3)
+				begin
+					s = 0;
+					next_state = IDLE;
+				end
+				else
+				begin
+					s = s+1;
+					next_state = START;
+				end
 			end
 		IDLE: // estado inicial. Idle
 				begin
+					activo = 0;
+					inicio = 0;
 					if(rx_empty == 0)
 					begin
 						rd=1;
@@ -95,25 +116,52 @@ begin
 					//Espero que rx empty vuelva a 1
 					if(rx_empty == 1)
 					begin
-						if(tx_full==0)
-						begin
-							w_data = r_data;
-							wr = 1;
-							rd = 0;
-							next_state = ESPERO;
-						end
-						else
-						begin
-							next_state = RECIBO;
-						end
+						buffer = r_data;
+						rd = 0;
+						/*
+							si buffer es p voy a paso
+							si buffer es c voy a cont
+						*/
+						next_state = CONTINUO;
 					end
+					else
+					begin
+						next_state = RECIBO;
+					end
+				end
+		CONTINUO:
+				begin
+					activo = 1;
+					indice = 0;
+					if(finalW == 1)
+					begin
+						next_state = ENVIAR;
+					end
+					else
+					begin
+						next_state = CONTINUO;
+					end
+				end
+		ENVIAR:
+				begin
+					indice = indice+1;
+					w_data = buffer_envio[(indice*8)-1:(indice*8)-8];
+					wr = 1;
+					next_state = ESPERO;
 				end
 		ESPERO: 
 				begin
 					if(tx_full == 1)
 					begin
 						wr = 0;
-						next_state = IDLE;
+						if(indice == bytes)
+						begin
+							next_state = IDLE;
+						end
+						else
+						begin
+							next_state = ENVIAR;
+						end
 					end
 					else
 					begin

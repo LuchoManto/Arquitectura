@@ -48,7 +48,7 @@ begin
 		ALUSrcD <= 0;
 		RegDstD <= 0;				 
 		MemReadD <= 0;
-		final <= 0;
+		finalD <= 0;
 	end
 	else
 	begin
