@@ -23,7 +23,7 @@ module Pipe
 	input wire clk,
 	input wire inicio,
 	input wire activo,
-	output reg Test
+	output reg [8:0]PCF
 );
 
 
@@ -586,9 +586,9 @@ unidad_riesgos unidadderiesgos
 );
 
 
-always@(posedge clk)
+always@(*)
 begin
-	Test<=ResultW;
+	PCF<=PCF;
 end
 
 endmodule
