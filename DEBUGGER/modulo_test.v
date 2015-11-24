@@ -28,7 +28,8 @@ module modulo_test
 	output reg rd,
 	output reg wr
 );
-		
+
+	
 //Estados
 localparam [2:0] START = 2'b00,
 					  IDLE = 2'b01,
@@ -41,6 +42,23 @@ localparam [2:0] START = 2'b00,
 reg [7:0] buffer = 1;
 reg [2:0] current_state = 3'b00;
 reg [2:0] next_state = 3'b00;
+
+//Variables para el pipe.
+reg inicio = 0;
+reg activo = 0;
+
+//Cables para el pipe
+wire [8:0]PCF;
+
+
+Pipe pipeline
+(
+	.clk(clk),
+	.inicio(inicio),
+	.activo(activo),
+	.PCF(PCF)
+);
+
 
 
 always @(posedge clk)
