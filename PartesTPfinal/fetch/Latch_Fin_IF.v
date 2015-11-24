@@ -31,7 +31,7 @@ module Latch_Fin_IF(
 
 reg espera_clr = 0;
 
-always@(posedge clk)
+always@(negedge clk)
 begin
 	if(en == 0)
 	begin
@@ -47,12 +47,12 @@ begin
 		else
 		begin
 			PCPlus4D <= PCPlus4F;
-			//InstrD <= Instr;
+			InstrD <= Instr;
 		end
 	end
 end
 
-
+/*
 always@(Instr)
 begin
 	if(espera_clr == 0)
@@ -65,6 +65,6 @@ begin
 		espera_clr = 0;
 	end
 end
-
+*/
 
 endmodule

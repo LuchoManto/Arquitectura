@@ -37,7 +37,7 @@ module Latch_Fin_Exec(
 	output reg [4:0]WriteRegM
 );
 
-always@(posedge clk)
+always@(negedge clk)
 begin
 	if(inicio)
 	begin

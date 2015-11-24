@@ -35,7 +35,7 @@ module Latch_Fin_Mem(
 	output reg [4:0]WriteRegW
 );
 
-always@(posedge clk)
+always@(negedge clk)
 begin
 	if(inicio)
 	begin
@@ -53,12 +53,14 @@ begin
 		ALUOutW <= ALUOutM;
 		WriteRegW <= WriteRegM;
 		MemReadW <= MemReadM;
+		ReadDataW <= ReadData;
 	end
 end
 
+/*
 always@(*)
 begin
 	ReadDataW <= ReadData;
 end
-
+*/
 endmodule

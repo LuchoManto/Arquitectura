@@ -430,7 +430,7 @@ memoria_de_datos memdatos
 mask_MemReadM maskmemreadM
 (
 	.ReadDataM(ReadDataM),
-	.MemReadW(MemReadW), 
+	.MemReadW(MemReadM), 
 	.ReadData(ReadData)
 );
 

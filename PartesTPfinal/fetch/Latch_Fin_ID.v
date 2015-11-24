@@ -50,7 +50,7 @@ module Latch_Fin_ID(
 	output reg [31:0]SignImmE
 );
 
-always@(posedge clk)
+always@(negedge clk)
 begin
 	if(FlushE || inicio)
 	begin

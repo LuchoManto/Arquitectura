@@ -65,7 +65,7 @@ module Register_File(
 	 
 	 reg [31:0] bank [31:0];
 	 
-	 always@(negedge clk)
+	 always@(posedge clk)
 	 begin
 		if(inicio == 1)
 		begin

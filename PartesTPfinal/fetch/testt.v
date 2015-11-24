@@ -50,7 +50,7 @@ module testt;
 		clk = 0;
 		inicio = 1;
 		
-		#2;
+		#4;
 		
 		inicio = 0;
 		
