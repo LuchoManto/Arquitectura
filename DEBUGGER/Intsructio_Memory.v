@@ -23,7 +23,67 @@ module Pipe
 	input wire clk,
 	input wire inicio,
 	input wire activo,
-	output reg [8:0]PCF
+	
+	// PC
+	output reg [8:0]PCF,
+	//Instruccion
+	output reg [31:0]InstrD,
+	
+	// señales de control
+	output reg [1:0]MemReadD,
+	output reg RegWriteD,
+	output reg MemtoRegD,
+	output reg [3:0]MemWriteD,
+	output reg [3:0]ALUControlID,
+	output reg [1:0]ALUSrcD,
+	output reg RegDstD,
+	output reg BranchD, 
+	
+	//banco de registros
+	output reg [31:0]out0,
+	output reg [31:0]out1,
+	output reg [31:0]out2,
+	output reg [31:0]out3,
+	output reg [31:0]out4,
+	output reg [31:0]out5,
+	output reg [31:0]out6,
+	output reg [31:0]out7,
+	output reg [31:0]out8,
+	output reg [31:0]out9,
+	output reg [31:0]out10,
+	output reg [31:0]out11,
+	output reg [31:0]out12,
+	output reg [31:0]out13,
+	output reg [31:0]out14,
+	output reg [31:0]out15,
+	output reg [31:0]out16,
+	output reg [31:0]out17,
+	output reg [31:0]out18,
+	output reg [31:0]out19,
+	output reg [31:0]out20,
+	output reg [31:0]out21,
+	output reg [31:0]out22,
+	output reg [31:0]out23,
+	output reg [31:0]out24,
+	output reg [31:0]out25,
+	output reg [31:0]out26,
+	output reg [31:0]out27,
+	output reg [31:0]out28,
+	output reg [31:0]out29,
+	output reg [31:0]out30,
+	output reg [31:0]out31,
+	
+	// señales de salida de la unidad de riesgos
+	output reg StallF,
+	output reg StallD,
+	output reg [1:0]ForwardAD,
+	output reg [1:0]ForwardBD,
+	output reg FlushE,
+	output reg [1:0]ForwardAE,
+	output reg [1:0]ForwardBE,
+	
+	
+	output reg finalW
 );
 
 
@@ -588,7 +648,67 @@ unidad_riesgos unidadderiesgos
 
 always@(*)
 begin
+	
+	// PC
 	PCF<=PCF;
+
+	//Instruccion
+	InstrD <= InstrD;
+	
+	// señales de control
+	MemReadD <= MemReadD;
+	RegWriteD <= RegWriteD;
+	MemtoRegD <= MemtoRegD;
+	MemWriteD <= MemWriteD;
+	ALUControlID <= ALUControlID;
+	ALUSrcD <= ALUSrcD;
+	RegDstD <= RegDstD;
+	BranchD  <=	BranchD; 
+	
+	//banco de registros
+	out0 <= out0;
+	out1 <= out1;
+	out2 <= out2;
+	out3 <= out3;
+	out4 <= out4;
+	out5 <= out5;
+	out6 <= out6;
+	out7 <= out7;
+	out8 <= out8;
+	out9 <= out9;
+	out10 <= out10;
+	out11 <= out11;
+	out12 <= out12;
+	out13 <= out13;
+	out14 <= out14;
+	out15 <= out15;
+	out16 <= out16;
+	out17 <= out17;
+	out18 <= out18;
+	out19 <= out19;
+	out20 <= out20;
+	out21 <= out21;
+	out22 <= out22;
+	out23 <= out23;
+	out24 <= out24;
+	out25 <= out25;
+	out26 <= out26;
+	out27 <= out27;
+	out28 <= out28;
+	out29 <= out29;
+	out30 <= out30;
+	out31 <= out31;
+	
+	// señales de salida de la unidad de riesgos
+	StallF <= StallF;
+	StallD <= StallD;
+	ForwardAD <= ForwardAD;
+	ForwardBD <= ForwardBD;
+	FlushE <= FlushE;
+	ForwardAE <= ForwardAE;
+	ForwardBE <= ForwardBE;
+	
+	finalw <= finalw;
 end
 
 endmodule
