@@ -25,65 +25,64 @@ module Pipe
 	input wire activo,
 	
 	// PC
-	output reg [8:0]PCF,
+	output reg [8:0]PCF_o,
 	//Instruccion
-	output reg [31:0]InstrD,
+	output reg [31:0]InstrD_o,
 	
 	// señales de control
-	output reg [1:0]MemReadD,
-	output reg RegWriteD,
-	output reg MemtoRegD,
-	output reg [3:0]MemWriteD,
-	output reg [3:0]ALUControlID,
-	output reg [1:0]ALUSrcD,
-	output reg RegDstD,
-	output reg BranchD, 
+	output reg [1:0]MemReadD_o,
+	output reg RegWriteD_o,
+	output reg MemtoRegD_o,
+	output reg [3:0]MemWriteD_o,
+	output reg [3:0]ALUControlID_o,
+	output reg [1:0]ALUSrcD_o,
+	output reg RegDstD_o,
+	output reg BranchD_o, 
 	
 	//banco de registros
-	output reg [31:0]out0,
-	output reg [31:0]out1,
-	output reg [31:0]out2,
-	output reg [31:0]out3,
-	output reg [31:0]out4,
-	output reg [31:0]out5,
-	output reg [31:0]out6,
-	output reg [31:0]out7,
-	output reg [31:0]out8,
-	output reg [31:0]out9,
-	output reg [31:0]out10,
-	output reg [31:0]out11,
-	output reg [31:0]out12,
-	output reg [31:0]out13,
-	output reg [31:0]out14,
-	output reg [31:0]out15,
-	output reg [31:0]out16,
-	output reg [31:0]out17,
-	output reg [31:0]out18,
-	output reg [31:0]out19,
-	output reg [31:0]out20,
-	output reg [31:0]out21,
-	output reg [31:0]out22,
-	output reg [31:0]out23,
-	output reg [31:0]out24,
-	output reg [31:0]out25,
-	output reg [31:0]out26,
-	output reg [31:0]out27,
-	output reg [31:0]out28,
-	output reg [31:0]out29,
-	output reg [31:0]out30,
-	output reg [31:0]out31,
+	output reg [31:0]out0_o,
+	output reg [31:0]out1_o,
+	output reg [31:0]out2_o,
+	output reg [31:0]out3_o,
+	output reg [31:0]out4_o,
+	output reg [31:0]out5_o,
+	output reg [31:0]out6_o,
+	output reg [31:0]out7_o,
+	output reg [31:0]out8_o,
+	output reg [31:0]out9_o,
+	output reg [31:0]out10_o,
+	output reg [31:0]out11_o,
+	output reg [31:0]out12_o,
+	output reg [31:0]out13_o,
+	output reg [31:0]out14_o,
+	output reg [31:0]out15_o,
+	output reg [31:0]out16_o,
+	output reg [31:0]out17_o,
+	output reg [31:0]out18_o,
+	output reg [31:0]out19_o,
+	output reg [31:0]out20_o,
+	output reg [31:0]out21_o,
+	output reg [31:0]out22_o,
+	output reg [31:0]out23_o,
+	output reg [31:0]out24_o,
+	output reg [31:0]out25_o,
+	output reg [31:0]out26_o,
+	output reg [31:0]out27_o,
+	output reg [31:0]out28_o,
+	output reg [31:0]out29_o,
+	output reg [31:0]out30_o,
+	output reg [31:0]out31_o,
 	
 	// señales de salida de la unidad de riesgos
-	output reg StallF,
-	output reg StallD,
-	output reg [1:0]ForwardAD,
-	output reg [1:0]ForwardBD,
-	output reg FlushE,
-	output reg [1:0]ForwardAE,
-	output reg [1:0]ForwardBE,
+	output reg StallF_o,
+	output reg StallD_o,
+	output reg [1:0]ForwardAD_o,
+	output reg [1:0]ForwardBD_o,
+	output reg FlushE_o,
+	output reg [1:0]ForwardAE_o,
+	output reg [1:0]ForwardBE_o,
 	
-	
-	output reg finalW
+	output reg finalW_o
 );
 
 
@@ -648,67 +647,66 @@ unidad_riesgos unidadderiesgos
 
 always@(*)
 begin
-	
 	// PC
-	PCF<=PCF;
+	PCF_o <=PCF;
 
 	//Instruccion
-	InstrD <= InstrD;
+	InstrD_o <= InstrD;
 	
 	// señales de control
-	MemReadD <= MemReadD;
-	RegWriteD <= RegWriteD;
-	MemtoRegD <= MemtoRegD;
-	MemWriteD <= MemWriteD;
-	ALUControlID <= ALUControlID;
-	ALUSrcD <= ALUSrcD;
-	RegDstD <= RegDstD;
-	BranchD  <=	BranchD; 
+	MemReadD_o <= MemReadD;
+	RegWriteD_o <= RegWriteD;
+	MemtoRegD_o <= MemtoRegD;
+	MemWriteD_o <= MemWriteD;
+	ALUControlID_o <= ALUControlID;
+	ALUSrcD_o <= ALUSrcD;
+	RegDstD_o <= RegDstD;
+	BranchD_o <=	BranchD; 
 	
 	//banco de registros
-	out0 <= out0;
-	out1 <= out1;
-	out2 <= out2;
-	out3 <= out3;
-	out4 <= out4;
-	out5 <= out5;
-	out6 <= out6;
-	out7 <= out7;
-	out8 <= out8;
-	out9 <= out9;
-	out10 <= out10;
-	out11 <= out11;
-	out12 <= out12;
-	out13 <= out13;
-	out14 <= out14;
-	out15 <= out15;
-	out16 <= out16;
-	out17 <= out17;
-	out18 <= out18;
-	out19 <= out19;
-	out20 <= out20;
-	out21 <= out21;
-	out22 <= out22;
-	out23 <= out23;
-	out24 <= out24;
-	out25 <= out25;
-	out26 <= out26;
-	out27 <= out27;
-	out28 <= out28;
-	out29 <= out29;
-	out30 <= out30;
-	out31 <= out31;
+	out0_o <= out0;
+	out1_o <= out1;
+	out2_o <= out2;
+	out3_o <= out3;
+	out4_o <= out4;
+	out5_o <= out5;
+	out6_o <= out6;
+	out7_o <= out7;
+	out8_o <= out8;
+	out9_o <= out9;
+	out10_o <= out10;
+	out11_o <= out11;
+	out12_o <= out12;
+	out13_o <= out13;
+	out14_o <= out14;
+	out15_o <= out15;
+	out16_o <= out16;
+	out17_o <= out17;
+	out18_o <= out18;
+	out19_o <= out19;
+	out20_o <= out20;
+	out21_o <= out21;
+	out22_o <= out22;
+	out23_o <= out23;
+	out24_o <= out24;
+	out25_o <= out25;
+	out26_o <= out26;
+	out27_o <= out27;
+	out28_o <= out28;
+	out29_o <= out29;
+	out30_o <= out30;
+	out31_o <= out31;
 	
 	// señales de salida de la unidad de riesgos
-	StallF <= StallF;
-	StallD <= StallD;
-	ForwardAD <= ForwardAD;
-	ForwardBD <= ForwardBD;
-	FlushE <= FlushE;
-	ForwardAE <= ForwardAE;
-	ForwardBE <= ForwardBE;
+	StallF_o <= StallF;
+	StallD_o <= StallD;
+	ForwardAD_o <= ForwardAD;
+	ForwardBD_o <= ForwardBD;
+	FlushE_o <= FlushE;
+	ForwardAE_o <= ForwardAE;
+	ForwardBE_o <= ForwardBE;
 	
-	finalw <= finalw;
+	finalW_o <= finalW;
 end
 
 endmodule
