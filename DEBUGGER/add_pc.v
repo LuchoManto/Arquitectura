@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    20:41:07 11/16/2015 
+// Create Date:    15:21:14 11/07/2015 
 // Design Name: 
-// Module Name:    PC_REG 
+// Module Name:    add_pc 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,31 +18,15 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PC_REG(
-	input clk,
-	input wire en,
-	input wire [8:0]PC1,
-	input wire inicio,
-	output reg [8:0]PCF
+module add_pc(
+	input wire [8:0] PCF,
+	output reg [8:0] PCPlus4F
     );
-	
-	
-//always@(*)
-always@(negedge clk)
-begin
-	if(en == 0)
-	begin
-		if(inicio == 1)
-		begin
-			PCF <= 0;
-		end	
-		else
-		begin
-			PCF <= PC1;
-		end
-	end
+
+
+always @(*)
+begin 
+	PCPlus4F <= PCF + 1; 
 end
-
-
 
 endmodule

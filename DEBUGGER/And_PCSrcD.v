@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    20:41:07 11/16/2015 
+// Create Date:    18:00:54 11/17/2015 
 // Design Name: 
-// Module Name:    PC_REG 
+// Module Name:    And_PCSrcD 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,31 +18,15 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PC_REG(
-	input clk,
-	input wire en,
-	input wire [8:0]PC1,
-	input wire inicio,
-	output reg [8:0]PCF
+module And_PCSrcD(
+	input wire BranchD,
+	input wire EqualD,
+	output reg PCSrcD
     );
-	
-	
-//always@(*)
-always@(negedge clk)
+
+always@(*)
 begin
-	if(en == 0)
-	begin
-		if(inicio == 1)
-		begin
-			PCF <= 0;
-		end	
-		else
-		begin
-			PCF <= PC1;
-		end
-	end
+	PCSrcD <= BranchD && EqualD;
 end
-
-
 
 endmodule

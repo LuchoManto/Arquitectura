@@ -426,7 +426,7 @@
             <wvobject fp_name="/testt/uut/bancoregistros/bank[5]" type="array" db_ref_id="1">
                <obj_property name="ElementShortName">[5,31:0]</obj_property>
                <obj_property name="ObjectShortName">bank[5,31:0]</obj_property>
-               <obj_property name="Radix">HEXRADIX</obj_property>
+               <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
             </wvobject>
             <wvobject fp_name="/testt/uut/bancoregistros/bank[4]" type="array" db_ref_id="1">
                <obj_property name="ElementShortName">[4,31:0]</obj_property>
@@ -1141,6 +1141,7 @@
          <wvobject fp_name="/testt/uut/maskmemreadM/ReadData" type="array" db_ref_id="1">
             <obj_property name="ElementShortName">ReadData[31:0]</obj_property>
             <obj_property name="ObjectShortName">ReadData[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
          </wvobject>
       </wvobject>
       <wvobject fp_name="group286" type="group">

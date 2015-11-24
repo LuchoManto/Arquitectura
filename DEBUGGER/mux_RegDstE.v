@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    20:41:07 11/16/2015 
+// Create Date:    00:08:57 11/18/2015 
 // Design Name: 
-// Module Name:    PC_REG 
+// Module Name:    mux_RegDstE 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,31 +18,20 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PC_REG(
-	input clk,
-	input wire en,
-	input wire [8:0]PC1,
-	input wire inicio,
-	output reg [8:0]PCF
-    );
-	
-	
-//always@(*)
-always@(negedge clk)
+module mux_RegDstE(
+	input wire [4:0]RtE,
+	input wire [4:0]RdE,
+	input wire RegDstE,
+	output reg [4:0]WriteRegE
+);
+	 
+always@(*)
 begin
-	if(en == 0)
-	begin
-		if(inicio == 1)
-		begin
-			PCF <= 0;
-		end	
-		else
-		begin
-			PCF <= PC1;
-		end
-	end
+	if(RegDstE)
+		WriteRegE <= RdE;
+	else
+		WriteRegE <= RtE;
 end
-
 
 
 endmodule

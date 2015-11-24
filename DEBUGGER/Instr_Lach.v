@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    20:41:07 11/16/2015 
+// Create Date:    00:10:22 11/17/2015 
 // Design Name: 
-// Module Name:    PC_REG 
+// Module Name:    Instr_Lach 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,31 +18,28 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PC_REG(
-	input clk,
+module Instr_Lach(
+	input wire clk,
 	input wire en,
-	input wire [8:0]PC1,
-	input wire inicio,
-	output reg [8:0]PCF
+	input wire clr,
+	input wire [31:0] Instr,
+	output reg [31:0] InstrD
     );
-	
-	
-//always@(*)
-always@(negedge clk)
+
+always@(posedge clk)
 begin
 	if(en == 0)
 	begin
-		if(inicio == 1)
+		if(clr)
 		begin
-			PCF <= 0;
-		end	
+			InstrD <= 0;
+		end
 		else
 		begin
-			PCF <= PC1;
+			InstrD <= Instr;
 		end
 	end
 end
-
 
 
 endmodule

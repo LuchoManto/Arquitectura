@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    01:21:45 11/20/2015 
+// Create Date:    00:13:38 11/17/2015 
 // Design Name: 
-// Module Name:    Latch_Fin_IF 
+// Module Name:    PC_Latch 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,53 +18,28 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Latch_Fin_IF(
-	input wire [31:0] Instr,
-	input wire [8:0] PCPlus4F,
+module PC_Latch(
 	input wire clk,
 	input wire en,
 	input wire clr,
-	input wire inicio,
-	output reg [31:0] InstrD,
+	input wire [8:0] PCPlus4F,
 	output reg [8:0] PCPlus4D
-);
+    );
 
-reg espera_clr = 0;
-
-always@(negedge clk)
+always@(posedge clk)
 begin
 	if(en == 0)
 	begin
-		if(clr || inicio)
+		if(clr)
 		begin
 			PCPlus4D <= 0;
-			InstrD <= 32'hFC00_0000;
-			if(clr)
-			begin
-				espera_clr = 1;
-			end
 		end
 		else
 		begin
 			PCPlus4D <= PCPlus4F;
-			InstrD <= Instr;
 		end
 	end
 end
 
-/*
-always@(Instr)
-begin
-	if(espera_clr == 0)
-	begin
-		InstrD <= Instr;
-	end
-	else
-	begin
-		InstrD <= 32'hFC00_0000;
-		espera_clr = 0;
-	end
-end
-*/
 
 endmodule

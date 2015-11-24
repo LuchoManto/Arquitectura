@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    20:41:07 11/16/2015 
+// Create Date:    17:33:24 11/17/2015 
 // Design Name: 
-// Module Name:    PC_REG 
+// Module Name:    Sign_Extend 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,31 +18,15 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PC_REG(
-	input clk,
-	input wire en,
-	input wire [8:0]PC1,
-	input wire inicio,
-	output reg [8:0]PCF
-    );
-	
-	
-//always@(*)
-always@(negedge clk)
+module Sign_Extend(
+	input wire [15:0]in,
+	output reg [31:0]SignImmD
+);
+	 
+always@(*)
 begin
-	if(en == 0)
-	begin
-		if(inicio == 1)
-		begin
-			PCF <= 0;
-		end	
-		else
-		begin
-			PCF <= PC1;
-		end
-	end
+	SignImmD <= $signed(in);
 end
-
 
 
 endmodule

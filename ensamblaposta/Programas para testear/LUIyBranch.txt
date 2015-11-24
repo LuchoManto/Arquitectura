@@ -25,10 +25,8 @@ SB 14,0(15); mem(80) = 5
 LW 6,0(15); r6 = 5;
 SRA 5,6,1; R5 = 2
 LUI 5,1 ; R5 = 65536
-SW 14,0(15); mem(80) = 0xFFFFFF05
-END 
+SW 14,0(15); mem(80) = 0xFFFFFF05 
 LB 4,0(15); r4 = 5;
-END
 LH 7,0(15); r7 = 0xFF05
 
 END

@@ -53,6 +53,7 @@ wire [1:0]ALUSrcD;
 wire RegDstD;
 wire BranchD;
 wire [1:0]MemReadD; 
+wire finalD;
 //Banco de registro
 wire [31:0]RD1;
 wire [31:0]RD2;
@@ -73,6 +74,42 @@ wire [8:0]PCBranchD;
 
 
 //--------------------------------------------------------------------------------
+//Bancos de registros
+//--------------------------------------------------------------------------------
+wire [31:0]out0;
+wire [31:0]out1;
+wire [31:0]out2;
+wire [31:0]out3;
+wire [31:0]out4;
+wire [31:0]out5;
+wire [31:0]out6;
+wire [31:0]out7;
+wire [31:0]out8;
+wire [31:0]out9;
+wire [31:0]out10;
+wire [31:0]out11;
+wire [31:0]out12;
+wire [31:0]out13;
+wire [31:0]out14;
+wire [31:0]out15;
+wire [31:0]out16;
+wire [31:0]out17;
+wire [31:0]out18;
+wire [31:0]out19;
+wire [31:0]out20;
+wire [31:0]out21;
+wire [31:0]out22;
+wire [31:0]out23;
+wire [31:0]out24;
+wire [31:0]out25;
+wire [31:0]out26;
+wire [31:0]out27;
+wire [31:0]out28;
+wire [31:0]out29;
+wire [31:0]out30;
+wire [31:0]out31;
+
+//--------------------------------------------------------------------------------
 //Etapa EX
 //--------------------------------------------------------------------------------
 //Latch entrada
@@ -89,6 +126,7 @@ wire [4:0]RsE;
 wire [4:0]RtE;
 wire [4:0]RdE;
 wire [31:0]SignImmE;
+wire finalE;
 //mux regdste
 wire [4:0]WriteRegE;
 //mux forwardAE
@@ -114,6 +152,7 @@ wire [3:0]MemWriteM;
 wire [31:0]ALUOutM;
 wire [31:0]WriteDataM;
 wire [4:0]WriteRegM;
+wire finalM;
 //SalidaMem
 wire [31:0]ReadDataM;
 //Salida maskMemReadM
@@ -130,6 +169,7 @@ wire MemtoRegW;
 wire [31:0]ReadDataW;
 wire [31:0]ALUOutW;
 wire [4:0]WriteRegW;
+wire finalW;
 //Mux memtoregW
 wire [31:0]ResultW;
 
@@ -214,7 +254,8 @@ Control_Unit controlunit
 	.BranchD(BranchD),
 	.ALUSrcD(ALUSrcD),
 	.RegDstD(RegDstD),	
-	.MemReadD(MemReadD)
+	.MemReadD(MemReadD),
+	.finalD(finalD)
 );
 
 //Banco de registros etapa ID
@@ -312,6 +353,7 @@ Latch_Fin_ID latchfinid
 	.FlushE(FlushE),
 	.inicio(inicio),
 	.activo(activo),
+	.finalD(finalD),
 	.MemReadE(MemReadE),
 	.RegWriteE(RegWriteE),
 	.MemtoRegE(MemtoRegE),
@@ -324,7 +366,8 @@ Latch_Fin_ID latchfinid
 	.RsE(RsE),
 	.RtE(RtE),
 	.RdE(RdE),
-	.SignImmE(SignImmE)
+	.SignImmE(SignImmE),
+	.finalE(finalE)
 );
 
 //--------------------------------------------------------------------------------
@@ -401,13 +444,15 @@ Latch_Fin_Exec latchfinEXEC
 	.clk(clk),
 	.activo(activo),
 	.inicio(inicio),
+	.finalE(finalE),
 	.MemReadM(MemReadM),
 	.RegWriteM(RegWriteM),
 	.MemtoRegM(MemtoRegM),
 	.MemWriteM(MemWriteM),
 	.ALUOutM(ALUOutM),
 	.WriteDataM(WriteDataM),
-	.WriteRegM(WriteRegM)
+	.WriteRegM(WriteRegM),
+	.finalM(finalM)
 );
 
 
@@ -487,12 +532,14 @@ Latch_Fin_Mem latchfinMEM
 	.clk(clk),
 	.inicio(inicio),
 	.activo(activo),
+	.finalM(finalM),
 	.MemReadW(MemReadW),
 	.RegWriteW(RegWriteW),
 	.MemtoRegW(MemtoRegW),
 	.ReadDataW(ReadDataW),
 	.ALUOutW(ALUOutW),
-	.WriteRegW(WriteRegW)
+	.WriteRegW(WriteRegW),
+	.finalW(finalW)
 );
 
 //--------------------------------------------------------------------------------
