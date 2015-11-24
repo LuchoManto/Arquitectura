@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Buffer_out#(parameter N = 1208)(
+module Buffer_out#(parameter N = 1184)(
 	
 	// PC
 	input wire [8:0]PCF,
