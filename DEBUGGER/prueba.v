@@ -27,7 +27,8 @@ module prueba
 (
    input wire i_rx,
 	input wire clk,
-	output reg tx
+	output reg tx,
+	output reg [3:0]state
 );
 
 //wire de baud_rate
@@ -55,6 +56,9 @@ wire fifo_tx_tx_full;
 wire tx_tx_done;
 wire tx_o_tx;
 
+
+//wire del test
+wire [3:0]current_state_o;
 baud
 #(
 	.COUNT(651)
@@ -91,7 +95,8 @@ modulo_test tester(
 	.tx_full(fifo_tx_tx_full),
 	.w_data(test_w_data),
 	.rd(test_rd),
-	.wr(test_wr)
+	.wr(test_wr),
+	.current_state_o(current_state_o)
 );
 
 fifo_de_tx fifotx
@@ -118,6 +123,7 @@ tx transmisor
 always@(posedge clk)
 begin
 	tx <= tx_o_tx;
+	state <= current_state_o;
 end
 
 endmodule
