@@ -23,7 +23,66 @@ module Pipe
 	input wire clk,
 	input wire inicio,
 	input wire activo,
-	output reg Test
+	
+	// PC
+	output reg [8:0]PCF_o,
+	//Instruccion
+	output reg [31:0]InstrD_o,
+	
+	// señales de control
+	output reg [1:0]MemReadD_o,
+	output reg RegWriteD_o,
+	output reg MemtoRegD_o,
+	output reg [3:0]MemWriteD_o,
+	output reg [3:0]ALUControlID_o,
+	output reg [1:0]ALUSrcD_o,
+	output reg RegDstD_o,
+	output reg BranchD_o, 
+	
+	//banco de registros
+	output reg [31:0]out0_o,
+	output reg [31:0]out1_o,
+	output reg [31:0]out2_o,
+	output reg [31:0]out3_o,
+	output reg [31:0]out4_o,
+	output reg [31:0]out5_o,
+	output reg [31:0]out6_o,
+	output reg [31:0]out7_o,
+	output reg [31:0]out8_o,
+	output reg [31:0]out9_o,
+	output reg [31:0]out10_o,
+	output reg [31:0]out11_o,
+	output reg [31:0]out12_o,
+	output reg [31:0]out13_o,
+	output reg [31:0]out14_o,
+	output reg [31:0]out15_o,
+	output reg [31:0]out16_o,
+	output reg [31:0]out17_o,
+	output reg [31:0]out18_o,
+	output reg [31:0]out19_o,
+	output reg [31:0]out20_o,
+	output reg [31:0]out21_o,
+	output reg [31:0]out22_o,
+	output reg [31:0]out23_o,
+	output reg [31:0]out24_o,
+	output reg [31:0]out25_o,
+	output reg [31:0]out26_o,
+	output reg [31:0]out27_o,
+	output reg [31:0]out28_o,
+	output reg [31:0]out29_o,
+	output reg [31:0]out30_o,
+	output reg [31:0]out31_o,
+	
+	// señales de salida de la unidad de riesgos
+	output reg StallF_o,
+	output reg StallD_o,
+	output reg [1:0]ForwardAD_o,
+	output reg [1:0]ForwardBD_o,
+	output reg FlushE_o,
+	output reg [1:0]ForwardAE_o,
+	output reg [1:0]ForwardBE_o,
+	
+	output reg finalW_o
 );
 
 
@@ -53,6 +112,7 @@ wire [1:0]ALUSrcD;
 wire RegDstD;
 wire BranchD;
 wire [1:0]MemReadD; 
+wire finalD;
 //Banco de registro
 wire [31:0]RD1;
 wire [31:0]RD2;
@@ -73,6 +133,42 @@ wire [8:0]PCBranchD;
 
 
 //--------------------------------------------------------------------------------
+//Bancos de registros
+//--------------------------------------------------------------------------------
+wire [31:0]out0;
+wire [31:0]out1;
+wire [31:0]out2;
+wire [31:0]out3;
+wire [31:0]out4;
+wire [31:0]out5;
+wire [31:0]out6;
+wire [31:0]out7;
+wire [31:0]out8;
+wire [31:0]out9;
+wire [31:0]out10;
+wire [31:0]out11;
+wire [31:0]out12;
+wire [31:0]out13;
+wire [31:0]out14;
+wire [31:0]out15;
+wire [31:0]out16;
+wire [31:0]out17;
+wire [31:0]out18;
+wire [31:0]out19;
+wire [31:0]out20;
+wire [31:0]out21;
+wire [31:0]out22;
+wire [31:0]out23;
+wire [31:0]out24;
+wire [31:0]out25;
+wire [31:0]out26;
+wire [31:0]out27;
+wire [31:0]out28;
+wire [31:0]out29;
+wire [31:0]out30;
+wire [31:0]out31;
+
+//--------------------------------------------------------------------------------
 //Etapa EX
 //--------------------------------------------------------------------------------
 //Latch entrada
@@ -89,6 +185,7 @@ wire [4:0]RsE;
 wire [4:0]RtE;
 wire [4:0]RdE;
 wire [31:0]SignImmE;
+wire finalE;
 //mux regdste
 wire [4:0]WriteRegE;
 //mux forwardAE
@@ -114,6 +211,7 @@ wire [3:0]MemWriteM;
 wire [31:0]ALUOutM;
 wire [31:0]WriteDataM;
 wire [4:0]WriteRegM;
+wire finalM;
 //SalidaMem
 wire [31:0]ReadDataM;
 //Salida maskMemReadM
@@ -130,6 +228,7 @@ wire MemtoRegW;
 wire [31:0]ReadDataW;
 wire [31:0]ALUOutW;
 wire [4:0]WriteRegW;
+wire finalW;
 //Mux memtoregW
 wire [31:0]ResultW;
 
@@ -214,7 +313,8 @@ Control_Unit controlunit
 	.BranchD(BranchD),
 	.ALUSrcD(ALUSrcD),
 	.RegDstD(RegDstD),	
-	.MemReadD(MemReadD)
+	.MemReadD(MemReadD),
+	.finalD(finalD)
 );
 
 //Banco de registros etapa ID
@@ -312,6 +412,7 @@ Latch_Fin_ID latchfinid
 	.FlushE(FlushE),
 	.inicio(inicio),
 	.activo(activo),
+	.finalD(finalD),
 	.MemReadE(MemReadE),
 	.RegWriteE(RegWriteE),
 	.MemtoRegE(MemtoRegE),
@@ -324,7 +425,8 @@ Latch_Fin_ID latchfinid
 	.RsE(RsE),
 	.RtE(RtE),
 	.RdE(RdE),
-	.SignImmE(SignImmE)
+	.SignImmE(SignImmE),
+	.finalE(finalE)
 );
 
 //--------------------------------------------------------------------------------
@@ -401,13 +503,15 @@ Latch_Fin_Exec latchfinEXEC
 	.clk(clk),
 	.activo(activo),
 	.inicio(inicio),
+	.finalE(finalE),
 	.MemReadM(MemReadM),
 	.RegWriteM(RegWriteM),
 	.MemtoRegM(MemtoRegM),
 	.MemWriteM(MemWriteM),
 	.ALUOutM(ALUOutM),
 	.WriteDataM(WriteDataM),
-	.WriteRegM(WriteRegM)
+	.WriteRegM(WriteRegM),
+	.finalM(finalM)
 );
 
 
@@ -487,12 +591,14 @@ Latch_Fin_Mem latchfinMEM
 	.clk(clk),
 	.inicio(inicio),
 	.activo(activo),
+	.finalM(finalM),
 	.MemReadW(MemReadW),
 	.RegWriteW(RegWriteW),
 	.MemtoRegW(MemtoRegW),
 	.ReadDataW(ReadDataW),
 	.ALUOutW(ALUOutW),
-	.WriteRegW(WriteRegW)
+	.WriteRegW(WriteRegW),
+	.finalW(finalW)
 );
 
 //--------------------------------------------------------------------------------
@@ -539,9 +645,68 @@ unidad_riesgos unidadderiesgos
 );
 
 
-always@(posedge clk)
+always@(*)
 begin
-	Test<=ResultW;
+	// PC
+	PCF_o <=PCF;
+
+	//Instruccion
+	InstrD_o <= InstrD;
+	
+	// señales de control
+	MemReadD_o <= MemReadD;
+	RegWriteD_o <= RegWriteD;
+	MemtoRegD_o <= MemtoRegD;
+	MemWriteD_o <= MemWriteD;
+	ALUControlID_o <= ALUControlID;
+	ALUSrcD_o <= ALUSrcD;
+	RegDstD_o <= RegDstD;
+	BranchD_o <=	BranchD; 
+	
+	//banco de registros
+	out0_o <= out0;
+	out1_o <= out1;
+	out2_o <= out2;
+	out3_o <= out3;
+	out4_o <= out4;
+	out5_o <= out5;
+	out6_o <= out6;
+	out7_o <= out7;
+	out8_o <= out8;
+	out9_o <= out9;
+	out10_o <= out10;
+	out11_o <= out11;
+	out12_o <= out12;
+	out13_o <= out13;
+	out14_o <= out14;
+	out15_o <= out15;
+	out16_o <= out16;
+	out17_o <= out17;
+	out18_o <= out18;
+	out19_o <= out19;
+	out20_o <= out20;
+	out21_o <= out21;
+	out22_o <= out22;
+	out23_o <= out23;
+	out24_o <= out24;
+	out25_o <= out25;
+	out26_o <= out26;
+	out27_o <= out27;
+	out28_o <= out28;
+	out29_o <= out29;
+	out30_o <= out30;
+	out31_o <= out31;
+	
+	// señales de salida de la unidad de riesgos
+	StallF_o <= StallF;
+	StallD_o <= StallD;
+	ForwardAD_o <= ForwardAD;
+	ForwardBD_o <= ForwardBD;
+	FlushE_o <= FlushE;
+	ForwardAE_o <= ForwardAE;
+	ForwardBE_o <= ForwardBE;
+	
+	finalW_o <= finalW;
 end
 
 endmodule

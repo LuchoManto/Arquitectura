@@ -10,7 +10,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="8" />
+   <WVObjectSize size="12" />
    <wvobject fp_name="group56" type="group">
       <obj_property name="label">Etapa fetch</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -1394,5 +1394,21 @@
    <wvobject fp_name="/testt/clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testt/uut/latchfinid/finalD" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">finalD</obj_property>
+      <obj_property name="ObjectShortName">finalD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testt/uut/latchfinid/finalE" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">finalE</obj_property>
+      <obj_property name="ObjectShortName">finalE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testt/uut/latchfinEXEC/finalM" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">finalM</obj_property>
+      <obj_property name="ObjectShortName">finalM</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testt/uut/latchfinMEM/finalW" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">finalW</obj_property>
+      <obj_property name="ObjectShortName">finalW</obj_property>
    </wvobject>
 </wave_config>

@@ -27,6 +27,7 @@ module testt;
 	// Inputs
 	reg clk;
 	reg inicio;
+	reg activo;
 
 	// Outputs
 	wire Test;
@@ -34,8 +35,8 @@ module testt;
 	// Instantiate the Unit Under Test (UUT)
 	Pipe uut (
 		.clk(clk), 
-		.inicio(inicio), 
-		.Test(Test)
+		.inicio(inicio),
+		.activo(activo)
 	);
 		
 		
@@ -49,6 +50,7 @@ module testt;
 		$display("Comienza la simulacion");
 		clk = 0;
 		inicio = 1;
+		activo = 1;
 		
 		#4;
 		
@@ -66,7 +68,7 @@ module testt;
 
 		#60;
 		
-		
+		/*
 		inicio=1;
 		#4;
 		inicio=0;
@@ -74,7 +76,7 @@ module testt;
 		#60;
 		
 		inicio=0;
-
+*/
 		$display("Termina la simulacion. -Time: ",$time);
 		$finish;
 	end

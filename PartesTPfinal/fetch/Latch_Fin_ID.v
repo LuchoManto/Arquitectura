@@ -36,6 +36,7 @@ module Latch_Fin_ID(
 	input wire FlushE,
 	input wire inicio,
 	input wire activo,
+	input wire finalD,
 	output reg [1:0]MemReadE,
 	output reg RegWriteE,
 	output reg MemtoRegE,
@@ -48,7 +49,8 @@ module Latch_Fin_ID(
 	output reg [0:4]RsE,
 	output reg [0:4]RtE,
 	output reg [0:4]RdE,
-	output reg [31:0]SignImmE
+	output reg [31:0]SignImmE,
+	output reg finalE
 );
 
 always@(negedge clk)
@@ -70,6 +72,7 @@ begin
 			RtE <= 0;
 			RdE <= 0;
 			SignImmE <= 0;
+			finalE <= 0;
 		end
 		else
 		begin
@@ -86,6 +89,7 @@ begin
 			RtE <= RtD;
 			RdE <= RdD;
 			SignImmE <= SignImmD;
+			finalE <= finalD;
 		end
 	end
 end
