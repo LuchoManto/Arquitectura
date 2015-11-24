@@ -81,7 +81,7 @@ module Buffer_out#(parameter N = 1208)(
 	
 	// salida
 	
-	output reg buffer_envio[N-1:0]
+	output reg [N-1:0]buffer_envio
 	
     );
 	 
@@ -97,14 +97,14 @@ module Buffer_out#(parameter N = 1208)(
 		buffer_envio[63:32] <= InstrD; // 32 bits
 
 		//señales de control
-		buffer_envio[71:64] <= {6{'b0}, MemReadD}; // 8 bits
-		buffer_envio[79:72] <= {7{'b0}, RegWriteD}; // 8 bits
-		buffer_envio[87:80] <= {7{'b0}, MemtoRegD}; // 8 bits
-		buffer_envio[95:88] <= {4{'b0}, MemWriteD}; // 8 bits
-		buffer_envio[103:96] <= {4{'b0}, ALUControlD}; // 8 bits
-		buffer_envio[111:104] <= {6{'b0}, ALUSrcD}; // 8 bits
-		buffer_envio[119:112] <= {7{'b0}, RegDstD}; // 8 bits
-		buffer_envio[127:120] <= {7{'b0}, BranchD}; // 8 bits
+		buffer_envio[71:64] <= {{6{2'b0}}, MemReadD}; // 8 bits
+		buffer_envio[79:72] <= {{7{2'b0}}, RegWriteD}; // 8 bits
+		buffer_envio[87:80] <= {{7{2'b0}}, MemtoRegD}; // 8 bits
+		buffer_envio[95:88] <= {{4{2'b0}}, MemWriteD}; // 8 bits
+		buffer_envio[103:96] <= {{4{2'b0}}, ALUControlID}; // 8 bits
+		buffer_envio[111:104] <= {{6{2'b0}}, ALUSrcD}; // 8 bits
+		buffer_envio[119:112] <= {{7{2'b0}}, RegDstD}; // 8 bits
+		buffer_envio[127:120] <= {{7{2'b0}}, BranchD}; // 8 bits
 
 		//registros
 
@@ -142,13 +142,13 @@ module Buffer_out#(parameter N = 1208)(
 		buffer_envio[1151:1120] <= out31; // 32 bits
 
 		// señales de la unidad de riesgo
-		buffer_envio[1159:1152] <= {7{'b0'}StallF}; // 8 bits
-		buffer_envio[1167:1160] <= {7{'b0'}StallD}; // 8 bits
-		buffer_envio[1175:1168] <= {6{'b0'}ForwardAD}; // 8 bits
-		buffer_envio[1183:1176] <= {6{'b0'}ForwardBD}; // 8 bits
-		buffer_envio[1191:1184] <= {7{'b0'}FlushE}; // 8 bits
-		buffer_envio[1199:1192] <= {6{'b0'}ForwardAE}; // 8 bits
-		buffer_envio[1207:1200] <= {6{'b0'}ForwardBE}; // 8 bits
+		buffer_envio[1159:1152] <= {{7{2'b0}},StallF}; // 8 bits
+		buffer_envio[1167:1160] <= {{7{2'b0}},StallD}; // 8 bits
+		buffer_envio[1175:1168] <= {{6{2'b0}},ForwardAD}; // 8 bits
+		buffer_envio[1183:1176] <= {{6{2'b0}},ForwardBD}; // 8 bits
+		buffer_envio[1191:1184] <= {{7{2'b0}},FlushE}; // 8 bits
+		buffer_envio[1199:1192] <= {{6{2'b0}},ForwardAE}; // 8 bits
+		buffer_envio[1207:1200] <= {{6{2'b0}},ForwardBE}; // 8 bits
 
 	 end
 
