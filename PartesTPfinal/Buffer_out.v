@@ -21,7 +21,7 @@
 module Buffer_out#(parameter N = 1208)(
 	
 	// PC
-	input wire [31:0]PCF,
+	input wire [8:0]PCF,
 	
 	// Instruccion
 	input wire [31:0]InstrD,
@@ -90,67 +90,104 @@ module Buffer_out#(parameter N = 1208)(
 	 begin
 	 
 
-		// PC
-		buffer_envio[31:0] <= PCF; // 32 bits
+			// PC
+			buffer_envio[31:0] <= PCF; // 32 bits
 
-		//instruccion
-		buffer_envio[63:32] <= InstrD; // 32 bits
+			//instruccion
+			buffer_envio[39:8] <= InstrD; // 32 bits
 
-		//señales de control
-		buffer_envio[71:64] <= {{6{2'b0}}, MemReadD}; // 8 bits
-		buffer_envio[79:72] <= {{7{2'b0}}, RegWriteD}; // 8 bits
-		buffer_envio[87:80] <= {{7{2'b0}}, MemtoRegD}; // 8 bits
-		buffer_envio[95:88] <= {{4{2'b0}}, MemWriteD}; // 8 bits
-		buffer_envio[103:96] <= {{4{2'b0}}, ALUControlID}; // 8 bits
-		buffer_envio[111:104] <= {{6{2'b0}}, ALUSrcD}; // 8 bits
-		buffer_envio[119:112] <= {{7{2'b0}}, RegDstD}; // 8 bits
-		buffer_envio[127:120] <= {{7{2'b0}}, BranchD}; // 8 bits
+			//señales de control
 
-		//registros
+			buffer_envio[47:40] <= {{6{2'b0}}, MemReadD}; // 8bits
+			buffer_envio[55:48] <= {{7{2'b0}}, RegWriteD}; // 8bits
+			buffer_envio[63:56] <= {{7{2'b0}}, MemtoRegD}; // 8bits
+			buffer_envio[71:64] <= {{4{2'b0}}, MemWriteD}; // 8bits
+			buffer_envio[79:72] <= {{4{2'b0}}, ALUControlID}; // 8bits
+			buffer_envio[87:80] <= {{6{2'b0}}, ALUSrcD}; // 8bits
+			buffer_envio[95:88] <= {{7{2'b0}}, RegDstD}; // 8bits
+			buffer_envio[103:96] <= {{7{2'b0}}, BranchD}; // 8bits
 
-		buffer_envio[159:128] <= out0; //32 bits
-		buffer_envio[191:160] <= out1; // 32 bits
-		buffer_envio[223:192] <= out2; // 32 bits
-		buffer_envio[255:224] <= out3; // 32 bits
-		buffer_envio[287:256] <= out4; // 32 bits
-		buffer_envio[319:288] <= out5; // 32 bits
-		buffer_envio[351:320] <= out6; // 32 bits
-		buffer_envio[383:352] <= out7; // 32 bits
-		buffer_envio[415:384] <= out8; // 32 bits
-		buffer_envio[447:416] <= out9; // 32 bits
-		buffer_envio[479:448] <= out10; // 32 bits
-		buffer_envio[511:480] <= out11; // 32 bits
-		buffer_envio[543:512] <= out12; // 32 bits
-		buffer_envio[575:544] <= out13; // 32 bits
-		buffer_envio[607:576] <= out14; // 32 bits
-		buffer_envio[639:608] <= out15; // 32 bits
-		buffer_envio[671:640] <= out16; // 32 bits
-		buffer_envio[703:672] <= out17; // 32 bits
-		buffer_envio[735:704] <= out18; // 32 bits
-		buffer_envio[767:736] <= out19; // 32 bits
-		buffer_envio[799:768] <= out20; // 32 bits
-		buffer_envio[831:800] <= out21; // 32 bits
-		buffer_envio[863:832] <= out22; // 32 bits
-		buffer_envio[895:864] <= out23; // 32 bits
-		buffer_envio[927:896] <= out24; // 32 bits
-		buffer_envio[959:928] <= out25; // 32 bits
-		buffer_envio[991:960] <= out26; // 32 bits
-		buffer_envio[1023:992] <= out27; // 32 bits
-		buffer_envio[1055:1024] <= out28; // 32 bits
-		buffer_envio[1087:1056] <= out29; // 32 bits
-		buffer_envio[1119:1088] <= out30; // 32 bits
-		buffer_envio[1151:1120] <= out31; // 32 bits
 
-		// señales de la unidad de riesgo
-		buffer_envio[1159:1152] <= {{7{2'b0}},StallF}; // 8 bits
-		buffer_envio[1167:1160] <= {{7{2'b0}},StallD}; // 8 bits
-		buffer_envio[1175:1168] <= {{6{2'b0}},ForwardAD}; // 8 bits
-		buffer_envio[1183:1176] <= {{6{2'b0}},ForwardBD}; // 8 bits
-		buffer_envio[1191:1184] <= {{7{2'b0}},FlushE}; // 8 bits
-		buffer_envio[1199:1192] <= {{6{2'b0}},ForwardAE}; // 8 bits
-		buffer_envio[1207:1200] <= {{6{2'b0}},ForwardBE}; // 8 bits
+			//registros
 
-	 end
+			buffer_envio[159:128] <= out0; //32 bits
+			buffer_envio[191:160] <= out1; // 32 bits
+			buffer_envio[223:192] <= out2; // 32 bits
+			buffer_envio[255:224] <= out3; // 32 bits
+			buffer_envio[287:256] <= out4; // 32 bits
+			buffer_envio[319:288] <= out5; // 32 bits
+			buffer_envio[351:320] <= out6; // 32 bits
+			buffer_envio[383:352] <= out7; // 32 bits
+			buffer_envio[415:384] <= out8; // 32 bits
+			buffer_envio[447:416] <= out9; // 32 bits
+			buffer_envio[479:448] <= out10; // 32 bits
+			buffer_envio[511:480] <= out11; // 32 bits
+			buffer_envio[543:512] <= out12; // 32 bits
+			buffer_envio[575:544] <= out13; // 32 bits
+			buffer_envio[607:576] <= out14; // 32 bits
+			buffer_envio[639:608] <= out15; // 32 bits
+			buffer_envio[671:640] <= out16; // 32 bits
+			buffer_envio[703:672] <= out17; // 32 bits
+			buffer_envio[735:704] <= out18; // 32 bits
+			buffer_envio[767:736] <= out19; // 32 bits
+			buffer_envio[799:768] <= out20; // 32 bits
+			buffer_envio[831:800] <= out21; // 32 bits
+			buffer_envio[863:832] <= out22; // 32 bits
+			buffer_envio[895:864] <= out23; // 32 bits
+			buffer_envio[927:896] <= out24; // 32 bits
+			buffer_envio[959:928] <= out25; // 32 bits
+			buffer_envio[991:960] <= out26; // 32 bits
+			buffer_envio[1023:992] <= out27; // 32 bits
+			buffer_envio[1055:1024] <= out28; // 32 bits
+			buffer_envio[1087:1056] <= out29; // 32 bits
+			buffer_envio[1119:1088] <= out30; // 32 bits
+			buffer_envio[1151:1120] <= out31; // 32 bits
+
+			buffer_envio[135:104] <= out0; // 32 bits
+			buffer_envio[167:136] <= out1; // 32 bits
+			buffer_envio[199:168] <= out2; // 32 bits
+			buffer_envio[231:200] <= out3; // 32 bits
+			buffer_envio[263:232] <= out4; // 32 bits
+			buffer_envio[295:264] <= out5; // 32 bits
+			buffer_envio[327:296] <= out6; // 32 bits
+			buffer_envio[359:328] <= out7; // 32 bits
+			buffer_envio[391:360] <= out8; // 32 bits
+			buffer_envio[423:392] <= out9; // 32 bits
+			buffer_envio[455:424] <= out10; // 32 bits
+			buffer_envio[487:456] <= out11; // 32 bits
+			buffer_envio[519:488] <= out12; // 32 bits
+			buffer_envio[551:520] <= out13; // 32 bits
+			buffer_envio[583:552] <= out14; // 32 bits
+			buffer_envio[615:584] <= out15; // 32 bits
+			buffer_envio[647:616] <= out16; // 32 bits
+			buffer_envio[679:648] <= out17; // 32 bits
+			buffer_envio[711:680] <= out18; // 32 bits
+			buffer_envio[743:712] <= out19; // 32 bits
+			buffer_envio[775:744] <= out20; // 32 bits
+			buffer_envio[807:776] <= out21; // 32 bits
+			buffer_envio[839:808] <= out22; // 32 bits
+			buffer_envio[871:840] <= out23; // 32 bits
+			buffer_envio[903:872] <= out24; // 32 bits
+			buffer_envio[935:904] <= out25; // 32 bits
+			buffer_envio[967:936] <= out26; // 32 bits
+			buffer_envio[999:968] <= out27; // 32 bits
+			buffer_envio[1031:1000] <= out28; // 32 bits
+			buffer_envio[1063:1032] <= out29; // 32 bits
+			buffer_envio[1095:1064] <= out30; // 32 bits
+			buffer_envio[1127:1096] <= out31; // 32 bits
+
+
+			// señales de la unidad de riesgo	
+			buffer_envio[1135:1128] <= {{7{2'b0}}, StallF}; // 8 bits
+			buffer_envio[1143:1136] <= {{7{2'b0}}, StallD}; // 8 bits
+			buffer_envio[1151:1144] <= {{7{2'b0}}, ForwardAD}; // 8 bits
+			buffer_envio[1159:1152] <= {{7{2'b0}}, ForwardBD}; // 8 bits
+			buffer_envio[1167:1160] <= {{7{2'b0}}, FlushE}; // 8 bits
+			buffer_envio[1175:1168] <= {{7{2'b0}}, ForwardAE}; // 8 bits
+			buffer_envio[1183:1176] <= {{7{2'b0}}, ForwardBE}; // 8 bits
+
+
+		end
 
 
 endmodule
