@@ -2,7 +2,7 @@ __author__ = 'Gaston'
 
 import bottle
 import threading
-
+import json
 
 from bottle import debug as bottle_debug, static_file, view, response
 from bottle import Bottle
@@ -11,12 +11,13 @@ from helpers.connection import *
 from serials.serials import *
 
 
+
 bottle.TEMPLATE_PATH.insert(0, os.path.join(os.getcwd(), 'ui/views'))
 
 
 app = Bottle()
 logger = create_logger()
-
+connect(logger)
 
 # Function to run the UI. host='localhost'
 def run_ui(debug=False, host='0.0.0.0', port=50505, browser=True):
@@ -99,13 +100,15 @@ def send_serials(value):
     log_send(str(value))
     send_serial(value)
     #time.sleep()
-    respuesta = read_serial()
-    logger.info('Respuesta: ' + str(respuesta))
-    log_response(str(respuesta))
-    # send = value
-    # parameter = {'tosend': send}
-    # send_esp_1(parameter, logger)
+    #respuesta(value)
     return
+
+# def respuesta(value):
+#     respuesta = read_serial()
+#     respuesta = respuesta.split()[0]
+#
+#     logger.info('Respuesta: ' + str(respuesta))
+#     log_response(str(respuesta))
 
 # Post send by serial
 @app.post('/send_wifi/<value>')
@@ -139,6 +142,18 @@ def get_gps_lines():
     renglones = gps_screen()
     return renglones
 
+# Ruta para obtener un json con los COMS
+@app.get('/getcoms')
+def get_coms():
+    response.content_type = 'application/json'
+    coms = get_com()
+    return json.dumps(coms)
+
+# Post conectar serial
+@app.post('/conectar_serial/<port>')
+def connect_port(port):
+    connect(logger, puerto=port)
+    return
 
 # Route to get the dynamic log.
 @app.get('/logger')
