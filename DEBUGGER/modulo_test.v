@@ -278,6 +278,8 @@ begin
 					mem_in = 0;
 					activo = 0;
 					inicio = 0;
+					indice = 0;
+					offset = 0;
 					if(rx_empty == 0)
 					begin
 						rd=1;
@@ -387,9 +389,9 @@ begin
 			ENVIARM:
 				begin
 					activo = 0;
-					indice = indice +1;
 					if(tx_full == 0) 
 					begin
+						indice = indice +1;
 						if(offset < 5)
 						begin
 							case(indice)
@@ -450,7 +452,12 @@ begin
 						begin
 							if(indice == 2)
 							begin
+								mem_in = 0;
 								current_state = IDLE;
+							end
+							else
+							begin
+								current_state = ENVIARM;
 							end
 						end
 					end

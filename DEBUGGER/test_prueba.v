@@ -47,9 +47,9 @@ module test_prueba;
 	end
 	task recibir_dato(input [7:0] dato);
 	begin
-		$fdisplay(f,"\n -----------------------------------------------------------------------------------------------------"," Time: ",$time, " \n");
-		$fdisplay(f,"\n Comienza envio de dato: %b",dato," -Time: ",$time, " \n");
-		$fdisplay(f,"\n -----------------------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n -----------------------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Comienza envio de dato: %b",dato," -Time: ",$time, " \n");
+		//$fdisplay(f,"\n -----------------------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 		//$finish;
 		
 		i_rx = 0;
@@ -57,7 +57,7 @@ module test_prueba;
 			#1;
 	
 		
-		$fdisplay(f,"\n Recibo bit start-------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Recibo bit start-------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 		//$finish;
 		
 		i_rx = dato[0];
@@ -67,7 +67,7 @@ module test_prueba;
 		while(uut.receptor.s!=0)
 			#1;
 			
-		$fdisplay(f,"\n Recibo bit[0]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Recibo bit[0]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 		//$finish;
         
 		i_rx = dato[1];
@@ -77,7 +77,7 @@ module test_prueba;
 		while(uut.receptor.s!=0)
 			#1;
 			
-		$fdisplay(f,"\n Recibo bit[1]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Recibo bit[1]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 		//$finish;
 		
 		i_rx = dato[2];
@@ -87,7 +87,7 @@ module test_prueba;
 		while(uut.receptor.s!=0)
 			#1;
 			
-		$fdisplay(f,"\n Recibo bit[2]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Recibo bit[2]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
       //$finish;
 		  
 		i_rx = dato[3];
@@ -97,7 +97,7 @@ module test_prueba;
 		while(uut.receptor.s!=0)
 			#1;
 			
-		$fdisplay(f,"\n Recibo bit[3]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Recibo bit[3]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 		//$finish;
 		
 		i_rx = dato[4];
@@ -107,7 +107,7 @@ module test_prueba;
 		while(uut.receptor.s!=0)
 			#1;
 			
-		$fdisplay(f,"\n Recibo bit[4]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Recibo bit[4]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 		//$finish;
         
 		i_rx = dato[5];
@@ -117,7 +117,7 @@ module test_prueba;
 		while(uut.receptor.s!=0)
 			#1;
 			
-		$fdisplay(f,"\n Recibo bit[5]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Recibo bit[5]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 		//$finish;
 		
 		i_rx = dato[6];
@@ -127,7 +127,7 @@ module test_prueba;
 		while(uut.receptor.s!=0)
 			#1;
 			
-		$fdisplay(f,"\n Recibo bit[6]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Recibo bit[6]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 		
 		i_rx = dato[7];
 		
@@ -136,23 +136,23 @@ module test_prueba;
 		while(uut.receptor.s!=0)
 			#1;
 			
-		$fdisplay(f,"\n Recibo bit[7]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Recibo bit[7]   -------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 		
 		i_rx = 1;
 		
 		while(uut.receptor.current_state!=0)
 			#1;
 			
-		$fdisplay(f,"\n -----------------------------------------------------------------------------------------------------"," Time: ",$time, " \n");
-		$fdisplay(f,"\n Finaliza envio de dato: %b",dato," Time: ",$time, " \n");
-		$fdisplay(f,"\n -----------------------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n -----------------------------------------------------------------------------------------------------"," Time: ",$time, " \n");
+		//$fdisplay(f,"\n Finaliza envio de dato: %b",dato," Time: ",$time, " \n");
+		//$fdisplay(f,"\n -----------------------------------------------------------------------------------------------------"," Time: ",$time, " \n");
 	end
 	endtask
 
-	integer f;
+	//integer f;
 	initial begin
-		f = $fopen("test_modules1_salida.txt", "w");
-		$fdisplay("Comienza la simulacion");
+		//f = $fopen("test_modules1_salida.txt", "w");
+		//$fdisplay("Comienza la simulacion");
 		
 		i_rx = 1;
 		clk = 0;
@@ -183,8 +183,8 @@ module test_prueba;
 		#10000;	
 		
 		
-		$fdisplay(f,"Termina la simulacion. -Time: ",$time);
-		$fclose(f);
+		//$fdisplay(f,"Termina la simulacion. -Time: ",$time);
+		//$fclose(f);
 		$finish;
 	end
       

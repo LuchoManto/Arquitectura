@@ -31,10 +31,6 @@
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_prueba/f" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">f[31:0]</obj_property>
-      <obj_property name="ObjectShortName">f[31:0]</obj_property>
-   </wvobject>
    <wvobject fp_name="/test_prueba/uut/tester/r_data" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">r_data[7:0]</obj_property>
       <obj_property name="ObjectShortName">r_data[7:0]</obj_property>
@@ -148,10 +144,6 @@
       <obj_property name="ElementShortName">buffer[7:0]</obj_property>
       <obj_property name="ObjectShortName">buffer[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_prueba/uut/tester/current_state" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">current_state[3:0]</obj_property>
-      <obj_property name="ObjectShortName">current_state[3:0]</obj_property>
-   </wvobject>
    <wvobject fp_name="/test_prueba/uut/tester/next_state" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">next_state[3:0]</obj_property>
       <obj_property name="ObjectShortName">next_state[3:0]</obj_property>
@@ -168,10 +160,23 @@
       <obj_property name="ElementShortName">s[2:0]</obj_property>
       <obj_property name="ObjectShortName">s[2:0]</obj_property>
    </wvobject>
+   <wvobject fp_name="/test_prueba/uut/tester/current_state" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">current_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">current_state[3:0]</obj_property>
+   </wvobject>
    <wvobject fp_name="/test_prueba/uut/tester/indice" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">indice[7:0]</obj_property>
       <obj_property name="ObjectShortName">indice[7:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_prueba/uut/tester/offset" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">offset[7:0]</obj_property>
+      <obj_property name="ObjectShortName">offset[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_prueba/uut/fifotx/tx_full" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">tx_full</obj_property>
+      <obj_property name="ObjectShortName">tx_full</obj_property>
    </wvobject>
    <wvobject fp_name="/test_prueba/uut/tester/bytes" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">bytes[7:0]</obj_property>
@@ -288,10 +293,6 @@
    <wvobject fp_name="/test_prueba/uut/fifotx/clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/test_prueba/uut/fifotx/tx_full" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">tx_full</obj_property>
-      <obj_property name="ObjectShortName">tx_full</obj_property>
    </wvobject>
    <wvobject fp_name="/test_prueba/uut/fifotx/tx_start" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">tx_start</obj_property>
