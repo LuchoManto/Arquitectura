@@ -31,13 +31,14 @@ module test_prueba;
 	// Outputs
 	wire [7:0] salida;
 	wire tx;
+	wire [3:0]outputs;
 
 	// Instantiate the Unit Under Test (UUT)
 	prueba uut (
 		.i_rx(i_rx), 
 		.clk(clk), 
-		.salida(salida), 
-		.tx(tx)
+		.tx(tx),
+		.state(outputs)
 	);
 
 	always #1
@@ -156,11 +157,11 @@ module test_prueba;
 		i_rx = 1;
 		clk = 0;
 
-		recibir_dato(8'b01010101);
+		recibir_dato(8'b01110000);
 
 		#100;
-		//$finish;
-		
+		$finish;
+		/*
       recibir_dato(8'b10101010);
 
 		#100;
@@ -178,8 +179,9 @@ module test_prueba;
 		#100;	
 		
 		recibir_dato(8'b11111111);
-
+		*/
 		#10000;	
+		
 		
 		$fdisplay(f,"Termina la simulacion. -Time: ",$time);
 		$fclose(f);

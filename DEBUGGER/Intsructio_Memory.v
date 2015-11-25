@@ -23,6 +23,8 @@ module Pipe
 	input wire clk,
 	input wire inicio,
 	input wire activo,
+	input wire mem_in,
+	input wire [11:0]add_in,
 	
 	// PC
 	output reg [8:0]PCF_o,
@@ -82,7 +84,8 @@ module Pipe
 	output reg [1:0]ForwardAE_o,
 	output reg [1:0]ForwardBE_o,
 	
-	output reg finalW_o
+	output reg finalW_o,
+	output reg [31:0]ReadDataM_o
 );
 
 
@@ -212,6 +215,8 @@ wire [31:0]ALUOutM;
 wire [31:0]WriteDataM;
 wire [4:0]WriteRegM;
 wire finalM;
+//salida mux mem in
+wire [11:0]add_mem;
 //SalidaMem
 wire [31:0]ReadDataM;
 //Salida maskMemReadM
@@ -329,7 +334,39 @@ Register_File bancoregistros
 	.inicio(inicio),
 	.activo(activo),
 	.RD1(RD1),
-	.RD2(RD2)
+	.RD2(RD2),
+	.out0(out0),
+	.out1(out1),
+	.out2(out2),
+	.out3(out3),
+	.out4(out4),
+	.out5(out5),
+	.out6(out6),
+	.out7(out7),
+	.out8(out8),
+	.out9(out9),
+	.out10(out10),
+	.out11(out11),
+	.out12(out12),
+	.out13(out13),
+	.out14(out14),
+	.out15(out15),
+	.out16(out16),
+	.out17(out17),
+	.out18(out18),
+	.out19(out19),
+	.out20(out20),
+	.out21(out21),
+	.out22(out22),
+	.out23(out23),
+	.out24(out24),
+	.out25(out25),
+	.out26(out26),
+	.out27(out27),
+	.out28(out28),
+	.out29(out29),
+	.out30(out30),
+	.out31(out31)
 );
 
 //SignExtend etapa ID
@@ -519,12 +556,21 @@ Latch_Fin_Exec latchfinEXEC
 //Etapa MEM
 //--------------------------------------------------------------------------------
 
+mux_mem_in muxmemin
+(
+	.add_in(add_in),
+	.ALUOutM(ALUOutM[11:0]),
+	.mem_in(mem_in),
+	.add_mem(add_mem)
+);
+
 memoria_de_datos memdatos
 (  
   .clka(clk), // input clka
   .ena(activo), // input ena
   .wea(MemWriteM), // input [3 : 0] wea
-  .addra(ALUOutM[11:0]), // input [11 : 0] addra
+  //.addra(ALUOutM[11:0]), // input [11 : 0] addra
+  .addra(add_mem),
   .dina(WriteDataM), // input [31 : 0] dina
   .douta(ReadDataM) // output [31 : 0] douta
 );
@@ -707,6 +753,7 @@ begin
 	ForwardBE_o <= ForwardBE;
 	
 	finalW_o <= finalW;
+	ReadDataM_o <= ReadDataM;
 end
 
 endmodule
