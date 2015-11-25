@@ -34,8 +34,7 @@
             <div class="collapse navbar-collapse" id="navbar_ex_collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/lpc_expresso">LPC_Expresso</a></li>
-                    <li><a href="/lpc_expresso_wifi">LPC_Expresso WIFI</a></li>
+                    <li><a href="/fpga">FPGA</a></li>
                 </ul>
             </div>
         </div>

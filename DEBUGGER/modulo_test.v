@@ -262,7 +262,7 @@ begin
 				//Inicializo el pipe
 				inicio = 1;
 				activo = 1;
-				if(s == 3)
+				if(s == 2)
 				begin
 					s = 0;
 					current_state = IDLE;
@@ -270,7 +270,7 @@ begin
 				else
 				begin
 					s = s+1;
-					current_state = IDLE;
+					current_state = START;
 				end
 			end
 		IDLE: // estado inicial. Idle
@@ -299,13 +299,18 @@ begin
 						buffer = r_data;
 						rd = 0;
 						case(buffer)
-							99: //c
+							67: //c
 							begin
 								current_state = CONTINUO;
 							end
-							112: //p
+							80: //p
 							begin
 								current_state = PASO;
+							end
+							82: //r
+							begin
+								indice = 150; 
+								current_state = ENVIAR;
 							end
 							default:
 							begin
@@ -352,6 +357,11 @@ begin
 							150: //mande e voy a idle
 							begin 
 								current_state = IDLE;
+							end
+							152: //mande r
+							begin
+								s = 0;
+								current_state = START;
 							end
 							default:
 							begin
@@ -1070,6 +1080,14 @@ begin
 									w_data = 69; //E
 								end
 								150:
+								begin
+									w_data = 10;
+								end
+								151:
+								begin
+									w_data = 82; //r
+								end
+								152:
 								begin
 									w_data = 10;
 								end

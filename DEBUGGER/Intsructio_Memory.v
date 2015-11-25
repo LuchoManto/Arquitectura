@@ -88,6 +88,8 @@ module Pipe
 	output reg [31:0]ReadDataM_o
 );
 
+//AUX DE MEM
+reg aux_mem_en = 1;
 
 //--------------------------------------------------------------------------------
 //Etapa fetch 
@@ -567,7 +569,7 @@ mux_mem_in muxmemin
 memoria_de_datos memdatos
 (  
   .clka(clk), // input clka
-  .ena(activo), // input ena
+  .ena(aux_mem_en), // input ena
   .wea(MemWriteM), // input [3 : 0] wea
   //.addra(ALUOutM[11:0]), // input [11 : 0] addra
   .addra(add_mem),
