@@ -9,6 +9,7 @@
 !*.xco
 !*.py
 !*.wcfg
+!interfa/**
 # etc...
 
 # ...even if they are in subdirectories
