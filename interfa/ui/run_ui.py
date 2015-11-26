@@ -66,6 +66,12 @@ def send_serials(value):
     send_serial(value, logger=logger)
     return
 
+# Ruta para obtener los valores de senales
+@app.get('/getdatos')
+def send_datos():
+    response.content_type = 'application/json'
+    datos = get_datos()
+    return json.dumps(datos)
 
 # Ruta para obtener un json con los COMS
 @app.get('/getcoms')

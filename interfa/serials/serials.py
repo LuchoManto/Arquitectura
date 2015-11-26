@@ -82,7 +82,6 @@ def read_serial(logger=None):
                 guardardatos(serial_data)
                 logger.info('Respuesta: ' + str(serial_data))
                 logger.info(str(datos))
-                # llego la respuesta de todo
 
             if(len(serial_data) == 2):
                 if(serial_data[0] == 'E'):
@@ -165,6 +164,15 @@ def get_com():
 
     return puertos
 
+def bytestoint(dato):
+    if(len(dato) == 4):
+        return struct.unpack('i', dato)[0]
+
+
+def get_datos():
+    return datos
+
+
 def guardardatos(serial_data):
     datos['PCF'] = ord(serial_data[0:1])
     #h = ( bin(int(h, 16))[2:] ).zfill(h_size)
@@ -221,7 +229,3 @@ def guardardatos(serial_data):
     datos['Mem3'] = bytestoint(serial_data[156:160])
     datos['Mem4'] = bytestoint(serial_data[160:164])
     return
-
-def bytestoint(dato):
-    if(len(dato) == 4):
-        return struct.unpack('i', dato)[0]
