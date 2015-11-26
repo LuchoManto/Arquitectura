@@ -8,6 +8,7 @@ import struct
 from helpers.config import *
 
 Serialport = serial.Serial()
+serial_data_aux = ''
 
 # port="COM5",
 #         baudrate=9600,
@@ -73,21 +74,39 @@ datos = {
 
 def read_serial(logger=None):
     try:
+        global serial_data_aux
         while True:
             serial_data = Serialport.readline()
             # serial_data = serial_data.split()[0]
-            logger.info('Respuesta: ' + str(serial_data))
             if(len(serial_data) == 166):
                 guardardatos(serial_data)
+                logger.info('Respuesta: ' + str(serial_data))
                 logger.info(str(datos))
                 # llego la respuesta de todo
 
             if(len(serial_data) == 2):
                 if(serial_data[0] == 'E'):
+                    logger.info('Respuesta: ' + str(serial_data))
                     logger.info('Comando no reconocido por la FPGA')
                 if(serial_data[0] == 'R'):
+                    logger.info('Respuesta: ' + str(serial_data))
                     logger.info('Se reinicio el Pipe MENOS la memoria')
+                if(serial_data[0] != 'R' and serial_data[0] != 'E'):
+                    serial_data_aux = serial_data_aux + str(serial_data)
+                    if(len(serial_data_aux) == 166):
+                        guardardatos(serial_data_aux)
+                        logger.info('Respuesta: ' + str(serial_data_aux))
+                        logger.info(str(datos))
+                        serial_data_aux = ''
 
+            if(len(serial_data) != 2 and len(serial_data) != 166):
+                serial_data_aux = serial_data_aux + str(serial_data)
+                if(len(serial_data_aux) == 166):
+                    guardardatos(serial_data_aux)
+                    logger.info('Respuesta: ' + str(serial_data_aux))
+                    logger.info(str(datos))
+                    serial_data_aux = ''
+                    # llego la respuesta de todo
 
             #logger.info('Respuesta: ' + str(serial_data))
             #log_response(str(serial_data))
