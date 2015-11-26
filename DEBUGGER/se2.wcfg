@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="E:/Documents/Windows/Facu/Arquitectura de computadoras/ProyectosXilinx/Arquitectura/DEBUGGER/test_prueba_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="test_prueba" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="6" />
+   <wvobject fp_name="/test_prueba/uut/baudrate/clock" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_prueba/uut/baudrate/baud_rate" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">baud_rate</obj_property>
+      <obj_property name="ObjectShortName">baud_rate</obj_property>
+   </wvobject>
+   <wvobject fp_name="group285" type="group">
+      <obj_property name="label">test</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/test_prueba/uut/tester/current_state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">current_state[3:0]</obj_property>
+         <obj_property name="ObjectShortName">current_state[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/indice" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">indice[7:0]</obj_property>
+         <obj_property name="ObjectShortName">indice[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/offset" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">offset[7:0]</obj_property>
+         <obj_property name="ObjectShortName">offset[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/ReadDataM" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">ReadDataM[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ReadDataM[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/w_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">w_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_data[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/wr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">wr</obj_property>
+         <obj_property name="ObjectShortName">wr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/tx_full" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tx_full</obj_property>
+         <obj_property name="ObjectShortName">tx_full</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/add_in" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">add_in[11:0]</obj_property>
+         <obj_property name="ObjectShortName">add_in[11:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/mem_in" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">mem_in</obj_property>
+         <obj_property name="ObjectShortName">mem_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/s" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">s[2:0]</obj_property>
+         <obj_property name="ObjectShortName">s[2:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group284" type="group">
+      <obj_property name="label">memoria</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/test_prueba/uut/tester/pipeline/memdatos/clka" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clka</obj_property>
+         <obj_property name="ObjectShortName">clka</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/pipeline/memdatos/ena" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ena</obj_property>
+         <obj_property name="ObjectShortName">ena</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/pipeline/memdatos/wea" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wea[3:0]</obj_property>
+         <obj_property name="ObjectShortName">wea[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/pipeline/memdatos/addra" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">addra[11:0]</obj_property>
+         <obj_property name="ObjectShortName">addra[11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/pipeline/memdatos/dina" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">dina[31:0]</obj_property>
+         <obj_property name="ObjectShortName">dina[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/tester/pipeline/memdatos/douta" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">douta[31:0]</obj_property>
+         <obj_property name="ObjectShortName">douta[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group300" type="group">
+      <obj_property name="label">fifo tx</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/test_prueba/uut/fifotx/w_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">w_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_data[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/fifotx/wr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">wr</obj_property>
+         <obj_property name="ObjectShortName">wr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/fifotx/tx_done" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tx_done</obj_property>
+         <obj_property name="ObjectShortName">tx_done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/fifotx/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/fifotx/tx_full" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tx_full</obj_property>
+         <obj_property name="ObjectShortName">tx_full</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/fifotx/tx_start" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tx_start</obj_property>
+         <obj_property name="ObjectShortName">tx_start</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/fifotx/d_in" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">d_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">d_in[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/fifotx/current_state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">current_state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">current_state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/fifotx/next_state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">next_state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">next_state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/fifotx/buffer" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">buffer[7:0]</obj_property>
+         <obj_property name="ObjectShortName">buffer[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group318" type="group">
+      <obj_property name="label">tx</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/test_prueba/uut/transmisor/tx_start" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tx_start</obj_property>
+         <obj_property name="ObjectShortName">tx_start</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/d_in" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">d_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">d_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/baud" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">baud</obj_property>
+         <obj_property name="ObjectShortName">baud</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/tx" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tx</obj_property>
+         <obj_property name="ObjectShortName">tx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/tx_done" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tx_done</obj_property>
+         <obj_property name="ObjectShortName">tx_done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/current_state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">current_state[3:0]</obj_property>
+         <obj_property name="ObjectShortName">current_state[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/next_state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">next_state[3:0]</obj_property>
+         <obj_property name="ObjectShortName">next_state[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/state_after_wait" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">state_after_wait[3:0]</obj_property>
+         <obj_property name="ObjectShortName">state_after_wait[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/n" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">n[3:0]</obj_property>
+         <obj_property name="ObjectShortName">n[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/s" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">s[3:0]</obj_property>
+         <obj_property name="ObjectShortName">s[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/test_prueba/uut/transmisor/buffer" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">buffer[7:0]</obj_property>
+         <obj_property name="ObjectShortName">buffer[7:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

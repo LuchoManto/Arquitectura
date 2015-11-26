@@ -26,9 +26,8 @@ module PC_REG(
 	output reg [8:0]PCF
     );
 	
-	
-//always@(*)
-always@(posedge clk)
+
+always@(negedge clk)
 begin
 	if(en == 0)
 	begin

@@ -4,7 +4,7 @@ import serial
 import serial.tools.list_ports
 import time
 import threading
-
+import struct
 from helpers.config import *
 
 Serialport = serial.Serial()
@@ -205,4 +205,4 @@ def guardardatos(serial_data):
 
 def bytestoint(dato):
     if(len(dato) == 4):
-        return ord(dato[0])+ord(dato[1])*16+ord(dato[2])*256+ord(dato[3])*4096
+        return struct.unpack('i', dato)[0]

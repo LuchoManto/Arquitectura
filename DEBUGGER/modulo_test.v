@@ -59,6 +59,7 @@ reg [7:0]indice = 0; //variable utilizada para enviar el buffer
 reg [7:0]bytes = 148; //cantidad de bytes a enviar en buffer envio
 reg [11:0]add_in=0;
 reg mem_in=0;
+reg mem_write_in=0;
 reg [11:0]base_mem=79;
 reg [7:0]offset=0;
 
@@ -130,6 +131,7 @@ Pipe pipeline
 	.inicio(inicio),
 	.activo(activo),
 	.mem_in(mem_in),
+	.mem_write_in(mem_write_in),
 	.add_in(add_in),
 	.PCF_o(PCF),
 	.InstrD_o(InstrD),
@@ -253,6 +255,7 @@ begin
 	case(current_state)
 		START:
 			begin
+				mem_write_in=0;
 				w_data=buffer;
 				rd = 0;
 				wr = 0;
@@ -377,6 +380,7 @@ begin
 			MEMORIA:
 				begin
 					offset = offset + 1;
+					mem_write_in=1;
 					mem_in = 1;
 					add_in = base_mem + offset;
 					s = 0;
@@ -407,19 +411,19 @@ begin
 							case(indice)
 									1:
 									begin
-										w_data = ReadDataM[(1*8)-1 : (1*8)-8];
+										w_data = ReadDataM[7:0];
 									end
 									2:
 									begin
-										w_data = ReadDataM[(	2*8)-1 : (	2*8)-8];
+										w_data = ReadDataM[15:8];
 									end
 									3:
 									begin
-										w_data = ReadDataM[(	3*8)-1 : (	3*8)-8];
+										w_data = ReadDataM[23:16];
 									end
 									4:
 									begin
-										w_data = ReadDataM[(	4*8)-1 : (	4*8)-8];
+										w_data = ReadDataM[31:24];
 									end
 							endcase
 						end
@@ -463,6 +467,7 @@ begin
 							if(indice == 2)
 							begin
 								mem_in = 0;
+								mem_write_in=0;
 								current_state = IDLE;
 							end
 							else
