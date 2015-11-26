@@ -616,12 +616,12 @@
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/out13" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">out13[31:0]</obj_property>
          <obj_property name="ObjectShortName">out13[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/out14" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">out14[31:0]</obj_property>
          <obj_property name="ObjectShortName">out14[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/out15" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">out15[31:0]</obj_property>
@@ -771,6 +771,7 @@
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/SrcAE" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">SrcAE[31:0]</obj_property>
          <obj_property name="ObjectShortName">SrcAE[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/WriteDataE" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">WriteDataE[31:0]</obj_property>
@@ -779,14 +780,17 @@
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/SrcAE1" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">SrcAE1[31:0]</obj_property>
          <obj_property name="ObjectShortName">SrcAE1[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/SrcBE" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">SrcBE[31:0]</obj_property>
          <obj_property name="ObjectShortName">SrcBE[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/ALUOut" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">ALUOut[31:0]</obj_property>
          <obj_property name="ObjectShortName">ALUOut[31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/MemReadM" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">MemReadM[1:0]</obj_property>
