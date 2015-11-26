@@ -24,6 +24,7 @@ module Pipe
 	input wire inicio,
 	input wire activo,
 	input wire mem_in,
+	input wire mem_write_in,
 	input wire [11:0]add_in,
 	
 	// PC
@@ -88,6 +89,8 @@ module Pipe
 	output reg [31:0]ReadDataM_o
 );
 
+//AUX DE MEM
+reg aux_mem_en = 1;
 
 //--------------------------------------------------------------------------------
 //Etapa fetch 
@@ -211,6 +214,7 @@ wire [1:0]MemReadM;
 wire RegWriteM;
 wire MemtoRegM;
 wire [3:0]MemWriteM;
+wire [3:0]MemWriteM1;
 wire [31:0]ALUOutM;
 wire [31:0]WriteDataM;
 wire [4:0]WriteRegM;
@@ -279,7 +283,8 @@ ip_core ip_core1 (
   .addra(PCF), // input [31 : 0] addra
   //.addra(PC1),
   .douta(Instr), // output [31 : 0] douta
-  .ena(~StallF && ~inicio && activo)
+  //.ena(~StallF && ~inicio && activo)
+  .ena(~StallF && ~inicio)
 );	
 
 //Sumador de etapa de fetch.
@@ -564,11 +569,19 @@ mux_mem_in muxmemin
 	.add_mem(add_mem)
 );
 
+mux_mem_write_in memwritein
+(
+	.MemWriteM(MemWriteM),
+	.mem_write_in(mem_write_in),
+	.MemWriteM1(MemWriteM1)
+);
+
 memoria_de_datos memdatos
 (  
   .clka(clk), // input clka
-  .ena(activo), // input ena
-  .wea(MemWriteM), // input [3 : 0] wea
+  .ena(aux_mem_en), // input ena
+  //.wea(MemWriteM), // input [3 : 0] wea
+  .wea(MemWriteM1),
   //.addra(ALUOutM[11:0]), // input [11 : 0] addra
   .addra(add_mem),
   .dina(WriteDataM), // input [31 : 0] dina

@@ -60,6 +60,8 @@ begin
 			WriteRegW <= WriteRegM;
 			MemReadW <= MemReadM;
 			finalW <= finalM;
+			
+			ReadDataW <= ReadData;
 		end
 	end
 end

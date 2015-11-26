@@ -30,6 +30,9 @@ module Latch_Fin_IF(
 );
 
 reg espera_clr = 0;
+reg reset_clr = 0;
+wire reset_clrw;
+wire espera_clrw;
 
 always@(negedge clk)
 begin
@@ -39,10 +42,6 @@ begin
 		begin
 			PCPlus4D <= 0;
 			InstrD <= 32'hF800_0000;
-			if(clr)
-			begin
-				espera_clr = 1;
-			end
 		end
 		else
 		begin
@@ -51,20 +50,5 @@ begin
 		end
 	end
 end
-
-/*
-always@(Instr)
-begin
-	if(espera_clr == 0)
-	begin
-		InstrD <= Instr;
-	end
-	else
-	begin
-		InstrD <= 32'hFC00_0000;
-		espera_clr = 0;
-	end
-end
-*/
 
 endmodule

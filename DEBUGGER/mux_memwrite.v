@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    20:41:07 11/16/2015 
+// Create Date:    02:56:34 11/26/2015 
 // Design Name: 
-// Module Name:    PC_REG 
+// Module Name:    mux_memwrite 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,30 +18,17 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PC_REG(
-	input clk,
-	input wire en,
-	input wire [8:0]PC1,
-	input wire inicio,
-	output reg [8:0]PCF
+module mux_mem_write_in(
+	input wire [3:0]MemWriteM,
+	input wire mem_write_in,
+	output reg [3:0] MemWriteM1
     );
-	
-	
-always@(negedge clk)
+
+always @(*)
 begin
-	if(en == 0)
-	begin
-		if(inicio == 1)
-		begin
-			PCF <= 9'b111111111;
-		end	
-		else
-		begin
-			PCF <= PC1;
-		end
-	end
+      if(mem_write_in)
+			MemWriteM1 <= 0;
+      else
+         MemWriteM1 <= MemWriteM;
 end
-
-
-
 endmodule

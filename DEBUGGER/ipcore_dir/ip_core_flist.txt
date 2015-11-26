@@ -1,4 +1,5 @@
 # Output products list for <ip_core>
+_xmsgs\pn_parser.xmsgs
 ip_core.asy
 ip_core.gise
 ip_core.mif

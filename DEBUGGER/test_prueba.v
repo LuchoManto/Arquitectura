@@ -157,7 +157,7 @@ module test_prueba;
 		i_rx = 1;
 		clk = 0;
 
-		recibir_dato(8'b01110000);
+		recibir_dato(8'b01000011);
 
 		#100;
 		$finish;

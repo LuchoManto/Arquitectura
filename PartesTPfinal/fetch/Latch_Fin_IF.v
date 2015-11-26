@@ -61,7 +61,7 @@ begin
 	end
 	else
 	begin
-		InstrD <= 32'hFC00_0000;
+		InstrD <= 32'hF800_0000;
 		espera_clr = 0;
 	end
 end

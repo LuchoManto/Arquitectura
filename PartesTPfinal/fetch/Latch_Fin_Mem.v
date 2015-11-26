@@ -60,6 +60,8 @@ begin
 			WriteRegW <= WriteRegM;
 			MemReadW <= MemReadM;
 			finalW <= finalM;
+			
+			ReadDataW <= ReadData;
 		end
 	end
 end
@@ -70,4 +72,5 @@ begin
 	ReadDataW <= ReadData;
 end
 */
+
 endmodule
