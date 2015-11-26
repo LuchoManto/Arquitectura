@@ -71,6 +71,7 @@ def send_serials(value):
 def send_datos():
     response.content_type = 'application/json'
     datos = get_datos()
+    # datos = {'out27': 0, 'out26': 0, 'out25': 0, 'out24': 0, 'out23': 0, 'out22': 0, 'out21': 0, 'out20': 0, 'out29': 0, 'out28': 0, 'ForwardAE': 0, 'ALUSrcD': 1, 'out30': 0, 'out31': 0, 'RegWriteD': 0, 'ForwardAD': 0, 'InstrD': 'a5ed0000', 'MemWriteD': 3, 'BranchD': 0, 'ForwardBD': 0, 'ForwardBE': 0, 'FlushE': 0, 'PCF': 1, 'MemtoRegD': 0, 'MemReadD': 0, 'StallD': 0, 'StallF': 0, 'ALUControlID': 0, 'out18': 0, 'out19': 0, 'out12': 0, 'out13': -65533, 'out10': 0, 'out11': 0, 'out16': 0, 'out17': 0, 'out14': -251, 'out15': 80, 'out0': 2, 'out1': 2, 'out2': 2, 'out3': 5, 'out4': 2, 'out5': 5, 'out6': 1, 'out7': 2, 'out8': 3, 'out9': 0, 'RegDstD': 0, 'Mem4': 0, 'Mem1': -251, 'Mem3': 0, 'Mem2': 0}
     return json.dumps(datos)
 
 # Ruta para obtener un json con los COMS
