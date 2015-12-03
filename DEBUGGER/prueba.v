@@ -31,6 +31,20 @@ module prueba
 	output reg [3:0]state
 );
 
+reg reset_clk_wiz = 0;
+wire clk_lento;
+wire clk_fast;
+
+
+clockwizard instance_name
+(// Clock in ports
+.CLK_IN1(clk),      // IN
+// Clock out ports
+.clk_lento(clk_lento),     // OUT
+.CLK_OUT2(clk_fast));
+
+
+	 
 //wire de baud_rate
 wire baud_gen_baud;
 
@@ -64,7 +78,7 @@ baud
 	.COUNT(651)
 ) 
 baudrate (
-	.clock(clk),
+	.clock(clk_fast),
 	.baud_rate(baud_gen_baud)
 );
 
@@ -72,7 +86,7 @@ rx
 receptor
 (
 	.senial(i_rx),
-	.clk(clk),
+	.clk(clk_fast),
 	.baud(baud_gen_baud),
 	.d_out(rx_d_out),
 	.rx_done(rx_rx_done)
@@ -82,7 +96,7 @@ fifo_de_rx fiforx(
 	.d_out(rx_d_out),
 	.rx_done(rx_rx_done),
 	.rd(test_rd),
-	.clk(clk),
+	.clk(clk_fast),
 	.r_data(fifo_r_data),
 	.rx_empty(fifo_rx_empty)
 );
@@ -90,7 +104,7 @@ fifo_de_rx fiforx(
 
 modulo_test tester(
 	.r_data(fifo_r_data),
-	.clk(clk),
+	.clk(clk_lento),
 	.rx_empty(fifo_rx_empty),
 	.tx_full(fifo_tx_tx_full),
 	.w_data(test_w_data),
@@ -104,7 +118,7 @@ fifo_de_tx fifotx
 	.w_data(test_w_data),
 	.wr(test_wr),
 	.tx_done(tx_tx_done),
-	.clk(clk),
+	.clk(clk_fast),
 	.tx_full(fifo_tx_tx_full),
 	.tx_start(fifo_tx_tx_start),
 	.d_in(fifo_tx_d_in)
@@ -114,13 +128,13 @@ tx transmisor
 (
 	.tx_start(fifo_tx_tx_start),
 	.d_in(fifo_tx_d_in),
-	.clk(clk),
+	.clk(clk_fast),
 	.baud(baud_gen_baud),
 	.tx(tx_o_tx),
 	.tx_done(tx_tx_done)
 );
 
-always@(posedge clk)
+always@(posedge clk_fast)
 begin
 	tx <= tx_o_tx;
 	state <= current_state_o;

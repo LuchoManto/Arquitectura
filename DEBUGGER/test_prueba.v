@@ -158,6 +158,7 @@ module test_prueba;
 		clk = 0;
 
 		recibir_dato(8'b01000011);
+		//recibir_dato(8'b01010000);
 
 		#100;
 		$finish;

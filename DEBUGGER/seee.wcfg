@@ -811,6 +811,7 @@
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/ALUOutM" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">ALUOutM[31:0]</obj_property>
          <obj_property name="ObjectShortName">ALUOutM[31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/WriteDataM" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">WriteDataM[31:0]</obj_property>
@@ -867,6 +868,7 @@
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/ResultW" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">ResultW[31:0]</obj_property>
          <obj_property name="ObjectShortName">ResultW[31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/test_prueba/uut/tester/pipeline/StallF" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">StallF</obj_property>
